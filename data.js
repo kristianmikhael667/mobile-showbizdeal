@@ -30,7 +30,7 @@ export default [
   {
     id: '4',
     image: OnBoardingImg4,
-    title: 'Yuk! Jadi Bagian dari Kami',
+    title: '',
     field: '',
   },
 ];

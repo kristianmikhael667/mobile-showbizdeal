@@ -1,17 +1,25 @@
 import React, {Component} from 'react';
-import {Image, StyleSheet, View, Text, TouchableOpacity} from 'react-native';
+import {
+  Image,
+  StyleSheet,
+  View,
+  Text,
+  TouchableOpacity,
+  StatusBar,
+} from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
 import AppIntroSlider from 'react-native-app-intro-slider';
 import boarding from '../../../data';
 import {responsiveHeight, responsiveWidth} from '../../utils/utils';
-import {Tombol} from '../../components';
-import {colors} from '../../utils';
+import {StatusBars, Tombol} from '../../components';
+import {colors, fonts} from '../../utils';
 
 export default class Info extends Component {
   state = {showHomePage: false};
   _renderItem = ({item}) => {
     return (
       <LinearGradient colors={['#1A032D', '#34126C']} style={styles.container}>
+        <StatusBars />
         <Image
           source={item.image}
           style={{
@@ -22,12 +30,23 @@ export default class Info extends Component {
           }}
         />
         <View style={styles.content}>
-          <View style={styles.judul}>
-            <Text style={styles.title}>{item.title}</Text>
-            {item.field ? (
-              <Text style={styles.field}>{item.field}</Text>
-            ) : (
-              <>
+          {item.title && item.field ? (
+            <>
+              <View style={styles.field1}>
+                <View style={styles.title}>
+                  <Text style={styles.titles}>{item.title}</Text>
+                </View>
+                <Text style={styles.field}>{item.field}</Text>
+              </View>
+            </>
+          ) : (
+            <>
+              <View style={styles.field2}>
+                <View style={styles.title2}>
+                  <Text style={styles.titles}>Yuk!</Text>
+                  <Text style={styles.titles}>Jadi Bagian dari</Text>
+                  <Text style={styles.titles}>Kami</Text>
+                </View>
                 <Tombol
                   type="text"
                   title="Daftar Sekarang"
@@ -37,6 +56,7 @@ export default class Info extends Component {
                   color={colors.white}
                   width={259}
                   height={48}
+                  onPress={() => this.props.navigation.navigate('Register')}
                   backgroundColor={colors.primary2}
                 />
                 <Text style={styles.kenalan}>
@@ -46,17 +66,18 @@ export default class Info extends Component {
                   type="text"
                   title="Masuk Tanpa Harus Login"
                   borderWidth={1}
-                  fontSize={18}
-                  paddingVertical={10}
-                  paddingHorizontal={60}
+                  fontSize={14}
+                  paddingVertical={12}
+                  paddingHorizontal={38}
                   color={colors.primary2}
                   width={259}
                   height={48}
+                  onPress={() => this.props.navigation.navigate('Home')}
                   borderColor={colors.primary2}
                 />
-              </>
-            )}
-          </View>
+              </View>
+            </>
+          )}
         </View>
       </LinearGradient>
     );
@@ -96,20 +117,41 @@ const styles = StyleSheet.create({
     borderTopLeftRadius: 40,
     borderTopRightRadius: 40,
   },
-  judul: {
+
+  field1: {
+    marginBottom: 19,
     marginTop: 28,
     alignItems: 'center',
-    justifyContent: 'center',
+  },
+  field2: {
+    marginTop: 23,
+    alignItems: 'center',
   },
   title: {
-    marginBottom: 19,
     width: responsiveWidth(260),
-    height: responsiveHeight(63),
-    fontWeight: '800',
+    height: responsiveHeight(70),
     marginHorizontal: 77,
+    alignItems: 'center',
+    justifyContent: 'center',
+    marginBottom: 19,
+    display: 'flex',
+  },
+  title2: {
+    width: responsiveWidth(260),
+    height: responsiveHeight(113),
+    marginHorizontal: 77,
+    alignItems: 'center',
+    justifyContent: 'center',
+    marginBottom: 19,
+    display: 'flex',
+  },
+  titles: {
     fontSize: 26,
+    color: colors.primary2,
     textAlign: 'center',
-    lineHeight: 27,
+    lineHeight: 29,
+    fontFamily: fonts.primary.bold,
+    alignItems: 'center',
   },
   field: {
     marginHorizontal: responsiveWidth(41),
@@ -122,5 +164,6 @@ const styles = StyleSheet.create({
     marginTop: 19,
     fontSize: 13,
     marginBottom: 4,
+    color: colors.grey,
   },
 });
