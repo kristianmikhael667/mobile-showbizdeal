@@ -57,6 +57,20 @@ export const getMarketPlace = () => {
         });
         alert('Your Connection is Invalid');
       });
+  };
+};
+
+export const getCategory = () => {
+  return dispatch => {
+    //   Loading
+    dispatch({
+      type: GET_CATEGORY,
+      payload: {
+        loading: true,
+        data: false,
+        errorMessage: false,
+      },
+    });
 
     //Get Category
     axios({
@@ -66,15 +80,14 @@ export const getMarketPlace = () => {
         '/business-service/v1/multicategory?parentId=138bb094-8aa2-4900-95c5-c0cd0b4fa3da',
     })
       .then(responses => {
-        alert(responses);
-        if (response.status !== 200) {
+        if (responses.status !== 200) {
           //ERROR
           dispatch({
             type: GET_CATEGORY,
             payload: {
               loading: false,
               data: false,
-              errorMessage: response,
+              errorMessage: responses,
             },
           });
         } else {
@@ -83,7 +96,7 @@ export const getMarketPlace = () => {
             type: GET_CATEGORY,
             payload: {
               loading: false,
-              data: response.data ? response.data.data : [],
+              data: responses.data ? responses.data.data : [],
               errorMessage: false,
             },
           });
@@ -91,7 +104,7 @@ export const getMarketPlace = () => {
       })
       .catch(error => {
         dispatch({
-          type: GET_MARKET_PLACE,
+          type: GET_CATEGORY,
           payload: {
             loading: false,
             data: false,

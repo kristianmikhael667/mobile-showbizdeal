@@ -1,2 +1,3 @@
 import StatusBars from './StatusBar';
-export {StatusBars};
+import BottomNavigator from './BottomNavigator';
+export {StatusBars, BottomNavigator};
