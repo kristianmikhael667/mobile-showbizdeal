@@ -17,6 +17,8 @@ const Inputan = ({
   onFocus,
   lineHeight,
   textAlignVertical,
+  marginRight,
+  marginLeft,
 }) => {
   return (
     <View style={styles.container}>
@@ -27,7 +29,14 @@ const Inputan = ({
         </Text>
       </Text>
       <TextInput
-        style={styles.input(width, height, fontSize, backgroundColor)}
+        style={styles.input(
+          width,
+          height,
+          fontSize,
+          backgroundColor,
+          marginRight,
+          marginLeft,
+        )}
         value={value}
         onFocus={onFocus}
         placeholder={placeholder}
@@ -55,8 +64,17 @@ const styles = StyleSheet.create({
 
     textAlignVertical: textAlignVertical,
   }),
-  input: (width, height, fontSize, backgroundColor) => ({
+  input: (
+    width,
+    height,
+    fontSize,
+    backgroundColor,
+    marginRight,
+    marginLeft,
+  ) => ({
     fontSize: fontSize ? fontSize : 18,
+    marginRight: marginRight,
+    marginLeft: marginLeft,
     fontFamily: 'Arial',
     width: width,
     height: height,

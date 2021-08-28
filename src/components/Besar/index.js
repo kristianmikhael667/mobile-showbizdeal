@@ -1,3 +1,5 @@
 import StatusBars from './StatusBar';
 import BottomNavigator from './BottomNavigator';
-export {StatusBars, BottomNavigator};
+import BannerSlider from './BannerSlider';
+import Kategory from './Kategory';
+export {StatusBars, BottomNavigator, BannerSlider, Kategory};

@@ -4,6 +4,13 @@ import OnBoardingImg3 from './onboarding3.png';
 import OnBoardingImg4 from './onboarding4.png';
 import Heads from './heads.png';
 import LogoHeader from './logoheader.png';
+
+// Banner
+import Banner1 from './banner1.png';
+import Banner2 from './banner2.png';
+import Banner3 from './banner3.png';
+import Banner4 from './banner4.png';
+
 export {
   OnBoardingImg1,
   OnBoardingImg2,
@@ -11,4 +18,8 @@ export {
   OnBoardingImg4,
   Heads,
   LogoHeader,
+  Banner1,
+  Banner2,
+  Banner3,
+  Banner4,
 };

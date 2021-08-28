@@ -14,8 +14,20 @@ import {Heads, LogoHeader, Love, Start} from '../../assets';
 import {API_URL, heightMobileUi} from '../../utils/constant';
 import {responsiveWidth, responsiveHeight, colors, fonts} from '../../utils';
 import {RFValue} from 'react-native-responsive-fontsize';
-import {Inputan} from '../../components';
+import {BannerSlider, Inputan, Kategory, Tombol} from '../../components';
 class Home extends Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      clickLayanan(value) {
+        this.setState({
+          layanan: value,
+        });
+      },
+    };
+  }
+
   componentDidMount() {
     this.props.dispatch(getMarketPlace());
     this.props.dispatch(getCategory());
@@ -39,18 +51,56 @@ class Home extends Component {
               source={LogoHeader}
               style={{position: 'absolute', marginTop: 52, marginLeft: 32}}
             />
-            <View style={{position: 'absolute', left: 18, top: 35}}>
+            <View
+              style={{
+                position: 'absolute',
+                marginHorizontal: 20,
+                // left: 18,
+                // top: 35,
+                marginTop: 30,
+                flexDirection: 'row',
+                alignItems: 'center',
+              }}>
               <Inputan
                 fontSize={14}
                 placeholder="DJ Soda"
-                width={responsiveWidth(275)}
+                width={responsiveWidth(240)}
                 height={34}
                 color={colors.white}
                 backgroundColor={colors.white}
                 fontSizes={14 * 1.1}
                 textAlignVertical="top"
+                marginLeft={responsiveWidth(7)}
+                marginRight={responsiveWidth(16)}
               />
+              <Tombol
+                marginTop={30}
+                marginRight={16}
+                icon="notifikasi"
+                padding={10}
+              />
+              <Tombol marginTop={30} icon="filter" padding={10} />
             </View>
+          </View>
+          <BannerSlider />
+          <Text style={styles.categorys}>Kategory</Text>
+
+          <View style={styles.layanan}>
+            <Kategory
+              title="Performer"
+              onPress={() => this.clickLayanan('paket')}
+              active={this.state.layanan === 'paket' ? true : false}
+            />
+            <Kategory
+              title="Influencer"
+              onPress={() => this.clickLayanan('booking')}
+              active={this.state.layanan === 'booking' ? true : false}
+            />
+            <Kategory
+              title="Support"
+              onPress={() => this.clickLayanan('join')}
+              active={this.state.layanan === 'join' ? true : false}
+            />
           </View>
           <View style={styles.body}>
             {getdataMarketPlaceResult ? (
@@ -206,5 +256,12 @@ const styles = StyleSheet.create({
     marginTop: 7,
     textAlign: 'center',
     marginBottom: 8,
+  },
+  categorys: {
+    color: colors.primary2,
+    fontFamily: fonts.primary.bold,
+    fontSize: 18,
+    marginLeft: 18,
+    marginBottom: 9,
   },
 });
