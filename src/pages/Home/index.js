@@ -10,10 +10,11 @@ import {
 } from 'react-native';
 import {connect} from 'react-redux';
 import {getCategory, getMarketPlace} from '../../actions/MarketPlace';
-import {Heads, Love, Start} from '../../assets';
+import {Heads, LogoHeader, Love, Start} from '../../assets';
 import {API_URL, heightMobileUi} from '../../utils/constant';
 import {responsiveWidth, responsiveHeight, colors, fonts} from '../../utils';
 import {RFValue} from 'react-native-responsive-fontsize';
+import {Inputan} from '../../components';
 class Home extends Component {
   componentDidMount() {
     this.props.dispatch(getMarketPlace());
@@ -34,6 +35,22 @@ class Home extends Component {
               style={{resizeMode: 'stretch', width: '100%'}}
               source={Heads}
             />
+            <Image
+              source={LogoHeader}
+              style={{position: 'absolute', marginTop: 52, marginLeft: 32}}
+            />
+            <View style={{position: 'absolute', left: 18, top: 35}}>
+              <Inputan
+                fontSize={14}
+                placeholder="DJ Soda"
+                width={responsiveWidth(275)}
+                height={34}
+                color={colors.white}
+                backgroundColor={colors.white}
+                fontSizes={14 * 1.1}
+                textAlignVertical="top"
+              />
+            </View>
           </View>
           <View style={styles.body}>
             {getdataMarketPlaceResult ? (
@@ -118,13 +135,16 @@ export default connect(mapStatetoProps, null)(Home);
 
 const styles = StyleSheet.create({
   pages: {
-    backgroundColor: colors.white,
+    backgroundColor: '#F2F2F2',
   },
   body: {
     flexDirection: 'row',
     flexWrap: 'wrap',
-    marginHorizontal: 18,
-    marginTop: 18,
+    width: '100%',
+    borderTopLeftRadius: 20,
+    borderTopRightRadius: 20,
+    paddingHorizontal: 18,
+    paddingTop: 18,
     backgroundColor: colors.white,
   },
   images: {
@@ -162,7 +182,7 @@ const styles = StyleSheet.create({
     elevation: 5,
     backgroundColor: colors.white,
     marginBottom: 16,
-    marginHorizontal: 7,
+    marginHorizontal: responsiveWidth(7),
   },
   nama: {
     textAlign: 'center',
@@ -178,6 +198,7 @@ const styles = StyleSheet.create({
   },
   start: {
     flexDirection: 'row',
+
     justifyContent: 'center',
   },
   review: {

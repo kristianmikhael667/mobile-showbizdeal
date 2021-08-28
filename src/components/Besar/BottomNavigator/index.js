@@ -61,7 +61,7 @@ const styles = StyleSheet.create({
     paddingTop: 21,
     justifyContent: 'center',
     alignItems: 'center',
-    paddingHorizontal: responsiveWidth(24),
+    paddingHorizontal: responsiveWidth(18),
     borderTopLeftRadius: 15,
     borderTopRightRadius: 15,
     shadowColor: colors.white,

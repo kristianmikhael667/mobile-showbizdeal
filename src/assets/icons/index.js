@@ -10,7 +10,7 @@ import HomeAktif from './homeactive.svg';
 import HomeNon from './homenon.svg';
 import TransaksiAktif from './mytransactionactive.svg';
 import TransaksiNon from './mytransactionnon.svg';
-import Showbizlive from './live.svg';
+import Showbizlive from './showlive.svg';
 import MessageAktif from './messageactive';
 import MessageNon from './messagenon';
 import ProfileAktif from './useractive.svg';

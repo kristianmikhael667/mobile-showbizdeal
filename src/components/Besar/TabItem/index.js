@@ -48,13 +48,14 @@ export default TabItem;
 const styles = StyleSheet.create({
   container: {
     alignItems: 'center',
+    paddingBottom: 8,
     flex: 1,
   },
   text: isFocused => ({
     color: isFocused ? colors.primary2 : colors.grey,
     fontSize: 8,
-    marginTop: 1,
+    marginTop: 10,
     textAlign: 'center',
-    marginBottom: 7,
+    marginBottom: 8,
   }),
 });
