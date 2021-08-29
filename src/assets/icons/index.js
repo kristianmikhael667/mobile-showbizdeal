@@ -17,12 +17,12 @@ import MessageAktif from './messageactive';
 import MessageNon from './messagenon';
 import ProfileAktif from './useractive.svg';
 import ProfileNon from './usernon.svg';
-import PerformerActive from './performeraktif.svg';
-import PerformerNon from './performernon.svg';
-import InfluencerActive from './influenceractive.svg';
-import InfluencerNon from './influencernon.svg';
-import SupportActive from './supportactive.svg';
-import SupportNon from './supportnon.svg';
+import PerformerActive from './performeractive.png';
+import PerformerNon from './performernonactive.png';
+import InfluencerActive from './influenceractive.png';
+import InfluencerNon from './infulencernonactive.png';
+import SupportActive from './supportactive.png';
+import SupportNon from './supportnonactive.png';
 
 export {
   Logo,

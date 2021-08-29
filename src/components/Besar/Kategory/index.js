@@ -1,5 +1,5 @@
 import React from 'react';
-import {StyleSheet, Text, View, TouchableOpacity} from 'react-native';
+import {StyleSheet, Text, Image, TouchableOpacity} from 'react-native';
 import {
   InfluencerActive,
   InfluencerNon,
@@ -8,21 +8,32 @@ import {
   SupportActive,
   SupportNon,
 } from '../../../assets';
-import {colors} from '../../../utils';
+import {colors, responsiveHeight, responsiveWidth} from '../../../utils';
 const Kategory = ({title, active, onPress}) => {
   const Icon = () => {
     if (title === 'Performer')
-      return active ? <PerformerActive /> : <PerformerNon />;
+      return active ? (
+        <Image style={styles.images} source={PerformerActive} />
+      ) : (
+        <Image style={styles.images} source={PerformerNon} />
+      );
     if (title === 'Influencer')
-      return active ? <InfluencerActive /> : <InfluencerNon />;
-    if (title === 'Support') return active ? <SupportActive /> : <SupportNon />;
+      return active ? (
+        <Image style={styles.images} source={InfluencerActive} />
+      ) : (
+        <Image style={styles.images} source={InfluencerNon} />
+      );
+    if (title === 'Support')
+      return active ? (
+        <Image style={styles.images} source={SupportActive} />
+      ) : (
+        <Image style={styles.images} source={SupportNon} />
+      );
     return <PerformerActive />;
   };
   return (
     <TouchableOpacity style={styles.container(active)} onPress={onPress}>
-      <View>
-        <Icon />
-      </View>
+      <Icon />
     </TouchableOpacity>
   );
 };
@@ -31,9 +42,13 @@ export default Kategory;
 
 const styles = StyleSheet.create({
   container: active => ({
-    flex: 1,
-    backgroundColor: active ? WARNA_UTAMA : '#FFFFFF',
-    flexDirection: 'row',
-    borderColor: colors.primary2,
+    alignItems: 'center',
+    marginRight: -11,
+    borderRadius: 10,
   }),
+  images: {
+    width: responsiveWidth(132),
+    height: responsiveHeight(60),
+    borderRadius: 10,
+  },
 });

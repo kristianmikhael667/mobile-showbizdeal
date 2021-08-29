@@ -9,7 +9,11 @@ import {
   TouchableOpacity,
 } from 'react-native';
 import {connect} from 'react-redux';
-import {getCategory, getMarketPlace} from '../../actions/MarketPlace';
+import {
+  getCategory,
+  getMarketInfluencer,
+  getMarketPlace,
+} from '../../actions/MarketPlace';
 import {Heads, LogoHeader, Love, Start} from '../../assets';
 import {API_URL, heightMobileUi} from '../../utils/constant';
 import {responsiveWidth, responsiveHeight, colors, fonts} from '../../utils';
@@ -20,23 +24,38 @@ class Home extends Component {
     super(props);
 
     this.state = {
-      clickLayanan(value) {
-        this.setState({
-          layanan: value,
-        });
-      },
+      layanan: '138bb094-8aa2-4900-95c5-c0cd0b4fa3da',
     };
+  }
+
+  clear = () => {
+    this.textInputRef.clear();
+  };
+
+  clickLayanan(value) {
+    this.setState({
+      layanan: value,
+    });
+    const {layanan} = this.state;
+    console.log(layanan);
+    this.props.dispatch(getMarketInfluencer(layanan));
   }
 
   componentDidMount() {
     this.props.dispatch(getMarketPlace());
     this.props.dispatch(getCategory());
   }
+
   render() {
     const {
       getdataMarketPlaceResult,
       getdataMarketPlaceLoading,
       getdataMarketPlaceError,
+
+      getInfluencerResult,
+      getInfluencerLoading,
+      getInfluencerError,
+
       getCategoryResult,
     } = this.props;
     return (
@@ -88,23 +107,41 @@ class Home extends Component {
           <View style={styles.layanan}>
             <Kategory
               title="Performer"
-              onPress={() => this.clickLayanan('paket')}
-              active={this.state.layanan === 'paket' ? true : false}
+              onPress={() =>
+                this.clickLayanan('138bb094-8aa2-4900-95c5-c0cd0b4fa3da')
+              }
+              active={
+                this.state.layanan === '138bb094-8aa2-4900-95c5-c0cd0b4fa3da'
+                  ? true
+                  : false
+              }
             />
             <Kategory
               title="Influencer"
-              onPress={() => this.clickLayanan('booking')}
-              active={this.state.layanan === 'booking' ? true : false}
+              onPress={() =>
+                this.clickLayanan('2e60785a-6022-46c9-bee0-db37ed166535')
+              }
+              active={
+                this.state.layanan === '2e60785a-6022-46c9-bee0-db37ed166535'
+                  ? true
+                  : false
+              }
             />
             <Kategory
               title="Support"
-              onPress={() => this.clickLayanan('join')}
-              active={this.state.layanan === 'join' ? true : false}
+              onPress={() =>
+                this.clickLayanan('389a3ac3-3a26-4bf8-b691-3c8a7b5011da')
+              }
+              active={
+                this.state.layanan === '389a3ac3-3a26-4bf8-b691-3c8a7b5011da'
+                  ? true
+                  : false
+              }
             />
           </View>
           <View style={styles.body}>
-            {getdataMarketPlaceResult ? (
-              getdataMarketPlaceResult.map(market => {
+            {getInfluencerResult ? (
+              getInfluencerResult.map(market => {
                 return (
                   <TouchableOpacity style={styles.bodysub}>
                     <Image
@@ -152,14 +189,14 @@ class Home extends Component {
                   </TouchableOpacity>
                 );
               })
-            ) : getdataMarketPlaceLoading ? (
+            ) : getInfluencerLoading ? (
               <View
                 style={{
                   flex: 1,
                 }}>
                 <ActivityIndicator size="large" color={colors.primary2} />
               </View>
-            ) : getdataMarketPlaceError ? (
+            ) : getInfluencerError ? (
               <Text>Error</Text>
             ) : (
               <Text>Gak ada</Text>
@@ -172,9 +209,10 @@ class Home extends Component {
 }
 
 const mapStatetoProps = state => ({
-  getdataMarketPlaceLoading: state.MarketPlaceReducer.getdataMarketPlaceLoading,
-  getdataMarketPlaceResult: state.MarketPlaceReducer.getdataMarketPlaceResult,
-  getdataMarketPlaceError: state.MarketPlaceReducer.getdataMarketPlaceError,
+  // Influencer
+  getInfluencerLoading: state.MarketPlaceReducer.getInfluencerLoading,
+  getInfluencerResult: state.MarketPlaceReducer.getInfluencerResult,
+  getInfluencerError: state.MarketPlaceReducer.getInfluencerError,
 
   getCategoryLoading: state.MarketPlaceReducer.getCategoryLoading,
   getCategoryResult: state.MarketPlaceReducer.getCategoryResult,
@@ -186,8 +224,11 @@ export default connect(mapStatetoProps, null)(Home);
 const styles = StyleSheet.create({
   pages: {
     backgroundColor: '#F2F2F2',
+    flex: 1,
   },
   body: {
+    flex: 1,
+
     flexDirection: 'row',
     flexWrap: 'wrap',
     width: '100%',
@@ -261,7 +302,12 @@ const styles = StyleSheet.create({
     color: colors.primary2,
     fontFamily: fonts.primary.bold,
     fontSize: 18,
-    marginLeft: 18,
+    marginLeft: responsiveWidth(26),
     marginBottom: 9,
+  },
+  layanan: {
+    flexDirection: 'row',
+    marginBottom: 14,
+    marginHorizontal: responsiveWidth(18),
   },
 });

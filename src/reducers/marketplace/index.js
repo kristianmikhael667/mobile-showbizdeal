@@ -1,10 +1,21 @@
-import {GET_MARKET_PLACE, GET_CATEGORY} from '../../actions/MarketPlace';
+import {
+  GET_MARKET_PLACE,
+  GET_CATEGORY,
+  GET_MARKET_INFLUENCER,
+} from '../../actions/MarketPlace';
 
 const initialState = {
+  // Performer
   getdataMarketPlaceLoading: false,
   getdataMarketPlaceResult: false,
   getdataMarketPlaceError: false,
 
+  // Influencer
+  getInfluencerLoading: false,
+  getInfluencerResult: false,
+  getInfluencerError: false,
+
+  // Category
   getCategoryLoading: false,
   getCategoryResult: false,
   getCategoryError: false,
@@ -18,6 +29,14 @@ export default function (state = initialState, action) {
         getdataMarketPlaceLoading: action.payload.loading,
         getdataMarketPlaceResult: action.payload.data,
         getdataMarketPlaceError: action.payload.errorMessage,
+      };
+
+    case GET_MARKET_INFLUENCER:
+      return {
+        ...state,
+        getInfluencerLoading: action.payload.loading,
+        getInfluencerResult: action.payload.data,
+        getInfluencerError: action.payload.errorMessage,
       };
     case GET_CATEGORY:
       return {
