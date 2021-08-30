@@ -16,6 +16,7 @@ const TextOnly = ({
   borderWidth,
   borderColor,
   justifyContent,
+  borderRadius,
 }) => {
   return (
     <TouchableOpacity
@@ -30,6 +31,7 @@ const TextOnly = ({
         borderWidth,
         borderColor,
         justifyContent,
+        borderRadius,
       )}>
       <Text style={styles.text(fontSize, fontFamily, color)}>{title}</Text>
     </TouchableOpacity>
@@ -49,6 +51,7 @@ const styles = StyleSheet.create({
     borderWidth,
     borderColor,
     justifyContent,
+    borderRadius,
   ) => ({
     backgroundColor: backgroundColor,
     padding: padding,
@@ -56,6 +59,7 @@ const styles = StyleSheet.create({
     paddingVertical: paddingVertical,
     borderRadius: 8,
     width: width,
+    borderRadius: borderRadius,
     height: height,
     borderWidth: borderWidth,
     borderColor: borderColor,

@@ -5,4 +5,5 @@ export const colors = {
   active: '#34126C',
   nonactive: '#A28EC5',
   grey: '#656565',
+  pembatas: '#F2F2F2',
 };

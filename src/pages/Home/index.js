@@ -24,7 +24,7 @@ class Home extends Component {
     super(props);
 
     this.state = {
-      layanan: '138bb094-8aa2-4900-95c5-c0cd0b4fa3da',
+      layanan: this.state,
     };
   }
 
@@ -35,6 +35,7 @@ class Home extends Component {
       },
       () => {
         const {layanan} = this.state;
+        console.log(layanan);
         this.props.dispatch(getMarketInfluencer(layanan));
       },
     );
@@ -210,11 +211,12 @@ class Home extends Component {
 }
 
 const mapStatetoProps = state => ({
-  // Influencer
+  // Marketplace
   getInfluencerLoading: state.MarketPlaceReducer.getInfluencerLoading,
   getInfluencerResult: state.MarketPlaceReducer.getInfluencerResult,
   getInfluencerError: state.MarketPlaceReducer.getInfluencerError,
 
+  // Category
   getCategoryLoading: state.MarketPlaceReducer.getCategoryLoading,
   getCategoryResult: state.MarketPlaceReducer.getCategoryResult,
   getCategoryError: state.MarketPlaceReducer.getCategoryError,

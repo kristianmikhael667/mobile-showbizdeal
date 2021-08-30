@@ -5,6 +5,7 @@ export const GET_MARKET_PLACE = 'GET_MARKET_PLACE';
 export const GET_MARKET_INFLUENCER = 'GET_MARKET_INFLUENCER';
 export const GET_CATEGORY = 'GET_CATEGORY';
 export const GET_MANAGEMENT_PROFILE = 'GET_MANAGEMENT_PROFILE';
+export const GET_PORTOPOLIO = 'GET_PORTOPOLIO';
 
 // Performer
 export const getMarketPlace = () => {
@@ -172,7 +173,6 @@ export const getCategory = () => {
 };
 
 export const getManajemenProfileById = id => {
-  console.log('data si dia : ' + id);
   return dispatch => {
     //   Loading
     dispatch({
@@ -206,7 +206,7 @@ export const getManajemenProfileById = id => {
             type: GET_MANAGEMENT_PROFILE,
             payload: {
               loading: false,
-              data: response.data ? response.data.data : [],
+              data: response.data.data ? response.data.data : [],
               errorMessage: false,
             },
           });
@@ -215,6 +215,60 @@ export const getManajemenProfileById = id => {
       .catch(error => {
         dispatch({
           type: GET_MANAGEMENT_PROFILE,
+          payload: {
+            loading: false,
+            data: false,
+            errorMessage: true,
+          },
+        });
+        alert('Your Connection is Invalid');
+      });
+  };
+};
+
+export const getPortofolio = id => {
+  return dispatch => {
+    //   Loading
+    dispatch({
+      type: GET_PORTOPOLIO,
+      payload: {
+        loading: true,
+        data: false,
+        errorMessage: false,
+      },
+    });
+
+    // Get Manajemen
+    axios({
+      method: 'get',
+      url: API_URL + '/product-service/portofolio/business/' + id,
+    })
+      .then(response => {
+        if (response.status !== 200) {
+          //ERROR
+          dispatch({
+            type: GET_PORTOPOLIO,
+            payload: {
+              loading: false,
+              data: false,
+              errorMessage: response,
+            },
+          });
+        } else {
+          //BERHASIL
+          dispatch({
+            type: GET_PORTOPOLIO,
+            payload: {
+              loading: false,
+              data: response.data.results ? response.data.results : [],
+              errorMessage: false,
+            },
+          });
+        }
+      })
+      .catch(error => {
+        dispatch({
+          type: GET_PORTOPOLIO,
           payload: {
             loading: false,
             data: false,

@@ -26,6 +26,8 @@ import InfluencerActive from './influenceractive.png';
 import InfluencerNon from './infulencernonactive.png';
 import SupportActive from './supportactive.png';
 import SupportNon from './supportnonactive.png';
+import FillStart from './fillstart.svg';
+import TimeBomb from './waktu.svg';
 
 export {
   Logo,
@@ -54,4 +56,6 @@ export {
   Facebook,
   Youtube,
   Instagram,
+  FillStart,
+  TimeBomb,
 };
