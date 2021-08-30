@@ -4,6 +4,7 @@ import {API_URL, API_URL2} from '../utils/constant';
 export const GET_MARKET_PLACE = 'GET_MARKET_PLACE';
 export const GET_MARKET_INFLUENCER = 'GET_MARKET_INFLUENCER';
 export const GET_CATEGORY = 'GET_CATEGORY';
+export const GET_MANAGEMENT_PROFILE = 'GET_MANAGEMENT_PROFILE';
 
 // Performer
 export const getMarketPlace = () => {
@@ -61,7 +62,6 @@ export const getMarketPlace = () => {
 };
 
 export const getMarketInfluencer = data => {
-  console.log('punya daa : ' + data);
   return dispatch => {
     //   Loading
     dispatch({
@@ -167,6 +167,61 @@ export const getCategory = () => {
           },
         });
         alert('Your Connection is Invalids');
+      });
+  };
+};
+
+export const getManajemenProfileById = id => {
+  console.log('data si dia : ' + id);
+  return dispatch => {
+    //   Loading
+    dispatch({
+      type: GET_MANAGEMENT_PROFILE,
+      payload: {
+        loading: true,
+        data: false,
+        errorMessage: false,
+      },
+    });
+
+    // Get Manajemen
+    axios({
+      method: 'get',
+      url: API_URL + '/business-service/v2/business/' + id + '/one',
+    })
+      .then(response => {
+        if (response.status !== 200) {
+          //ERROR
+          dispatch({
+            type: GET_MANAGEMENT_PROFILE,
+            payload: {
+              loading: false,
+              data: false,
+              errorMessage: response,
+            },
+          });
+        } else {
+          //BERHASIL
+          dispatch({
+            type: GET_MANAGEMENT_PROFILE,
+            payload: {
+              loading: false,
+              data: response.data ? response.data.data : [],
+              errorMessage: false,
+            },
+          });
+        }
+      })
+      .catch(error => {
+        dispatch({
+          type: GET_MANAGEMENT_PROFILE,
+          payload: {
+            loading: false,
+            data: false,
+            errorMessage: true,
+          },
+        });
+        alert('Your Connection is Invalid');
       });
   };
 };

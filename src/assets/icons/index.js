@@ -6,6 +6,9 @@ import Love from './logolove.svg';
 import Start from './start.svg';
 import Notifikasi from './notifikasi';
 import Filter from './filter';
+import Facebook from './facebooks.svg';
+import Instagram from './instagram.svg';
+import Youtube from './youtube.svg';
 
 // Icon Bottom
 import HomeAktif from './homeactive.svg';
@@ -48,4 +51,7 @@ export {
   InfluencerNon,
   SupportActive,
   SupportNon,
+  Facebook,
+  Youtube,
+  Instagram,
 };

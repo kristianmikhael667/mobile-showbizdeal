@@ -9,6 +9,8 @@ import {
   Showbizlive,
   Transaksi,
   Message,
+  DetailMarket,
+  Login,
 } from '../pages';
 import Register from '../pages/Register';
 import {BottomNavigator} from '../components';
@@ -66,9 +68,21 @@ const Router = () => {
         component={Register}
         options={{headerShown: false}}
       />
+
+      <Stack.Screen
+        name="Login"
+        component={Login}
+        options={{headerShown: false}}
+      />
+
       <Stack.Screen
         name="MainApp"
         component={MainApp}
+        options={{headerShown: false}}
+      />
+      <Stack.Screen
+        name="DetailMarket"
+        component={DetailMarket}
         options={{headerShown: false}}
       />
     </Stack.Navigator>

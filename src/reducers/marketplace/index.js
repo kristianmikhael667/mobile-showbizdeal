@@ -2,6 +2,7 @@ import {
   GET_MARKET_PLACE,
   GET_CATEGORY,
   GET_MARKET_INFLUENCER,
+  GET_MANAGEMENT_PROFILE,
 } from '../../actions/MarketPlace';
 
 const initialState = {
@@ -19,6 +20,11 @@ const initialState = {
   getCategoryLoading: false,
   getCategoryResult: false,
   getCategoryError: false,
+
+  // DetailMarket
+  getManajementProfileLoading: false,
+  getManajementProfileResult: false,
+  getManajementProfileError: false,
 };
 
 export default function (state = initialState, action) {
@@ -44,6 +50,13 @@ export default function (state = initialState, action) {
         getCategoryLoading: action.payload.loading,
         getCategoryResult: action.payload.data,
         getCategoryError: action.payload.errorMessage,
+      };
+    case GET_MANAGEMENT_PROFILE:
+      return {
+        ...state,
+        getManajementProfileLoading: action.payload.loading,
+        getManajementProfileResult: action.payload.data,
+        getManajementProfileError: action.payload.errorMessage,
       };
     default:
       return state;

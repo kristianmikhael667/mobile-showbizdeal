@@ -22,7 +22,9 @@ export default class Register extends Component {
   }
   render() {
     return (
-      <LinearGradient colors={['#1A032D', '#34126C']} style={styles.container}>
+      <LinearGradient
+        colors={[colors.primary1, colors.primary2]}
+        style={styles.container}>
         <ScrollView>
           <Text style={styles.hi}>Hi!</Text>
           <View style={styles.header}>
@@ -121,7 +123,7 @@ export default class Register extends Component {
               color={colors.white}
               width={199}
               height={36}
-              onPress={() => this.props.navigation.navigate('Register')}
+              onPress={() => this.props.navigation.replace('Login')}
               backgroundColor={colors.primary2}
             />
             <Text style={styles.punyakun}>

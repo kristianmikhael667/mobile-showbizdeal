@@ -28,30 +28,24 @@ class Home extends Component {
     };
   }
 
-  clear = () => {
-    this.textInputRef.clear();
-  };
-
   clickLayanan(value) {
-    this.setState({
-      layanan: value,
-    });
-    const {layanan} = this.state;
-    console.log(layanan);
-    this.props.dispatch(getMarketInfluencer(layanan));
+    this.setState(
+      {
+        layanan: value,
+      },
+      () => {
+        const {layanan} = this.state;
+        this.props.dispatch(getMarketInfluencer(layanan));
+      },
+    );
   }
 
   componentDidMount() {
-    this.props.dispatch(getMarketPlace());
     this.props.dispatch(getCategory());
   }
 
   render() {
     const {
-      getdataMarketPlaceResult,
-      getdataMarketPlaceLoading,
-      getdataMarketPlaceError,
-
       getInfluencerResult,
       getInfluencerLoading,
       getInfluencerError,
@@ -143,7 +137,14 @@ class Home extends Component {
             {getInfluencerResult ? (
               getInfluencerResult.map(market => {
                 return (
-                  <TouchableOpacity style={styles.bodysub}>
+                  <TouchableOpacity
+                    onPress={() =>
+                      this.props.navigation.navigate('DetailMarket', {
+                        market,
+                        getCategoryResult,
+                      })
+                    }
+                    style={styles.bodysub}>
                     <Image
                       style={styles.images}
                       source={{
