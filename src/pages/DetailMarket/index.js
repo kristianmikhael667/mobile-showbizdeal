@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {Text, StyleSheet, View, Image} from 'react-native';
+import {Text, StyleSheet, View, Image, ScrollView} from 'react-native';
 import {RFValue} from 'react-native-responsive-fontsize';
 import {connect} from 'react-redux';
 import {
@@ -36,108 +36,130 @@ class DetailMarket extends Component {
   render() {
     const {market, getCategoryResult} = this.state;
     const {getManajementProfileResult, getPortofolioResult} = this.props;
-    console.log('Nih : ' + getPortofolioResult);
+
     return (
       <View style={styles.page}>
-        <Image
-          style={styles.images}
-          source={{
-            uri: API_URL + market.img + '&w=500&h=500&fit=crop',
-          }}
-        />
-        <View style={{backgroundColor: colors.white}}>
-          <Text style={styles.name}>{market.name}</Text>
-          {getCategoryResult ? (
-            getCategoryResult.map(category => {
-              {
-                if (category.id === market.vendor_category[0].sub_category_id) {
-                  return <Text style={styles.category}>{category.name}</Text>;
-                } else {
-                  <Text>No</Text>;
+        <ScrollView>
+          <Image
+            style={styles.images}
+            source={{
+              uri: API_URL + market.img + '&w=500&h=500&fit=crop',
+            }}
+          />
+          <View style={{backgroundColor: colors.white}}>
+            <Text style={styles.name}>{market.name}</Text>
+            {getCategoryResult ? (
+              getCategoryResult.map(category => {
+                {
+                  if (
+                    category.id === market.vendor_category[0].sub_category_id
+                  ) {
+                    return <Text style={styles.category}>{category.name}</Text>;
+                  } else {
+                    <Text>No</Text>;
+                  }
                 }
-              }
-            })
-          ) : (
-            <Text>kosong</Text>
-          )}
-          <View style={styles.sosmed}>
-            <View style={styles.media}>
-              <Facebook />
-            </View>
-            <View style={styles.media}>
-              <Instagram />
-            </View>
-            <View style={styles.media}>
-              <Youtube />
+              })
+            ) : (
+              <Text>kosong</Text>
+            )}
+            <View style={styles.sosmed}>
+              <View style={styles.media}>
+                <Facebook />
+              </View>
+              <View style={styles.media}>
+                <Instagram />
+              </View>
+              <View style={styles.media}>
+                <Youtube />
+              </View>
             </View>
           </View>
-        </View>
 
-        <Jarak height={10} />
-        <View style={styles.cardmanajer}>
-          <View style={styles.cardmanajers}>
-            <View style={{flexDirection: 'row'}}>
+          <Jarak height={10} />
+          <View style={styles.cardmanajer}>
+            <View style={styles.cardmanajers}>
+              <View style={{flexDirection: 'row'}}>
+                <View>
+                  <Image
+                    style={styles.imagesmanajemen}
+                    source={{
+                      uri:
+                        API_URL +
+                        getManajementProfileResult.img +
+                        '&w=500&h=500&fit=crop',
+                    }}
+                  />
+                </View>
+
+                <View>
+                  <Text style={styles.manajemen}>Manajemen</Text>
+                  <Text style={styles.names}>
+                    {getManajementProfileResult.name}
+                  </Text>
+                  <View style={{marginTop: 4, flexDirection: 'row'}}>
+                    <FillStart />
+                    <Text style={styles.rating}>4.9 Rata-rata Ulasan</Text>
+                  </View>
+                  <View style={{marginTop: 4, flexDirection: 'row'}}>
+                    <TimeBomb />
+                    <Text style={styles.times}>Waktu proses cepat</Text>
+                  </View>
+                </View>
+              </View>
+
               <View>
-                <Image
-                  style={styles.imagesmanajemen}
-                  source={{
-                    uri:
-                      API_URL +
-                      getManajementProfileResult.img +
-                      '&w=500&h=500&fit=crop',
-                  }}
+                <Tombol
+                  type="text"
+                  title="Ikuti Management"
+                  fontSize={8}
+                  borderColor={colors.primary2}
+                  borderWidth={1}
+                  borderRadius={3}
+                  paddingVertical={5}
+                  paddingHorizontal={21}
+                  color={colors.primary2}
+                  width={110}
+                  height={responsiveHeight(30)}
+                  // onPress={() => this.props.navigation.navigate('Login')}
+                  backgroundColor={colors.white}
                 />
               </View>
-
-              <View>
-                <Text style={styles.manajemen}>Manajemen</Text>
-                <Text style={styles.names}>
-                  {getManajementProfileResult.name}
-                </Text>
-                <View style={{marginTop: 4, flexDirection: 'row'}}>
-                  <FillStart />
-                  <Text style={styles.rating}>4.9 Rata-rata Ulasan</Text>
-                </View>
-                <View style={{marginTop: 4, flexDirection: 'row'}}>
-                  <TimeBomb />
-                  <Text style={styles.times}>Waktu proses cepat</Text>
-                </View>
-              </View>
-            </View>
-
-            <View>
-              <Tombol
-                type="text"
-                title="Ikuti Management"
-                fontSize={8}
-                borderColor={colors.primary2}
-                borderWidth={1}
-                borderRadius={3}
-                paddingVertical={5}
-                paddingHorizontal={21}
-                color={colors.primary2}
-                width={110}
-                height={responsiveHeight(30)}
-                // onPress={() => this.props.navigation.navigate('Login')}
-                backgroundColor={colors.white}
-              />
             </View>
           </View>
-        </View>
-        <Jarak height={10} />
-        <View style={styles.cardportofolio}>
-          <View style={styles.board}>
-            <Text style={styles.portofoliotitle}>Portofolio</Text>
-            <Text style={styles.seeall}>Lihat Semua</Text>
+          <Jarak height={10} />
+          <View style={styles.cardportofolio}>
+            <View style={styles.board}>
+              <Text style={styles.portofoliotitle}>Portofolio</Text>
+              <Text style={styles.seeall}>Lihat Semua</Text>
+            </View>
+            <View style={styles.portopolio}>
+              <ScrollView horizontal showsHorizontalScrollIndicator={false}>
+                {getPortofolioResult ? (
+                  getPortofolioResult.map(porto => {
+                    return (
+                      <>
+                        {porto.images.map(mbar => {
+                          return (
+                            <>
+                              <Image
+                                style={styles.imageporto}
+                                source={{uri: API_URL + mbar.images}}
+                              />
+                            </>
+                          );
+                        })}
+                      </>
+                    );
+                  })
+                ) : (
+                  <Text>Tidak Ada Portofolio</Text>
+                )}
+              </ScrollView>
+            </View>
           </View>
-          <View>
-            {getPortofolioResult
-              ? getPortofolioResult.map(porto => {
-                  return <Text>{porto.last_edited_timestamp}</Text>;
-                })
-              : []}
-          </View>
-        </View>
+          <Jarak height={10} />
+        </ScrollView>
       </View>
     );
   }
@@ -238,5 +260,16 @@ const styles = StyleSheet.create({
   seeall: {
     fontSize: 10,
     fontStyle: 'italic',
+  },
+  imageporto: {
+    width: responsiveWidth(144),
+    height: responsiveHeight(144),
+    marginRight: 10,
+    marginBottom: 18,
+  },
+  portopolio: {
+    flexDirection: 'row',
+    marginTop: 11,
+    marginLeft: 18,
   },
 });
