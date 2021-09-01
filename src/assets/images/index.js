@@ -11,6 +11,8 @@ import Banner2 from './banner2.png';
 import Banner3 from './banner3.png';
 import Banner4 from './banner4.png';
 
+import BeAPartner from './beapartner.png';
+
 export {
   OnBoardingImg1,
   OnBoardingImg2,
@@ -22,4 +24,5 @@ export {
   Banner2,
   Banner3,
   Banner4,
+  BeAPartner,
 };

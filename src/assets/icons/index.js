@@ -10,6 +10,8 @@ import Facebook from './facebooks.svg';
 import Instagram from './instagram.svg';
 import Youtube from './youtube.svg';
 
+import ButtonLefts from './buttonleft.svg';
+
 // Icon Bottom
 import HomeAktif from './homeactive.svg';
 import HomeNon from './homenon.svg';
@@ -28,6 +30,17 @@ import SupportActive from './supportactive.png';
 import SupportNon from './supportnonactive.png';
 import FillStart from './fillstart.svg';
 import TimeBomb from './waktu.svg';
+import LogoSukses from './logosukses.svg';
+
+// Icon Menu Login
+import MenuUbahProfile from './ubahprofile.svg';
+import MenuAlamat from './alamat.svg';
+import MenuFavorit from './favorite.svg';
+import MenuTransaksi from './transaksi.svg';
+import MenuPembayaran from './pembayaran.svg';
+import MenuSetBahasa from './language.svg';
+import MenuShowbizcare from './showbizcare.svg';
+import MenuKeluar from './logout.svg';
 
 export {
   Logo,
@@ -58,4 +71,14 @@ export {
   Instagram,
   FillStart,
   TimeBomb,
+  LogoSukses,
+  MenuAlamat,
+  MenuFavorit,
+  MenuKeluar,
+  MenuPembayaran,
+  MenuSetBahasa,
+  MenuShowbizcare,
+  MenuTransaksi,
+  MenuUbahProfile,
+  ButtonLefts,
 };

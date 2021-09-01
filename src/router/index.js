@@ -11,8 +11,9 @@ import {
   Message,
   DetailMarket,
   Login,
+  Register,
+  RegisterSuccess,
 } from '../pages';
-import Register from '../pages/Register';
 import {BottomNavigator} from '../components';
 
 const Stack = createNativeStackNavigator();
@@ -66,6 +67,12 @@ const Router = () => {
       <Stack.Screen
         name="Register"
         component={Register}
+        options={{headerShown: false}}
+      />
+
+      <Stack.Screen
+        name="RegisterSuccess"
+        component={RegisterSuccess}
         options={{headerShown: false}}
       />
 

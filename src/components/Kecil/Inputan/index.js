@@ -11,6 +11,9 @@ const Inputan = ({
   backgroundColor,
   placeholder,
   width,
+  onChangeText,
+  keyboardType,
+  ref,
   height,
   secureTextEntry,
   value,
@@ -37,10 +40,12 @@ const Inputan = ({
           marginRight,
           marginLeft,
         )}
+        ref={ref}
         value={value}
         onFocus={onFocus}
         placeholder={placeholder}
         secureTextEntry={secureTextEntry}
+        onChangeText={onChangeText}
       />
     </View>
   );

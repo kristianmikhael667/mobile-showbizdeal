@@ -3,6 +3,7 @@ import {StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 import {Filter, Notifikasi} from '../../../assets';
 import {colors} from '../../../utils';
 import TextOnly from './TextOnly';
+import TombolLoading from './TombolLoading';
 
 const Tombol = props => {
   const Icon = () => {
@@ -21,15 +22,20 @@ const Tombol = props => {
     marginTop,
     width,
     height,
+    loading,
     icon,
     paddingTop,
     paddingHorizontal,
     color,
     onPress,
   } = props;
+  if (loading) {
+    return <TombolLoading {...props} />;
+  }
   if (type === 'text') {
     return <TextOnly {...props} />;
   }
+
   return (
     <TouchableOpacity
       style={styles.container(padding, marginRight, marginTop)}

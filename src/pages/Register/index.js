@@ -1,16 +1,22 @@
 import React, {Component} from 'react';
-import {Text, StyleSheet, View, ScrollView} from 'react-native';
+import {Text, StyleSheet, View, ScrollView, Alert} from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
 import {Inputan, Jarak, Tombol} from '../../components';
 import {colors, fonts} from '../../utils';
 import CheckBox from '@react-native-community/checkbox';
 import {LogoFB, LogoGoogle, LogoTwitter} from '../../assets';
+import {registerUser} from '../../actions/RegisterPersonal';
+import {connect} from 'react-redux';
 
-export default class Register extends Component {
+class Register extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
+      username: '',
+      email: '',
+      password: '',
+      confirm: '',
       check: false,
     };
   }
@@ -20,7 +26,38 @@ export default class Register extends Component {
       check: !this.state.check,
     });
   }
+
+  onContinue = () => {
+    const {username, email, password, confirm, check} = this.state;
+    if (username && email && password && confirm && check) {
+      const data = {
+        username: username,
+        email: email,
+        password: password,
+        confirm: confirm,
+        role: 'common.user',
+      };
+      console.log(data);
+      this.props.dispatch(registerUser(data));
+      // this.props.navigation.navigate('RegisterSuccess');
+    } else {
+      Alert.alert('Error', 'Iis ');
+    }
+  };
+
+  componentDidUpdate(prevProps) {
+    const {postRegistPersonealResult} = this.props;
+    if (
+      postRegistPersonealResult &&
+      prevProps.postRegistPersonealResult !== postRegistPersonealResult
+    ) {
+      this.props.navigation.replace('RegisterSuccess');
+    }
+  }
+
   render() {
+    const {username, email, password, confirm, check} = this.state;
+    const {postRegistPersonealLoading} = this.props;
     return (
       <LinearGradient
         colors={[colors.primary1, colors.primary2]}
@@ -38,6 +75,8 @@ export default class Register extends Component {
               label="Username"
               fontSize={14}
               placeholder="Username"
+              value={username}
+              onChangeText={username => this.setState({username})}
               width={278}
               height={34}
               color={colors.white}
@@ -51,6 +90,8 @@ export default class Register extends Component {
               label="Email"
               fontSize={14}
               placeholder="email@domain.com"
+              value={email}
+              onChangeText={email => this.setState({email})}
               width={278}
               height={34}
               color={colors.white}
@@ -64,12 +105,15 @@ export default class Register extends Component {
               label="Password"
               fontSize={14}
               placeholder="******"
+              value={password}
+              onChangeText={password => this.setState({password})}
               width={278}
               height={34}
               color={colors.white}
               backgroundColor={colors.white}
               fontSizes={14 * 1.1}
               suptext="*"
+              secureTextEntry
               textAlignVertical="top"
             />
             <Jarak height={10} />
@@ -77,6 +121,9 @@ export default class Register extends Component {
               label="Confirm Password"
               fontSize={14}
               placeholder="******"
+              value={confirm}
+              onChangeText={confirm => this.setState({confirm})}
+              secureTextEntry
               width={278}
               height={34}
               color={colors.white}
@@ -108,7 +155,8 @@ export default class Register extends Component {
               color={colors.primary2}
               width={259}
               height={48}
-              onPress={() => this.props.navigation.navigate('Register')}
+              loading={postRegistPersonealLoading}
+              onPress={() => this.onContinue()}
               backgroundColor={colors.white}
             />
             <Text style={styles.punyakun}>Sudah punya akun?</Text>
@@ -146,6 +194,17 @@ export default class Register extends Component {
     );
   }
 }
+
+const mapStateToProps = state => ({
+  postRegistPersonealLoading:
+    state.RegisterPersonalReducer.postRegistPersonealLoading,
+  postRegistPersonealResult:
+    state.RegisterPersonalReducer.postRegistPersonealResult,
+  postRegistPersonealError:
+    state.RegisterPersonalReducer.postRegistPersonealError,
+});
+
+export default connect(mapStateToProps, null)(Register);
 
 const styles = StyleSheet.create({
   container: {
