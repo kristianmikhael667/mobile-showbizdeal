@@ -1,13 +1,43 @@
 import React, {Component} from 'react';
-import {Text, StyleSheet, View, ScrollView} from 'react-native';
+import {Text, StyleSheet, View, ScrollView, Alert} from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
 import {RFValue} from 'react-native-responsive-fontsize';
+import {connect} from 'react-redux';
+import {loginUser} from '../../actions/LoginAction';
 import {LogoFB, LogoGoogle, LogoTwitter} from '../../assets';
 import {Inputan, Jarak, Tombol} from '../../components';
 import {colors, fonts, heightMobileUi} from '../../utils';
 
-export default class Login extends Component {
+class Login extends Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      username: '',
+      password: '',
+    };
+  }
+
+  login = () => {
+    const {username, password} = this.state;
+    if (username && password) {
+      this.props.dispatch(loginUser(username, password));
+    } else {
+      Alert.alert('Error', 'Username dan Password wajib diisi');
+    }
+  };
+
+  componentDidUpdate(prevProps) {
+    const {loginResult} = this.props;
+    console.log('nihh : ' + loginResult);
+    if (loginResult && prevProps.loginResult !== loginResult) {
+      this.props.navigation.replace('MainApp');
+    }
+  }
+
   render() {
+    const {username, password} = this.state;
+    const {loginLoading} = this.props;
     return (
       <LinearGradient
         colors={[colors.primary1, colors.primary2]}
@@ -32,6 +62,8 @@ export default class Login extends Component {
               fontSizes={14 * 1.1}
               suptext="*"
               textAlignVertical="top"
+              value={username}
+              onChangeText={username => this.setState({username})}
             />
             <Jarak height={25} />
             <Inputan
@@ -45,12 +77,15 @@ export default class Login extends Component {
               fontSizes={14 * 1.1}
               suptext="*"
               textAlignVertical="top"
+              value={password}
+              onChangeText={password => this.setState({password})}
             />
             <Jarak height={52} />
             <Tombol
               type="text"
               title="Masuk"
               fontSize={18}
+              loading={loginLoading}
               borderColor={colors.white}
               borderWidth={1}
               paddingVertical={11}
@@ -58,7 +93,7 @@ export default class Login extends Component {
               color={colors.primary2}
               width={259}
               height={48}
-              onPress={() => this.props.navigation.navigate('Login')}
+              onPress={() => this.login()}
               backgroundColor={colors.white}
             />
             <Text style={styles.punyakun}>Belum Punya akun?</Text>
@@ -97,6 +132,13 @@ export default class Login extends Component {
     );
   }
 }
+
+const mapStateToProps = state => ({
+  loginLoading: state.LoginPersonalReducer.loginLoading,
+  loginResult: state.LoginPersonalReducer.loginResult,
+  loginError: state.LoginPersonalReducer.loginError,
+});
+export default connect(mapStateToProps, null)(Login);
 
 const styles = StyleSheet.create({
   container: {

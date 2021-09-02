@@ -3,14 +3,22 @@ import {Text, StyleSheet, View, SafeAreaView} from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
 import {Logo} from '../../assets';
 import {StatusBars} from '../../components';
-import {colors} from '../../utils';
+import {colors, getData} from '../../utils';
 
 export default class Splash extends Component {
   componentDidMount() {
     setTimeout(() => {
-      this.props.navigation.replace('Info');
+      getData('users').then(res => {
+        const data = res;
+        if (data) {
+          this.props.navigation.replace('MainApp');
+        } else {
+          this.props.navigation.replace('Info');
+        }
+      });
     }, 3000);
   }
+
   render() {
     return (
       <LinearGradient

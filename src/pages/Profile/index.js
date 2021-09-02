@@ -27,12 +27,53 @@ import {
   colors,
   fonts,
   heightMobileUi,
+  getData,
   responsiveHeight,
   responsiveWidth,
+  clearStorage,
+  API_URL,
 } from '../../utils';
 
 export default class Profile extends Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      profiles: false,
+    };
+  }
+
+  login = () => {
+    clearStorage();
+    this.props.navigation.replace('Info');
+  };
+
+  componentDidMount() {
+    this._unsubscribe = this.props.navigation.addListener('focus', () => {
+      this.getUserData();
+    });
+  }
+
+  componentWillUnmount() {
+    this._unsubscribe();
+  }
+
+  getUserData = () => {
+    getData('users').then(res => {
+      const data = res;
+      console.log(data.data.user.full_name);
+      if (data) {
+        this.setState({
+          profiles: data.data.user,
+        });
+      } else {
+        this.props.navigation.replace('Login');
+      }
+    });
+  };
+
   render() {
+    const {profiles} = this.state;
     return (
       <View style={styles.pages}>
         <ScrollView>
@@ -62,8 +103,8 @@ export default class Profile extends Component {
               />
             </View>
             <View style={styles.bio}>
-              <Text style={styles.nama}>Sasuke Uchiha</Text>
-              <Text style={styles.email}>sasukeuchiha@email.com</Text>
+              <Text style={styles.nama}>{profiles.full_name}</Text>
+              <Text style={styles.email}>{profiles.email}</Text>
             </View>
             <TouchableOpacity style={styles.bio}>
               <Image style={styles.beapart} source={BeAPartner} />
@@ -132,7 +173,9 @@ export default class Profile extends Component {
                   <ButtonLefts />
                 </View>
               </View>
-              <View style={styles.menus}>
+              <TouchableOpacity
+                onPress={() => this.login()}
+                style={styles.menus}>
                 <View style={{flexDirection: 'row'}}>
                   <MenuKeluar />
                   <Text style={styles.textmenu}>Keluar</Text>
@@ -140,7 +183,7 @@ export default class Profile extends Component {
                 <View>
                   <ButtonLefts />
                 </View>
-              </View>
+              </TouchableOpacity>
             </View>
             <View
               style={{
@@ -151,7 +194,10 @@ export default class Profile extends Component {
               <Image
                 style={styles.images}
                 source={{
-                  uri: 'https://assets.pikiran-rakyat.com/crop/0x0:0x0/x/photo/2021/01/02/3432118224.jpg',
+                  uri:
+                    API_URL + profiles.avatar_url
+                      ? API_URL + profiles.avatar_url
+                      : 'https://pbs.twimg.com/profile_images/1415573131251486725/Or3H-UjP_400x400.jpg',
                 }}
               />
             </View>
