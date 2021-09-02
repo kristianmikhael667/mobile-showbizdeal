@@ -24,7 +24,7 @@ class Home extends Component {
     super(props);
 
     this.state = {
-      layanan: this.state,
+      layanan: '138bb094-8aa2-4900-95c5-c0cd0b4fa3da',
     };
   }
 

@@ -72,7 +72,7 @@ export default class Info extends Component {
                   color={colors.primary2}
                   width={259}
                   height={48}
-                  onPress={() => this.props.navigation.navigate('MainApp')}
+                  onPress={() => this.props.navigation.replace('MainApp')}
                   borderColor={colors.primary2}
                 />
               </View>

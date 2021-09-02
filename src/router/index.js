@@ -13,6 +13,7 @@ import {
   Login,
   Register,
   RegisterSuccess,
+  DetailPortopolio,
 } from '../pages';
 import {BottomNavigator} from '../components';
 
@@ -90,6 +91,11 @@ const Router = () => {
       <Stack.Screen
         name="DetailMarket"
         component={DetailMarket}
+        options={{headerShown: false}}
+      />
+      <Stack.Screen
+        name="DetailPortopolio"
+        component={DetailPortopolio}
         options={{headerShown: false}}
       />
     </Stack.Navigator>

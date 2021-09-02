@@ -4,7 +4,7 @@ import {StatusBar, View} from 'react-native';
 const StatusBars = () => {
   return (
     <StatusBar
-      barStyle="light-content"
+      barStyle="dark-content"
       translucent={true}
       backgroundColor="transparent"
     />

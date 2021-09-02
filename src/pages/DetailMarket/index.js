@@ -1,5 +1,12 @@
 import React, {Component} from 'react';
-import {Text, StyleSheet, View, Image, ScrollView} from 'react-native';
+import {
+  Text,
+  StyleSheet,
+  View,
+  Image,
+  ScrollView,
+  TouchableOpacity,
+} from 'react-native';
 import {RFValue} from 'react-native-responsive-fontsize';
 import {connect} from 'react-redux';
 import {
@@ -7,7 +14,7 @@ import {
   getPortofolio,
 } from '../../actions/MarketPlace';
 import {Facebook, FillStart, Instagram, TimeBomb, Youtube} from '../../assets';
-import {Jarak, Tombol} from '../../components';
+import {Jarak, StatusBars, Tombol} from '../../components';
 import {
   API_URL,
   colors,
@@ -39,6 +46,7 @@ class DetailMarket extends Component {
 
     return (
       <View style={styles.page}>
+        <StatusBars />
         <ScrollView>
           <Image
             style={styles.images}
@@ -142,10 +150,18 @@ class DetailMarket extends Component {
                         {porto.images.map(mbar => {
                           return (
                             <>
-                              <Image
-                                style={styles.imageporto}
-                                source={{uri: API_URL + mbar.images}}
-                              />
+                              <TouchableOpacity
+                                onPress={() =>
+                                  this.props.navigation.navigate(
+                                    'DetailPortopolio',
+                                    {mbar, porto, market},
+                                  )
+                                }>
+                                <Image
+                                  style={styles.imageporto}
+                                  source={{uri: API_URL + mbar.images}}
+                                />
+                              </TouchableOpacity>
                             </>
                           );
                         })}

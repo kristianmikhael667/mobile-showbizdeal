@@ -42,6 +42,8 @@ import MenuSetBahasa from './language.svg';
 import MenuShowbizcare from './showbizcare.svg';
 import MenuKeluar from './logout.svg';
 
+import ButtonBack from './buttonback.svg';
+
 export {
   Logo,
   LogoFB,
@@ -81,4 +83,5 @@ export {
   MenuTransaksi,
   MenuUbahProfile,
   ButtonLefts,
+  ButtonBack,
 };

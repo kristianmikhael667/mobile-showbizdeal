@@ -61,7 +61,6 @@ export default class Profile extends Component {
   getUserData = () => {
     getData('users').then(res => {
       const data = res;
-      console.log(data.data.user.full_name);
       if (data) {
         this.setState({
           profiles: data.data.user,
@@ -194,10 +193,9 @@ export default class Profile extends Component {
               <Image
                 style={styles.images}
                 source={{
-                  uri:
-                    API_URL + profiles.avatar_url
-                      ? API_URL + profiles.avatar_url
-                      : 'https://pbs.twimg.com/profile_images/1415573131251486725/Or3H-UjP_400x400.jpg',
+                  uri: profiles.avatar_url
+                    ? API_URL + profiles.avatar_url
+                    : 'https://pbs.twimg.com/profile_images/1415573131251486725/Or3H-UjP_400x400.jpg',
                 }}
               />
             </View>

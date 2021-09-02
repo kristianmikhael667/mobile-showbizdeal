@@ -9,6 +9,7 @@ import DetailMarket from './DetailMarket';
 import Login from './Login';
 import Register from './Register';
 import RegisterSuccess from './Register/RegisterSuccess';
+import DetailPortopolio from './DetailPortopolio';
 export {
   Splash,
   Info,
@@ -21,4 +22,5 @@ export {
   Login,
   Register,
   RegisterSuccess,
+  DetailPortopolio,
 };
