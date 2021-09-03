@@ -6,8 +6,6 @@ export const LOGIN_PERSONAL = 'LOGIN_PERSONAL';
 
 // Performer
 export const loginUser = (username, password) => {
-  console.log('data siapa : ' + username + ' ' + password);
-
   return dispatch => {
     //   Loading
     dispatch({
@@ -26,7 +24,6 @@ export const loginUser = (username, password) => {
         password: password,
       })
       .then(res => {
-        console.log(res);
         if (res.status !== 200 || res.status !== 201) {
           // Fail
           dispatch({

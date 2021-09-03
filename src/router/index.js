@@ -14,6 +14,8 @@ import {
   Register,
   RegisterSuccess,
   DetailPortopolio,
+  IDCard,
+  MyDashboard,
 } from '../pages';
 import {BottomNavigator} from '../components';
 
@@ -96,6 +98,16 @@ const Router = () => {
       <Stack.Screen
         name="DetailPortopolio"
         component={DetailPortopolio}
+        options={{headerShown: false}}
+      />
+      <Stack.Screen
+        name="IDCard"
+        component={IDCard}
+        options={{headerShown: false}}
+      />
+      <Stack.Screen
+        name="MyDashboard"
+        component={MyDashboard}
         options={{headerShown: false}}
       />
     </Stack.Navigator>

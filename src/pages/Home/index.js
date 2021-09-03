@@ -35,7 +35,6 @@ class Home extends Component {
       },
       () => {
         const {layanan} = this.state;
-        console.log(layanan);
         this.props.dispatch(getMarketInfluencer(layanan));
       },
     );

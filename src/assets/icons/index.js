@@ -12,6 +12,7 @@ import Youtube from './youtube.svg';
 
 import ButtonLefts from './buttonleft.svg';
 
+import LogoIg from './LogoIg.svg';
 // Icon Bottom
 import HomeAktif from './homeactive.svg';
 import HomeNon from './homenon.svg';
@@ -47,12 +48,15 @@ import MenuKeluar from './logout.svg';
 
 import ButtonBack from './buttonback.svg';
 
+import Lefts from './lefts.svg';
+
 export {
   Logo,
   LogoFB,
   LogoTwitter,
   LogoGoogle,
   Love,
+  LogoIg,
   Start,
   HomeAktif,
   HomeNon,
@@ -89,4 +93,5 @@ export {
   ButtonBack,
   MenuIdCard,
   MenuDashboard,
+  Lefts,
 };

@@ -13,6 +13,8 @@ import Banner4 from './banner4.png';
 
 import BeAPartner from './beapartner.png';
 
+import IDCards from './idcard.png';
+
 export {
   OnBoardingImg1,
   OnBoardingImg2,
@@ -25,4 +27,5 @@ export {
   Banner3,
   Banner4,
   BeAPartner,
+  IDCards,
 };

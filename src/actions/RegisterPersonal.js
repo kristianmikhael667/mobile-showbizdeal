@@ -5,8 +5,6 @@ export const REGISTER_PERSONAL = 'REGISTER_PERSONAL';
 
 // Performer
 export const registerUser = data => {
-  console.log('data siapa : ' + data.username);
-
   return dispatch => {
     //   Loading
     dispatch({

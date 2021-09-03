@@ -10,6 +10,8 @@ import Login from './Login';
 import Register from './Register';
 import RegisterSuccess from './Register/RegisterSuccess';
 import DetailPortopolio from './DetailPortopolio';
+import IDCard from './IDCard';
+import MyDashboard from './MyDashboard';
 export {
   Splash,
   Info,
@@ -23,4 +25,6 @@ export {
   Register,
   RegisterSuccess,
   DetailPortopolio,
+  IDCard,
+  MyDashboard,
 };

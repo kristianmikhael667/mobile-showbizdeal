@@ -4,6 +4,7 @@ import {
   GET_MARKET_INFLUENCER,
   GET_MANAGEMENT_PROFILE,
   GET_PORTOPOLIO,
+  GET_MANAGEMENT,
 } from '../../actions/MarketPlace';
 
 const initialState = {
@@ -31,6 +32,11 @@ const initialState = {
   getPortofolioLoading: false,
   getPortofolioResult: false,
   getPortofolioError: false,
+
+  // MANAJEMENTPROFILE
+  getManajementLoading: false,
+  getManajementResult: false,
+  getManajementError: false,
 };
 
 export default function (state = initialState, action) {
@@ -70,6 +76,13 @@ export default function (state = initialState, action) {
         getPortofolioLoading: action.payload.loading,
         getPortofolioResult: action.payload.data,
         getPortofolioError: action.payload.errorMessage,
+      };
+    case GET_MANAGEMENT:
+      return {
+        ...state,
+        getManajementLoading: action.payload.loading,
+        getManajementResult: action.payload.data,
+        getManajementError: action.payload.errorMessage,
       };
     default:
       return state;

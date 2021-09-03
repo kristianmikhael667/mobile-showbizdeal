@@ -9,8 +9,6 @@ const initialState = {
 export default function (state = initialState, action) {
   switch (action.type) {
     case LOGIN_PERSONAL:
-      // console.log(action);
-
       return {
         ...state,
         loginLoading: action.payload.loading,

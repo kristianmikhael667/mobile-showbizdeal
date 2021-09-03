@@ -37,7 +37,6 @@ class Register extends Component {
         confirm: confirm,
         role: 'common.user',
       };
-      console.log(data);
       this.props.dispatch(registerUser(data));
       // this.props.navigation.navigate('RegisterSuccess');
     } else {

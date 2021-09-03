@@ -77,7 +77,6 @@ export default class Profile extends Component {
 
   render() {
     const {profiles, role} = this.state;
-    console.log(role.roles);
     return (
       <View style={styles.pages}>
         <ScrollView>
@@ -106,9 +105,10 @@ export default class Profile extends Component {
                 padding={10}
               />
             </View>
-            <View style={styles.bio}>
+            <View style={styles.biok}>
               <Text style={styles.nama}>{profiles.full_name}</Text>
               <Text style={styles.email}>{profiles.email}</Text>
+              <Text style={styles.nik}>{profiles.nik ? profiles.nik : []}</Text>
             </View>
             {role.roles == 'common.user' ? (
               <TouchableOpacity style={styles.bio}>
@@ -197,19 +197,31 @@ export default class Profile extends Component {
             ) : (
               <View style={styles.bios}>
                 <View style={styles.menus}>
-                  <View style={{flexDirection: 'row'}}>
+                  <TouchableOpacity
+                    onPress={() =>
+                      this.props.navigation.navigate('IDCard', {
+                        profiles,
+                      })
+                    }
+                    style={{flexDirection: 'row'}}>
                     <MenuIdCard />
                     <Text style={styles.textmenu}>View my ID Card</Text>
-                  </View>
+                  </TouchableOpacity>
                   <View>
                     <ButtonLefts />
                   </View>
                 </View>
                 <View style={styles.menus}>
-                  <View style={{flexDirection: 'row'}}>
+                  <TouchableOpacity
+                    onPress={() =>
+                      this.props.navigation.navigate('MyDashboard', {
+                        profiles,
+                      })
+                    }
+                    style={{flexDirection: 'row'}}>
                     <MenuDashboard />
                     <Text style={styles.textmenu}>My Dashboard</Text>
-                  </View>
+                  </TouchableOpacity>
                   <View>
                     <ButtonLefts />
                   </View>
@@ -322,6 +334,11 @@ const styles = StyleSheet.create({
     height: responsiveHeight(117),
     marginTop: 11,
   },
+  biok: {
+    backgroundColor: colors.white,
+    height: responsiveHeight(130),
+    marginTop: 11,
+  },
   bios: {
     backgroundColor: colors.white,
     marginTop: 11,
@@ -364,5 +381,11 @@ const styles = StyleSheet.create({
     fontSize: 16,
     marginLeft: 27,
     alignSelf: 'center',
+  },
+  nik: {
+    fontSize: RFValue(18, heightMobileUi),
+    marginBottom: 11,
+    marginTop: 3,
+    textAlign: 'center',
   },
 });

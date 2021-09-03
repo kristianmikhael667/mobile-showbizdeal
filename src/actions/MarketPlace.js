@@ -6,7 +6,7 @@ export const GET_MARKET_INFLUENCER = 'GET_MARKET_INFLUENCER';
 export const GET_CATEGORY = 'GET_CATEGORY';
 export const GET_MANAGEMENT_PROFILE = 'GET_MANAGEMENT_PROFILE';
 export const GET_PORTOPOLIO = 'GET_PORTOPOLIO';
-
+export const GET_MANAGEMENT = 'GET_MANAGEMENT';
 // Performer
 export const getMarketPlace = () => {
   return dispatch => {
@@ -215,6 +215,60 @@ export const getManajemenProfileById = id => {
       .catch(error => {
         dispatch({
           type: GET_MANAGEMENT_PROFILE,
+          payload: {
+            loading: false,
+            data: false,
+            errorMessage: true,
+          },
+        });
+        alert('Your Connection is Invalid');
+      });
+  };
+};
+
+export const getManajemenProfileId = id => {
+  return dispatch => {
+    //   Loading
+    dispatch({
+      type: GET_MANAGEMENT,
+      payload: {
+        loading: true,
+        data: false,
+        errorMessage: false,
+      },
+    });
+
+    // Get Manajemen
+    axios({
+      method: 'get',
+      url: API_URL + '/business-service/v2/business/' + id,
+    })
+      .then(response => {
+        if (response.status !== 200) {
+          //ERROR
+          dispatch({
+            type: GET_MANAGEMENT,
+            payload: {
+              loading: false,
+              data: false,
+              errorMessage: response,
+            },
+          });
+        } else {
+          //BERHASIL
+          dispatch({
+            type: GET_MANAGEMENT,
+            payload: {
+              loading: false,
+              data: response.data.data ? response.data.data : [],
+              errorMessage: false,
+            },
+          });
+        }
+      })
+      .catch(error => {
+        dispatch({
+          type: GET_MANAGEMENT,
           payload: {
             loading: false,
             data: false,

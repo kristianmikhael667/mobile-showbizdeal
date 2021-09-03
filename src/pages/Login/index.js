@@ -29,7 +29,6 @@ class Login extends Component {
 
   componentDidUpdate(prevProps) {
     const {loginResult} = this.props;
-    console.log('nihh : ' + loginResult);
     if (loginResult && prevProps.loginResult !== loginResult) {
       this.props.navigation.replace('MainApp');
     }

@@ -32,7 +32,6 @@ class DetailPortopolio extends Component {
 
   render() {
     const {mbar, porto, market} = this.state;
-    console.log(market.id);
     return (
       <View style={styles.pages}>
         <StatusBars />

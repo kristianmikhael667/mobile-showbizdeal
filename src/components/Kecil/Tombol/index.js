@@ -1,6 +1,6 @@
 import React from 'react';
 import {StyleSheet, Text, TouchableOpacity, View} from 'react-native';
-import {Filter, Notifikasi} from '../../../assets';
+import {Filter, Lefts, Notifikasi} from '../../../assets';
 import {colors} from '../../../utils';
 import TextOnly from './TextOnly';
 import TombolLoading from './TombolLoading';
@@ -12,6 +12,9 @@ const Tombol = props => {
     }
     if (icon === 'filter') {
       return <Filter />;
+    }
+    if (icon === 'left') {
+      return <Lefts />;
     }
     return <Notifikasi />;
   };
@@ -27,7 +30,9 @@ const Tombol = props => {
     paddingTop,
     paddingHorizontal,
     color,
+    paddingVertical,
     onPress,
+    marginLeft,
   } = props;
   if (loading) {
     return <TombolLoading {...props} />;
@@ -38,7 +43,15 @@ const Tombol = props => {
 
   return (
     <TouchableOpacity
-      style={styles.container(padding, marginRight, marginTop)}
+      style={styles.container(
+        padding,
+        marginRight,
+        marginTop,
+        marginLeft,
+        paddingTop,
+        paddingHorizontal,
+        paddingVertical,
+      )}
       onPress={onPress}>
       <Icon />
     </TouchableOpacity>
@@ -48,11 +61,23 @@ const Tombol = props => {
 export default Tombol;
 
 const styles = StyleSheet.create({
-  container: (padding, marginRight, marginTop) => ({
+  container: (
+    padding,
+    marginRight,
+    marginTop,
+    marginLeft,
+    paddingTop,
+    paddingHorizontal,
+    paddingVertical,
+  ) => ({
     backgroundColor: colors.white,
     padding: padding,
     borderRadius: 5,
     marginRight: marginRight,
+    marginLeft: marginLeft,
     marginTop: marginTop,
+    paddingTop: paddingTop,
+    paddingHorizontal: paddingHorizontal,
+    paddingVertical: paddingVertical,
   }),
 });
