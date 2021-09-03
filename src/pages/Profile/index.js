@@ -14,7 +14,9 @@ import {
   Heads,
   LogoHeader,
   MenuAlamat,
+  MenuDashboard,
   MenuFavorit,
+  MenuIdCard,
   MenuKeluar,
   MenuPembayaran,
   MenuSetBahasa,
@@ -40,6 +42,7 @@ export default class Profile extends Component {
 
     this.state = {
       profiles: false,
+      role: false,
     };
   }
 
@@ -64,6 +67,7 @@ export default class Profile extends Component {
       if (data) {
         this.setState({
           profiles: data.data.user,
+          role: data.data,
         });
       } else {
         this.props.navigation.replace('Login');
@@ -72,7 +76,8 @@ export default class Profile extends Component {
   };
 
   render() {
-    const {profiles} = this.state;
+    const {profiles, role} = this.state;
+    console.log(role.roles);
     return (
       <View style={styles.pages}>
         <ScrollView>
@@ -105,85 +110,187 @@ export default class Profile extends Component {
               <Text style={styles.nama}>{profiles.full_name}</Text>
               <Text style={styles.email}>{profiles.email}</Text>
             </View>
-            <TouchableOpacity style={styles.bio}>
-              <Image style={styles.beapart} source={BeAPartner} />
-            </TouchableOpacity>
-            <View style={styles.bios}>
-              <View style={styles.menus}>
-                <View style={{flexDirection: 'row'}}>
-                  <MenuUbahProfile />
-                  <Text style={styles.textmenu}>Ubah Profile</Text>
-                </View>
-                <View>
-                  <ButtonLefts />
-                </View>
-              </View>
-              <View style={styles.menus}>
-                <View style={{flexDirection: 'row'}}>
-                  <MenuAlamat />
-                  <Text style={styles.textmenu}>Alamat</Text>
-                </View>
-                <View>
-                  <ButtonLefts />
-                </View>
-              </View>
-              <View style={styles.menus}>
-                <View style={{flexDirection: 'row'}}>
-                  <MenuFavorit />
-                  <Text style={styles.textmenu}>Favorit</Text>
-                </View>
-                <View>
-                  <ButtonLefts />
-                </View>
-              </View>
-              <View style={styles.menus}>
-                <View style={{flexDirection: 'row'}}>
-                  <MenuTransaksi />
-                  <Text style={styles.textmenu}>Transaksi Saya</Text>
-                </View>
-                <View>
-                  <ButtonLefts />
-                </View>
-              </View>
-              <View style={styles.menus}>
-                <View style={{flexDirection: 'row'}}>
-                  <MenuPembayaran />
-                  <Text style={styles.textmenu}>Pembayaran</Text>
-                </View>
-                <View>
-                  <ButtonLefts />
-                </View>
-              </View>
-              <View style={styles.menus}>
-                <View style={{flexDirection: 'row'}}>
-                  <MenuSetBahasa />
-                  <Text style={styles.textmenu}>Pengaturan Bahasa</Text>
-                </View>
-                <View>
-                  <ButtonLefts />
-                </View>
-              </View>
-              <View style={styles.menus}>
-                <View style={{flexDirection: 'row'}}>
-                  <MenuShowbizcare />
-                  <Text style={styles.textmenu}>ShowbizCare</Text>
-                </View>
-                <View>
-                  <ButtonLefts />
-                </View>
-              </View>
-              <TouchableOpacity
-                onPress={() => this.login()}
-                style={styles.menus}>
-                <View style={{flexDirection: 'row'}}>
-                  <MenuKeluar />
-                  <Text style={styles.textmenu}>Keluar</Text>
-                </View>
-                <View>
-                  <ButtonLefts />
-                </View>
+            {role.roles == 'common.user' ? (
+              <TouchableOpacity style={styles.bio}>
+                <Image style={styles.beapart} source={BeAPartner} />
               </TouchableOpacity>
-            </View>
+            ) : (
+              []
+            )}
+            {role.roles == 'common.user' ? (
+              <View style={styles.bios}>
+                <View style={styles.menus}>
+                  <View style={{flexDirection: 'row'}}>
+                    <MenuUbahProfile />
+                    <Text style={styles.textmenu}>Ubah Profile</Text>
+                  </View>
+                  <View>
+                    <ButtonLefts />
+                  </View>
+                </View>
+                <View style={styles.menus}>
+                  <View style={{flexDirection: 'row'}}>
+                    <MenuAlamat />
+                    <Text style={styles.textmenu}>Alamat</Text>
+                  </View>
+                  <View>
+                    <ButtonLefts />
+                  </View>
+                </View>
+                <View style={styles.menus}>
+                  <View style={{flexDirection: 'row'}}>
+                    <MenuFavorit />
+                    <Text style={styles.textmenu}>Favorit</Text>
+                  </View>
+                  <View>
+                    <ButtonLefts />
+                  </View>
+                </View>
+                <View style={styles.menus}>
+                  <View style={{flexDirection: 'row'}}>
+                    <MenuTransaksi />
+                    <Text style={styles.textmenu}>Transaksi Saya</Text>
+                  </View>
+                  <View>
+                    <ButtonLefts />
+                  </View>
+                </View>
+                <View style={styles.menus}>
+                  <View style={{flexDirection: 'row'}}>
+                    <MenuPembayaran />
+                    <Text style={styles.textmenu}>Pembayaran</Text>
+                  </View>
+                  <View>
+                    <ButtonLefts />
+                  </View>
+                </View>
+                <View style={styles.menus}>
+                  <View style={{flexDirection: 'row'}}>
+                    <MenuSetBahasa />
+                    <Text style={styles.textmenu}>Pengaturan Bahasa</Text>
+                  </View>
+                  <View>
+                    <ButtonLefts />
+                  </View>
+                </View>
+                <View style={styles.menus}>
+                  <View style={{flexDirection: 'row'}}>
+                    <MenuShowbizcare />
+                    <Text style={styles.textmenu}>ShowbizCare</Text>
+                  </View>
+                  <View>
+                    <ButtonLefts />
+                  </View>
+                </View>
+                <TouchableOpacity
+                  onPress={() => this.login()}
+                  style={styles.menus}>
+                  <View style={{flexDirection: 'row'}}>
+                    <MenuKeluar />
+                    <Text style={styles.textmenu}>Keluar</Text>
+                  </View>
+                  <View>
+                    <ButtonLefts />
+                  </View>
+                </TouchableOpacity>
+              </View>
+            ) : (
+              <View style={styles.bios}>
+                <View style={styles.menus}>
+                  <View style={{flexDirection: 'row'}}>
+                    <MenuIdCard />
+                    <Text style={styles.textmenu}>View my ID Card</Text>
+                  </View>
+                  <View>
+                    <ButtonLefts />
+                  </View>
+                </View>
+                <View style={styles.menus}>
+                  <View style={{flexDirection: 'row'}}>
+                    <MenuDashboard />
+                    <Text style={styles.textmenu}>My Dashboard</Text>
+                  </View>
+                  <View>
+                    <ButtonLefts />
+                  </View>
+                </View>
+                <View style={styles.menus}>
+                  <View style={{flexDirection: 'row'}}>
+                    <MenuUbahProfile />
+                    <Text style={styles.textmenu}>Ubah Profile</Text>
+                  </View>
+                  <View>
+                    <ButtonLefts />
+                  </View>
+                </View>
+                <View style={styles.menus}>
+                  <View style={{flexDirection: 'row'}}>
+                    <MenuAlamat />
+                    <Text style={styles.textmenu}>Alamat</Text>
+                  </View>
+                  <View>
+                    <ButtonLefts />
+                  </View>
+                </View>
+                <View style={styles.menus}>
+                  <View style={{flexDirection: 'row'}}>
+                    <MenuFavorit />
+                    <Text style={styles.textmenu}>Favorit</Text>
+                  </View>
+                  <View>
+                    <ButtonLefts />
+                  </View>
+                </View>
+                <View style={styles.menus}>
+                  <View style={{flexDirection: 'row'}}>
+                    <MenuTransaksi />
+                    <Text style={styles.textmenu}>Transaksi Saya</Text>
+                  </View>
+                  <View>
+                    <ButtonLefts />
+                  </View>
+                </View>
+                <View style={styles.menus}>
+                  <View style={{flexDirection: 'row'}}>
+                    <MenuPembayaran />
+                    <Text style={styles.textmenu}>Pembayaran</Text>
+                  </View>
+                  <View>
+                    <ButtonLefts />
+                  </View>
+                </View>
+                <View style={styles.menus}>
+                  <View style={{flexDirection: 'row'}}>
+                    <MenuSetBahasa />
+                    <Text style={styles.textmenu}>Pengaturan Bahasa</Text>
+                  </View>
+                  <View>
+                    <ButtonLefts />
+                  </View>
+                </View>
+                <View style={styles.menus}>
+                  <View style={{flexDirection: 'row'}}>
+                    <MenuShowbizcare />
+                    <Text style={styles.textmenu}>ShowbizCare</Text>
+                  </View>
+                  <View>
+                    <ButtonLefts />
+                  </View>
+                </View>
+                <TouchableOpacity
+                  onPress={() => this.login()}
+                  style={styles.menus}>
+                  <View style={{flexDirection: 'row'}}>
+                    <MenuKeluar />
+                    <Text style={styles.textmenu}>Keluar</Text>
+                  </View>
+                  <View>
+                    <ButtonLefts />
+                  </View>
+                </TouchableOpacity>
+              </View>
+            )}
+
             <View
               style={{
                 position: 'absolute',

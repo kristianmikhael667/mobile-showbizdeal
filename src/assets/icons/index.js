@@ -33,6 +33,9 @@ import TimeBomb from './waktu.svg';
 import LogoSukses from './logosukses.svg';
 
 // Icon Menu Login
+import MenuIdCard from './idcard.svg';
+import MenuDashboard from './dashboard.svg';
+
 import MenuUbahProfile from './ubahprofile.svg';
 import MenuAlamat from './alamat.svg';
 import MenuFavorit from './favorite.svg';
@@ -84,4 +87,6 @@ export {
   MenuUbahProfile,
   ButtonLefts,
   ButtonBack,
+  MenuIdCard,
+  MenuDashboard,
 };
