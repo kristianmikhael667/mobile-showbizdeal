@@ -33,6 +33,8 @@ import FillStart from './fillstart.svg';
 import TimeBomb from './waktu.svg';
 import LogoSukses from './logosukses.svg';
 
+import IconFiltersa from './filtersa.svg';
+
 // Icon Menu Login
 import MenuIdCard from './idcard.svg';
 import MenuDashboard from './dashboard.svg';
@@ -94,4 +96,5 @@ export {
   MenuIdCard,
   MenuDashboard,
   Lefts,
+  IconFiltersa,
 };

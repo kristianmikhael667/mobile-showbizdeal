@@ -7,4 +7,5 @@ export const colors = {
   grey: '#656565',
   pembatas: '#F2F2F2',
   bisnis: '#B1B1B1',
+  black: '#000000',
 };

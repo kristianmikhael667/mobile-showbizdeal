@@ -1,4 +1,5 @@
-import React, {Component} from 'react';
+import React, {Component, useRef} from 'react';
+import {Modalize} from 'react-native-modalize';
 import {
   Text,
   StyleSheet,
@@ -14,7 +15,7 @@ import {
   getMarketInfluencer,
   getMarketPlace,
 } from '../../actions/MarketPlace';
-import {Heads, LogoHeader, Love, Start} from '../../assets';
+import {Heads, IconFiltersa, LogoHeader, Love, Start} from '../../assets';
 import {API_URL, heightMobileUi} from '../../utils/constant';
 import {responsiveWidth, responsiveHeight, colors, fonts} from '../../utils';
 import {RFValue} from 'react-native-responsive-fontsize';
@@ -22,7 +23,7 @@ import {BannerSlider, Inputan, Kategory, Tombol} from '../../components';
 class Home extends Component {
   constructor(props) {
     super(props);
-
+    this.modalizeReff = React.createRef();
     this.state = {
       layanan: '138bb094-8aa2-4900-95c5-c0cd0b4fa3da',
     };
@@ -44,6 +45,11 @@ class Home extends Component {
     this.props.dispatch(getCategory());
   }
 
+  OnOpen = () => {
+    // const {modalizeReff} = this.state;
+    this.modalizeReff.current?.open();
+  };
+
   render() {
     const {
       getInfluencerResult,
@@ -52,6 +58,7 @@ class Home extends Component {
 
       getCategoryResult,
     } = this.props;
+    const {modalizeReff} = this.state;
     return (
       <View style={styles.pages}>
         <ScrollView>
@@ -92,7 +99,12 @@ class Home extends Component {
                 icon="notifikasi"
                 padding={10}
               />
-              <Tombol marginTop={30} icon="filter" padding={10} />
+              <Tombol
+                onPress={() => this.OnOpen()}
+                marginTop={30}
+                icon="filter"
+                padding={10}
+              />
             </View>
           </View>
           <BannerSlider />
@@ -204,6 +216,389 @@ class Home extends Component {
             )}
           </View>
         </ScrollView>
+        <Modalize ref={this.modalizeReff} snapPoint={responsiveHeight(568)}>
+          <View style={styles.modalizes}>
+            <View style={styles.headermodal}>
+              <IconFiltersa />
+              <Text style={styles.filterproduk}>Filter Produk</Text>
+              <Text style={styles.reset}>Reset</Text>
+            </View>
+            <View
+              style={{
+                flexDirection: 'row',
+                justifyContent: 'space-between',
+                paddingHorizontal: responsiveWidth(30),
+                alignItems: 'center',
+                paddingTop: 15,
+              }}>
+              <Text style={styles.juduls}>Lokasi</Text>
+              <Text style={styles.lihatall}>Lihat Semua</Text>
+            </View>
+            <View
+              style={{
+                flexDirection: 'row',
+                justifyContent: 'space-around',
+                flexWrap: 'wrap',
+                marginTop: 10,
+                paddingHorizontal: responsiveWidth(30),
+              }}>
+              <View>
+                <Tombol
+                  type="text"
+                  title="Jabodetabek"
+                  borderColor={colors.black}
+                  borderWidth={1}
+                  paddingVertical={4}
+                  paddingHorizontal={10}
+                  fontSize={RFValue(11)}
+                  color={colors.white}
+                  borderRadius={3}
+                  width={responsiveWidth(102)}
+                  height={25}
+                  // onPress={() => this.login()}
+                  backgroundColor={colors.nonactive}
+                />
+              </View>
+
+              <View>
+                <Tombol
+                  type="text"
+                  title="DKI Jakarta"
+                  borderColor={colors.black}
+                  borderWidth={1}
+                  paddingVertical={4}
+                  color={colors.black}
+                  borderRadius={3}
+                  width={responsiveWidth(102)}
+                  height={25}
+                  paddingHorizontal={10}
+                  fontSize={RFValue(11)}
+                  // onPress={() => this.login()}
+                  backgroundColor={colors.white}
+                />
+              </View>
+
+              <View>
+                <Tombol
+                  type="text"
+                  title="Bekasi"
+                  borderColor={colors.black}
+                  borderWidth={1}
+                  paddingVertical={4}
+                  color={colors.black}
+                  borderRadius={3}
+                  width={responsiveWidth(102)}
+                  height={25}
+                  paddingHorizontal={10}
+                  fontSize={RFValue(11)}
+                  // onPress={() => this.login()}
+                  backgroundColor={colors.white}
+                />
+              </View>
+              <View>
+                <Tombol
+                  type="text"
+                  title="Karawang"
+                  borderColor={colors.black}
+                  borderWidth={1}
+                  paddingVertical={4}
+                  color={colors.black}
+                  borderRadius={3}
+                  width={responsiveWidth(102)}
+                  height={25}
+                  paddingHorizontal={10}
+                  fontSize={RFValue(11)}
+                  // onPress={() => this.login()}
+                  backgroundColor={colors.white}
+                />
+              </View>
+              <View>
+                <Tombol
+                  type="text"
+                  title="Bogor"
+                  borderColor={colors.black}
+                  borderWidth={1}
+                  paddingVertical={4}
+                  color={colors.black}
+                  borderRadius={3}
+                  width={responsiveWidth(102)}
+                  height={25}
+                  paddingHorizontal={10}
+                  fontSize={RFValue(11)}
+                  // onPress={() => this.login()}
+                  backgroundColor={colors.white}
+                />
+              </View>
+              <View>
+                <Tombol
+                  type="text"
+                  title="Depok"
+                  borderColor={colors.black}
+                  borderWidth={1}
+                  paddingVertical={4}
+                  color={colors.black}
+                  borderRadius={3}
+                  width={responsiveWidth(102)}
+                  height={25}
+                  paddingHorizontal={10}
+                  fontSize={RFValue(11)}
+                  // onPress={() => this.login()}
+                  backgroundColor={colors.white}
+                />
+              </View>
+            </View>
+
+            <View
+              style={{
+                flexDirection: 'row',
+                justifyContent: 'space-between',
+                paddingHorizontal: responsiveWidth(30),
+                alignItems: 'center',
+                paddingTop: 15,
+              }}>
+              <Text style={styles.juduls}>Kategori</Text>
+              <Text style={styles.lihatall}>Lihat Semua</Text>
+            </View>
+            <View
+              style={{
+                flexDirection: 'row',
+                justifyContent: 'space-around',
+                flexWrap: 'wrap',
+                marginTop: 10,
+                paddingHorizontal: responsiveWidth(30),
+              }}>
+              <View>
+                <Tombol
+                  type="text"
+                  title="Semua"
+                  borderColor={colors.black}
+                  borderWidth={1}
+                  paddingVertical={4}
+                  paddingHorizontal={10}
+                  fontSize={RFValue(11)}
+                  color={colors.white}
+                  borderRadius={3}
+                  width={responsiveWidth(102)}
+                  height={25}
+                  // onPress={() => this.login()}
+                  backgroundColor={colors.nonactive}
+                />
+              </View>
+
+              <View>
+                <Tombol
+                  type="text"
+                  title="DJ"
+                  borderColor={colors.black}
+                  borderWidth={1}
+                  paddingVertical={4}
+                  color={colors.black}
+                  borderRadius={3}
+                  width={responsiveWidth(102)}
+                  height={25}
+                  paddingHorizontal={10}
+                  fontSize={RFValue(11)}
+                  // onPress={() => this.login()}
+                  backgroundColor={colors.white}
+                />
+              </View>
+
+              <View>
+                <Tombol
+                  type="text"
+                  title="Musisi"
+                  borderColor={colors.black}
+                  borderWidth={1}
+                  paddingVertical={4}
+                  color={colors.black}
+                  borderRadius={3}
+                  width={responsiveWidth(102)}
+                  height={25}
+                  paddingHorizontal={10}
+                  fontSize={RFValue(11)}
+                  // onPress={() => this.login()}
+                  backgroundColor={colors.white}
+                />
+              </View>
+              <View>
+                <Tombol
+                  type="text"
+                  title="Badut"
+                  borderColor={colors.black}
+                  borderWidth={1}
+                  paddingVertical={4}
+                  color={colors.black}
+                  borderRadius={3}
+                  width={responsiveWidth(102)}
+                  height={25}
+                  paddingHorizontal={10}
+                  fontSize={RFValue(11)}
+                  // onPress={() => this.login()}
+                  backgroundColor={colors.white}
+                />
+              </View>
+              <View>
+                <Tombol
+                  type="text"
+                  title="MC"
+                  borderColor={colors.black}
+                  borderWidth={1}
+                  paddingVertical={4}
+                  color={colors.black}
+                  borderRadius={3}
+                  width={responsiveWidth(102)}
+                  height={25}
+                  paddingHorizontal={10}
+                  fontSize={RFValue(11)}
+                  // onPress={() => this.login()}
+                  backgroundColor={colors.white}
+                />
+              </View>
+              <View>
+                <Tombol
+                  type="text"
+                  title="Pesulap"
+                  borderColor={colors.black}
+                  borderWidth={1}
+                  paddingVertical={4}
+                  color={colors.black}
+                  borderRadius={3}
+                  width={responsiveWidth(102)}
+                  height={25}
+                  paddingHorizontal={10}
+                  fontSize={RFValue(11)}
+                  // onPress={() => this.login()}
+                  backgroundColor={colors.white}
+                />
+              </View>
+            </View>
+
+            <View
+              style={{
+                flexDirection: 'row',
+                justifyContent: 'space-between',
+                paddingHorizontal: responsiveWidth(30),
+                alignItems: 'center',
+                paddingTop: 15,
+              }}>
+              <Text style={styles.juduls}>Sub Kategori</Text>
+              <Text style={styles.lihatall}>Lihat Semua</Text>
+            </View>
+            <View
+              style={{
+                flexDirection: 'row',
+                justifyContent: 'space-around',
+                flexWrap: 'wrap',
+                marginTop: 10,
+                paddingHorizontal: responsiveWidth(30),
+              }}>
+              <View>
+                <Tombol
+                  type="text"
+                  title="Semua"
+                  borderColor={colors.black}
+                  borderWidth={1}
+                  paddingVertical={4}
+                  paddingHorizontal={10}
+                  fontSize={RFValue(11)}
+                  color={colors.white}
+                  borderRadius={3}
+                  width={responsiveWidth(102)}
+                  height={25}
+                  // onPress={() => this.login()}
+                  backgroundColor={colors.nonactive}
+                />
+              </View>
+
+              <View>
+                <Tombol
+                  type="text"
+                  title="Pop"
+                  borderColor={colors.black}
+                  borderWidth={1}
+                  paddingVertical={4}
+                  color={colors.black}
+                  borderRadius={3}
+                  width={responsiveWidth(102)}
+                  height={25}
+                  paddingHorizontal={10}
+                  fontSize={RFValue(11)}
+                  // onPress={() => this.login()}
+                  backgroundColor={colors.white}
+                />
+              </View>
+
+              <View>
+                <Tombol
+                  type="text"
+                  title="Rock"
+                  borderColor={colors.black}
+                  borderWidth={1}
+                  paddingVertical={4}
+                  color={colors.black}
+                  borderRadius={3}
+                  width={responsiveWidth(102)}
+                  height={25}
+                  paddingHorizontal={10}
+                  fontSize={RFValue(11)}
+                  // onPress={() => this.login()}
+                  backgroundColor={colors.white}
+                />
+              </View>
+              <View>
+                <Tombol
+                  type="text"
+                  title="Dangdut"
+                  borderColor={colors.black}
+                  borderWidth={1}
+                  paddingVertical={4}
+                  color={colors.black}
+                  borderRadius={3}
+                  width={responsiveWidth(102)}
+                  height={25}
+                  paddingHorizontal={10}
+                  fontSize={RFValue(11)}
+                  // onPress={() => this.login()}
+                  backgroundColor={colors.white}
+                />
+              </View>
+              <View>
+                <Tombol
+                  type="text"
+                  title="MC Kondangan"
+                  borderColor={colors.black}
+                  borderWidth={1}
+                  paddingVertical={4}
+                  color={colors.black}
+                  borderRadius={3}
+                  width={responsiveWidth(102)}
+                  height={25}
+                  paddingHorizontal={10}
+                  fontSize={RFValue(11)}
+                  // onPress={() => this.login()}
+                  backgroundColor={colors.white}
+                />
+              </View>
+              <View>
+                <Tombol
+                  type="text"
+                  title="MC Acara"
+                  borderColor={colors.black}
+                  borderWidth={1}
+                  paddingVertical={4}
+                  color={colors.black}
+                  borderRadius={3}
+                  width={responsiveWidth(102)}
+                  height={25}
+                  paddingHorizontal={10}
+                  fontSize={RFValue(11)}
+                  // onPress={() => this.login()}
+                  backgroundColor={colors.white}
+                />
+              </View>
+            </View>
+          </View>
+        </Modalize>
       </View>
     );
   }
@@ -311,5 +706,31 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     marginBottom: 14,
     marginHorizontal: responsiveWidth(18),
+  },
+  modalizes: {
+    height: responsiveHeight(568),
+    paddingHorizontal: 20,
+    paddingTop: 46,
+  },
+  headermodal: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+  },
+  filterproduk: {
+    fontFamily: fonts.primary.bold,
+    fontSize: 18,
+  },
+  reset: {
+    fontSize: 10,
+    fontStyle: 'italic',
+  },
+  juduls: {
+    fontFamily: fonts.primary.bold,
+    fontSize: 14,
+  },
+  lihatall: {
+    fontSize: 10,
+    fontStyle: 'italic',
   },
 });
