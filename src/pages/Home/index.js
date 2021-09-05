@@ -19,13 +19,22 @@ import {Heads, IconFiltersa, LogoHeader, Love, Start} from '../../assets';
 import {API_URL, heightMobileUi} from '../../utils/constant';
 import {responsiveWidth, responsiveHeight, colors, fonts} from '../../utils';
 import {RFValue} from 'react-native-responsive-fontsize';
-import {BannerSlider, Inputan, Kategory, Tombol} from '../../components';
+import {
+  BannerSlider,
+  FilterProduk,
+  Inputan,
+  Kategory,
+  Tombol,
+} from '../../components';
 class Home extends Component {
   constructor(props) {
     super(props);
     this.modalizeReff = React.createRef();
     this.state = {
       layanan: '138bb094-8aa2-4900-95c5-c0cd0b4fa3da',
+      lokasi: 'Jabodetabek',
+      kategori: 'Semua',
+      subkategori: 'Semua',
     };
   }
 
@@ -36,13 +45,35 @@ class Home extends Component {
       },
       () => {
         const {layanan} = this.state;
+        console.log('data : ' + layanan);
         this.props.dispatch(getMarketInfluencer(layanan));
       },
     );
   }
 
+  clickLokasi(value) {
+    this.setState({
+      lokasi: value,
+    });
+  }
+
+  clickKategori(value) {
+    this.setState({
+      kategori: value,
+    });
+  }
+
+  clickSubKategori(value) {
+    this.setState({
+      subkategori: value,
+    });
+  }
+
   componentDidMount() {
     this.props.dispatch(getCategory());
+    const {layanan} = this.state;
+    console.log('data : ' + layanan);
+    this.props.dispatch(getMarketInfluencer(layanan));
   }
 
   OnOpen = () => {
@@ -243,107 +274,45 @@ class Home extends Component {
                 paddingHorizontal: responsiveWidth(30),
               }}>
               <View>
-                <Tombol
-                  type="text"
+                <FilterProduk
                   title="Jabodetabek"
-                  borderColor={colors.black}
-                  borderWidth={1}
-                  paddingVertical={4}
-                  paddingHorizontal={10}
-                  fontSize={RFValue(11)}
-                  color={colors.white}
-                  borderRadius={3}
-                  width={responsiveWidth(102)}
-                  height={25}
-                  // onPress={() => this.login()}
-                  backgroundColor={colors.nonactive}
+                  onPress={() => this.clickLokasi('Jabodetabek')}
+                  active={this.state.lokasi === 'Jabodetabek' ? true : false}
                 />
               </View>
-
               <View>
-                <Tombol
-                  type="text"
+                <FilterProduk
                   title="DKI Jakarta"
-                  borderColor={colors.black}
-                  borderWidth={1}
-                  paddingVertical={4}
-                  color={colors.black}
-                  borderRadius={3}
-                  width={responsiveWidth(102)}
-                  height={25}
-                  paddingHorizontal={10}
-                  fontSize={RFValue(11)}
-                  // onPress={() => this.login()}
-                  backgroundColor={colors.white}
+                  onPress={() => this.clickLokasi('DKI Jakarta')}
+                  active={this.state.lokasi === 'DKI Jakarta' ? true : false}
                 />
               </View>
-
               <View>
-                <Tombol
-                  type="text"
+                <FilterProduk
                   title="Bekasi"
-                  borderColor={colors.black}
-                  borderWidth={1}
-                  paddingVertical={4}
-                  color={colors.black}
-                  borderRadius={3}
-                  width={responsiveWidth(102)}
-                  height={25}
-                  paddingHorizontal={10}
-                  fontSize={RFValue(11)}
-                  // onPress={() => this.login()}
-                  backgroundColor={colors.white}
+                  onPress={() => this.clickLokasi('Bekasi')}
+                  active={this.state.lokasi === 'Bekasi' ? true : false}
                 />
               </View>
               <View>
-                <Tombol
-                  type="text"
+                <FilterProduk
                   title="Karawang"
-                  borderColor={colors.black}
-                  borderWidth={1}
-                  paddingVertical={4}
-                  color={colors.black}
-                  borderRadius={3}
-                  width={responsiveWidth(102)}
-                  height={25}
-                  paddingHorizontal={10}
-                  fontSize={RFValue(11)}
-                  // onPress={() => this.login()}
-                  backgroundColor={colors.white}
+                  onPress={() => this.clickLokasi('Karawang')}
+                  active={this.state.lokasi === 'Karawang' ? true : false}
                 />
               </View>
               <View>
-                <Tombol
-                  type="text"
+                <FilterProduk
                   title="Bogor"
-                  borderColor={colors.black}
-                  borderWidth={1}
-                  paddingVertical={4}
-                  color={colors.black}
-                  borderRadius={3}
-                  width={responsiveWidth(102)}
-                  height={25}
-                  paddingHorizontal={10}
-                  fontSize={RFValue(11)}
-                  // onPress={() => this.login()}
-                  backgroundColor={colors.white}
+                  onPress={() => this.clickLokasi('Bogor')}
+                  active={this.state.lokasi === 'Bogor' ? true : false}
                 />
               </View>
               <View>
-                <Tombol
-                  type="text"
+                <FilterProduk
                   title="Depok"
-                  borderColor={colors.black}
-                  borderWidth={1}
-                  paddingVertical={4}
-                  color={colors.black}
-                  borderRadius={3}
-                  width={responsiveWidth(102)}
-                  height={25}
-                  paddingHorizontal={10}
-                  fontSize={RFValue(11)}
-                  // onPress={() => this.login()}
-                  backgroundColor={colors.white}
+                  onPress={() => this.clickLokasi('Depok')}
+                  active={this.state.lokasi === 'Depok' ? true : false}
                 />
               </View>
             </View>
@@ -368,107 +337,45 @@ class Home extends Component {
                 paddingHorizontal: responsiveWidth(30),
               }}>
               <View>
-                <Tombol
-                  type="text"
+                <FilterProduk
                   title="Semua"
-                  borderColor={colors.black}
-                  borderWidth={1}
-                  paddingVertical={4}
-                  paddingHorizontal={10}
-                  fontSize={RFValue(11)}
-                  color={colors.white}
-                  borderRadius={3}
-                  width={responsiveWidth(102)}
-                  height={25}
-                  // onPress={() => this.login()}
-                  backgroundColor={colors.nonactive}
+                  onPress={() => this.clickKategori('Semua')}
+                  active={this.state.kategori === 'Semua' ? true : false}
                 />
               </View>
-
               <View>
-                <Tombol
-                  type="text"
+                <FilterProduk
                   title="DJ"
-                  borderColor={colors.black}
-                  borderWidth={1}
-                  paddingVertical={4}
-                  color={colors.black}
-                  borderRadius={3}
-                  width={responsiveWidth(102)}
-                  height={25}
-                  paddingHorizontal={10}
-                  fontSize={RFValue(11)}
-                  // onPress={() => this.login()}
-                  backgroundColor={colors.white}
+                  onPress={() => this.clickKategori('DJ')}
+                  active={this.state.kategori === 'DJ' ? true : false}
                 />
               </View>
-
               <View>
-                <Tombol
-                  type="text"
+                <FilterProduk
                   title="Musisi"
-                  borderColor={colors.black}
-                  borderWidth={1}
-                  paddingVertical={4}
-                  color={colors.black}
-                  borderRadius={3}
-                  width={responsiveWidth(102)}
-                  height={25}
-                  paddingHorizontal={10}
-                  fontSize={RFValue(11)}
-                  // onPress={() => this.login()}
-                  backgroundColor={colors.white}
+                  onPress={() => this.clickKategori('Musisi')}
+                  active={this.state.kategori === 'Musisi' ? true : false}
                 />
               </View>
               <View>
-                <Tombol
-                  type="text"
+                <FilterProduk
                   title="Badut"
-                  borderColor={colors.black}
-                  borderWidth={1}
-                  paddingVertical={4}
-                  color={colors.black}
-                  borderRadius={3}
-                  width={responsiveWidth(102)}
-                  height={25}
-                  paddingHorizontal={10}
-                  fontSize={RFValue(11)}
-                  // onPress={() => this.login()}
-                  backgroundColor={colors.white}
+                  onPress={() => this.clickKategori('Badut')}
+                  active={this.state.kategori === 'Badut' ? true : false}
                 />
               </View>
               <View>
-                <Tombol
-                  type="text"
+                <FilterProduk
                   title="MC"
-                  borderColor={colors.black}
-                  borderWidth={1}
-                  paddingVertical={4}
-                  color={colors.black}
-                  borderRadius={3}
-                  width={responsiveWidth(102)}
-                  height={25}
-                  paddingHorizontal={10}
-                  fontSize={RFValue(11)}
-                  // onPress={() => this.login()}
-                  backgroundColor={colors.white}
+                  onPress={() => this.clickKategori('MC')}
+                  active={this.state.kategori === 'MC' ? true : false}
                 />
               </View>
               <View>
-                <Tombol
-                  type="text"
+                <FilterProduk
                   title="Pesulap"
-                  borderColor={colors.black}
-                  borderWidth={1}
-                  paddingVertical={4}
-                  color={colors.black}
-                  borderRadius={3}
-                  width={responsiveWidth(102)}
-                  height={25}
-                  paddingHorizontal={10}
-                  fontSize={RFValue(11)}
-                  // onPress={() => this.login()}
-                  backgroundColor={colors.white}
+                  onPress={() => this.clickKategori('Pesulap')}
+                  active={this.state.kategori === 'Pesulap' ? true : false}
                 />
               </View>
             </View>
@@ -493,107 +400,47 @@ class Home extends Component {
                 paddingHorizontal: responsiveWidth(30),
               }}>
               <View>
-                <Tombol
-                  type="text"
+                <FilterProduk
                   title="Semua"
-                  borderColor={colors.black}
-                  borderWidth={1}
-                  paddingVertical={4}
-                  paddingHorizontal={10}
-                  fontSize={RFValue(11)}
-                  color={colors.white}
-                  borderRadius={3}
-                  width={responsiveWidth(102)}
-                  height={25}
-                  // onPress={() => this.login()}
-                  backgroundColor={colors.nonactive}
+                  onPress={() => this.clickSubKategori('Semua')}
+                  active={this.state.subkategori === 'Semua' ? true : false}
                 />
               </View>
-
               <View>
-                <Tombol
-                  type="text"
+                <FilterProduk
                   title="Pop"
-                  borderColor={colors.black}
-                  borderWidth={1}
-                  paddingVertical={4}
-                  color={colors.black}
-                  borderRadius={3}
-                  width={responsiveWidth(102)}
-                  height={25}
-                  paddingHorizontal={10}
-                  fontSize={RFValue(11)}
-                  // onPress={() => this.login()}
-                  backgroundColor={colors.white}
+                  onPress={() => this.clickSubKategori('Pop')}
+                  active={this.state.subkategori === 'Pop' ? true : false}
                 />
               </View>
-
               <View>
-                <Tombol
-                  type="text"
+                <FilterProduk
                   title="Rock"
-                  borderColor={colors.black}
-                  borderWidth={1}
-                  paddingVertical={4}
-                  color={colors.black}
-                  borderRadius={3}
-                  width={responsiveWidth(102)}
-                  height={25}
-                  paddingHorizontal={10}
-                  fontSize={RFValue(11)}
-                  // onPress={() => this.login()}
-                  backgroundColor={colors.white}
+                  onPress={() => this.clickSubKategori('Rock')}
+                  active={this.state.subkategori === 'Rock' ? true : false}
                 />
               </View>
               <View>
-                <Tombol
-                  type="text"
+                <FilterProduk
                   title="Dangdut"
-                  borderColor={colors.black}
-                  borderWidth={1}
-                  paddingVertical={4}
-                  color={colors.black}
-                  borderRadius={3}
-                  width={responsiveWidth(102)}
-                  height={25}
-                  paddingHorizontal={10}
-                  fontSize={RFValue(11)}
-                  // onPress={() => this.login()}
-                  backgroundColor={colors.white}
+                  onPress={() => this.clickSubKategori('Dangdut')}
+                  active={this.state.subkategori === 'Dangdut' ? true : false}
                 />
               </View>
               <View>
-                <Tombol
-                  type="text"
+                <FilterProduk
                   title="MC Kondangan"
-                  borderColor={colors.black}
-                  borderWidth={1}
-                  paddingVertical={4}
-                  color={colors.black}
-                  borderRadius={3}
-                  width={responsiveWidth(102)}
-                  height={25}
-                  paddingHorizontal={10}
-                  fontSize={RFValue(11)}
-                  // onPress={() => this.login()}
-                  backgroundColor={colors.white}
+                  onPress={() => this.clickSubKategori('MC Kondangan')}
+                  active={
+                    this.state.subkategori === 'MC Kondangan' ? true : false
+                  }
                 />
               </View>
               <View>
-                <Tombol
-                  type="text"
+                <FilterProduk
                   title="MC Acara"
-                  borderColor={colors.black}
-                  borderWidth={1}
-                  paddingVertical={4}
-                  color={colors.black}
-                  borderRadius={3}
-                  width={responsiveWidth(102)}
-                  height={25}
-                  paddingHorizontal={10}
-                  fontSize={RFValue(11)}
-                  // onPress={() => this.login()}
-                  backgroundColor={colors.white}
+                  onPress={() => this.clickSubKategori('MC Acara')}
+                  active={this.state.subkategori === 'MC Acara' ? true : false}
                 />
               </View>
             </View>
