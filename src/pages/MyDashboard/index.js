@@ -87,10 +87,38 @@ class MyDashboard extends Component {
             </View>
           </View>
           <View style={styles.bio}>
-            <Text>Bio</Text>
-            <Text>{getManajementResult.desc}</Text>
-            <Text>Alamat</Text>
-            <Text>{getManajementResult.address}</Text>
+            <Text style={styles.biodara}>Bio</Text>
+            <View
+              style={{
+                width: responsiveWidth(334),
+                alignSelf: 'center',
+                paddingHorizontal: 20,
+                marginBottom: 15,
+              }}>
+              <Text style={styles.descs}>{getManajementResult.desc}</Text>
+            </View>
+            <Text style={styles.biodara}>Alamat</Text>
+            <View
+              style={{
+                width: responsiveWidth(334),
+                alignSelf: 'center',
+                paddingHorizontal: 20,
+                marginBottom: 15,
+              }}>
+              <Text style={styles.descs}>{getManajementResult.address}</Text>
+              <Text style={styles.viewmaps}>View On Map</Text>
+            </View>
+          </View>
+          <View style={styles.menus}>
+            <View style={styles.menu}>
+              <View style={{flexDirection: 'row'}}>
+                <MenuAlamat />
+                <Text style={styles.textmenu}>Alamat</Text>
+              </View>
+              <View>
+                <ButtonLefts />
+              </View>
+            </View>
           </View>
         </View>
       </View>
@@ -124,7 +152,7 @@ const styles = StyleSheet.create({
   bio: {
     backgroundColor: colors.white,
     width: responsiveWidth(374),
-    height: responsiveHeight(251),
+    // height: responsiveHeight(278),
     position: 'absolute',
     top: 330,
     borderRadius: 10,
@@ -154,5 +182,25 @@ const styles = StyleSheet.create({
     fontFamily: fonts.primary.normal,
     fontSize: 14,
     marginBottom: 10,
+  },
+  biodara: {
+    fontSize: 12,
+    color: colors.bisnis,
+    textAlign: 'center',
+    marginTop: 18,
+    marginBottom: 5,
+  },
+  viewmaps: {
+    fontStyle: 'italic',
+    fontSize: 12,
+    color: colors.bisnis,
+    textAlign: 'center',
+    marginTop: 18,
+    marginBottom: 5,
+  },
+  descs: {
+    fontFamily: fonts.primary.normal,
+    fontSize: 12,
+    textAlign: 'center',
   },
 });

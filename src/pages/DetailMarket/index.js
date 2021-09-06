@@ -6,6 +6,7 @@ import {
   Image,
   ScrollView,
   TouchableOpacity,
+  Linking,
 } from 'react-native';
 import {RFValue} from 'react-native-responsive-fontsize';
 import {connect} from 'react-redux';
@@ -42,6 +43,11 @@ class DetailMarket extends Component {
 
   render() {
     const {market, getCategoryResult} = this.state;
+    const ig = market.instagram;
+    const fb = market.facebook;
+    const ig_link = ig.length > 25 ? ig.substring(26, ig.length - 1) : ig;
+    const fb_link = fb.substring(25, fb.length - 1);
+    console.log(ig_link);
     const {getManajementProfileResult, getPortofolioResult} = this.props;
     return (
       <View style={styles.page}>
@@ -71,15 +77,23 @@ class DetailMarket extends Component {
               <Text>kosong</Text>
             )}
             <View style={styles.sosmed}>
-              <View style={styles.media}>
+              <TouchableOpacity
+                onPress={() => {
+                  Linking.openURL(`fb://profile/` + fb_link);
+                }}
+                style={styles.media}>
                 <Facebook />
-              </View>
-              <View style={styles.media}>
+              </TouchableOpacity>
+              <TouchableOpacity
+                onPress={() => {
+                  Linking.openURL(`instagram://user?username=` + ig_link);
+                }}
+                style={styles.media}>
                 <Instagram />
-              </View>
-              <View style={styles.media}>
+              </TouchableOpacity>
+              <TouchableOpacity style={styles.media}>
                 <Youtube />
-              </View>
+              </TouchableOpacity>
             </View>
           </View>
 

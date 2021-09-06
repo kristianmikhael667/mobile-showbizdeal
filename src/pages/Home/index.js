@@ -24,6 +24,7 @@ import {
   FilterProduk,
   Inputan,
   Kategory,
+  StatusBars,
   Tombol,
 } from '../../components';
 class Home extends Component {
@@ -92,6 +93,7 @@ class Home extends Component {
     const {modalizeReff} = this.state;
     return (
       <View style={styles.pages}>
+        <StatusBars />
         <ScrollView>
           <View style={styles.header}>
             <Image

@@ -48,6 +48,9 @@ import MenuSetBahasa from './language.svg';
 import MenuShowbizcare from './showbizcare.svg';
 import MenuKeluar from './logout.svg';
 
+// Icon Menu Dashboard
+import MenuIconTalent from './talents.svg';
+
 import ButtonBack from './buttonback.svg';
 
 import Lefts from './lefts.svg';
@@ -97,4 +100,5 @@ export {
   MenuDashboard,
   Lefts,
   IconFiltersa,
+  MenuIconTalent,
 };
