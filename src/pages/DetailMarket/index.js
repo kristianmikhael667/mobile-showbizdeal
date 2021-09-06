@@ -43,7 +43,6 @@ class DetailMarket extends Component {
   render() {
     const {market, getCategoryResult} = this.state;
     const {getManajementProfileResult, getPortofolioResult} = this.props;
-
     return (
       <View style={styles.page}>
         <StatusBars />
@@ -154,7 +153,12 @@ class DetailMarket extends Component {
                                 onPress={() =>
                                   this.props.navigation.navigate(
                                     'DetailPortopolio',
-                                    {mbar, porto, market},
+                                    {
+                                      mbar,
+                                      porto,
+                                      market,
+                                      getManajementProfileResult,
+                                    },
                                   )
                                 }>
                                 <Image
