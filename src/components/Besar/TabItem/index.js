@@ -10,6 +10,7 @@ import {
   MessageNon,
   ProfileAktif,
   ProfileNon,
+  Showbizliveactive,
 } from '../../../assets';
 import {colors} from '../../../utils';
 
@@ -22,7 +23,7 @@ const TabItem = ({isFocused, onPress, onLongPress, label}) => {
       return isFocused ? <TransaksiAktif /> : <TransaksiNon />;
     }
     if (label === 'ShowbizLive') {
-      return isFocused ? <Showbizlive /> : <Showbizlive />;
+      return isFocused ? <Showbizliveactive /> : <Showbizlive />;
     }
     if (label === 'Message') {
       return isFocused ? <MessageAktif /> : <MessageNon />;

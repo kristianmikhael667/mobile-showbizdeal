@@ -19,6 +19,7 @@ import HomeNon from './homenon.svg';
 import TransaksiAktif from './mytransactionactive.svg';
 import TransaksiNon from './mytransactionnon.svg';
 import Showbizlive from './showlive.svg';
+import Showbizliveactive from './shobizliveact.svg';
 import MessageAktif from './messageactive';
 import MessageNon from './messagenon';
 import ProfileAktif from './useractive.svg';
@@ -48,6 +49,8 @@ import MenuSetBahasa from './language.svg';
 import MenuShowbizcare from './showbizcare.svg';
 import MenuKeluar from './logout.svg';
 
+import EyesIcon from './eyes.svg';
+
 // Icon Menu Dashboard
 import MenuIconTalent from './talents.svg';
 
@@ -56,6 +59,7 @@ import ButtonBack from './buttonback.svg';
 import Lefts from './lefts.svg';
 
 export {
+  EyesIcon,
   Logo,
   LogoFB,
   LogoTwitter,
@@ -68,6 +72,7 @@ export {
   TransaksiAktif,
   TransaksiNon,
   Showbizlive,
+  Showbizliveactive,
   MessageAktif,
   MessageNon,
   ProfileAktif,
