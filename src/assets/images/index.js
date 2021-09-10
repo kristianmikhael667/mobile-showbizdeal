@@ -15,6 +15,11 @@ import BeAPartner from './beapartner.png';
 
 import IDCards from './idcard.png';
 
+// Leader Board
+import JuaraSatu from './lead1.png';
+import JuaraDua from './lead2.png';
+import JuaraTiga from './lead3.png';
+
 export {
   OnBoardingImg1,
   OnBoardingImg2,
@@ -28,4 +33,7 @@ export {
   Banner4,
   BeAPartner,
   IDCards,
+  JuaraSatu,
+  JuaraDua,
+  JuaraTiga,
 };

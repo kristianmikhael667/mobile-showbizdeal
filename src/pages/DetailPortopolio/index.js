@@ -41,8 +41,6 @@ class DetailPortopolio extends Component {
     const ret = desc.replace(/<(.|\n)*?>/g, '');
     const video = porto[0].videos;
     const linkgan = video.substring(32);
-    console.log('link gan : ' + linkgan);
-    console.log(mbar.images);
     return (
       <View style={styles.pages}>
         <StatusBars />

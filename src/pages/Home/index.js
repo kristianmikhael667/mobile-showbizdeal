@@ -45,7 +45,6 @@ class Home extends Component {
       },
       () => {
         const {layanan} = this.state;
-        console.log('data : ' + layanan);
         this.props.dispatch(getMarketInfluencer(layanan));
       },
     );
@@ -72,7 +71,6 @@ class Home extends Component {
   componentDidMount() {
     this.props.dispatch(getCategory());
     const {layanan} = this.state;
-    console.log('data : ' + layanan);
     this.props.dispatch(getMarketInfluencer(layanan));
   }
 

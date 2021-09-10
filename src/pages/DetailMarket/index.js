@@ -47,7 +47,6 @@ class DetailMarket extends Component {
     const fb = market.facebook;
     const ig_link = ig.length > 25 ? ig.substring(26, ig.length - 1) : ig;
     const fb_link = fb.substring(25, fb.length - 1);
-    console.log(ig_link);
     const {getManajementProfileResult, getPortofolioResult} = this.props;
     return (
       <View style={styles.page}>
