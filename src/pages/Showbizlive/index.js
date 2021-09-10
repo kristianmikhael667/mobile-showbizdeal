@@ -18,12 +18,39 @@ import {
   fonts,
   responsiveHeight,
   responsiveWidth,
+  getData,
 } from '../../utils';
 
 class Showbizlive extends Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      token: false,
+    };
+  }
+
   componentDidMount() {
     this.props.dispatch(getListShowLive());
+    this._unsubscribe = this.props.navigation.addListener('focus', () => {
+      this.getUserData();
+    });
   }
+
+  componentWillUnmount() {
+    this._unsubscribe();
+  }
+
+  getUserData = () => {
+    getData('users').then(res => {
+      const data = res;
+      if (data) {
+        this.setState({
+          token: data.data.token,
+        });
+      }
+    });
+  };
 
   render() {
     const {
@@ -31,7 +58,8 @@ class Showbizlive extends Component {
       getlistShowLiveLoading,
       getlistShowLiveError,
     } = this.props;
-    console.log(getlistShowLiveResult);
+    const {token} = this.state;
+    // console.log(getlistShowLiveResult);
     return (
       <View style={styles.pages}>
         <ScrollView>
@@ -83,31 +111,43 @@ class Showbizlive extends Component {
           <View style={styles.body}>
             {getlistShowLiveResult ? (
               getlistShowLiveResult.map(showlive => {
-                return (
-                  <TouchableOpacity style={styles.bodysub}>
-                    <Image
-                      style={styles.images}
-                      source={{uri: API_URL + showlive.thumbnail_url}}
-                    />
-                    <View style={styles.iconmata}></View>
-                    <View
-                      style={{
-                        flexDirection: 'row',
-                        position: 'absolute',
-                        top: 7,
-                        left: 8,
-                      }}>
-                      <EyesIcon />
-                      <Text style={styles.views}>{showlive.views}</Text>
-                    </View>
-                    <View style={styles.see}></View>
-                    <View style={styles.foot}></View>
-                    <View style={{position: 'absolute', bottom: -5}}>
-                      <Text style={styles.content}>{showlive.content}</Text>
-                      <Text style={styles.title}>{showlive.title}</Text>
-                    </View>
-                  </TouchableOpacity>
-                );
+                {
+                  if (showlive.is_live == true) {
+                    if (showlive.is_private != true) {
+                      return <Text>Blm Live asu sabarrr</Text>;
+                    } else if (token != null) {
+                      <Text>msk</Text>;
+                    } else {
+                      this.props.navigation.replace('Login');
+                    }
+                  } else {
+                    return (
+                      <TouchableOpacity style={styles.bodysub}>
+                        <Image
+                          style={styles.images}
+                          source={{uri: API_URL + showlive.thumbnail_url}}
+                        />
+                        <View style={styles.iconmata}></View>
+                        <View
+                          style={{
+                            flexDirection: 'row',
+                            position: 'absolute',
+                            top: 7,
+                            left: 8,
+                          }}>
+                          <EyesIcon />
+                          <Text style={styles.views}>{showlive.views}</Text>
+                        </View>
+                        <View style={styles.see}></View>
+                        <View style={styles.foot}></View>
+                        <View style={{position: 'absolute', bottom: -5}}>
+                          <Text style={styles.content}>{showlive.content}</Text>
+                          <Text style={styles.title}>{showlive.title}</Text>
+                        </View>
+                      </TouchableOpacity>
+                    );
+                  }
+                }
               })
             ) : getlistShowLiveLoading ? (
               <View style={{flex: 1}}>
@@ -149,7 +189,7 @@ const styles = StyleSheet.create({
   },
   body: {
     flexDirection: 'row',
-    marginHorizontal: 18,
+    marginHorizontal: responsiveWidth(18),
     marginBottom: 25,
     flex: 1,
     flexWrap: 'wrap',
@@ -158,6 +198,7 @@ const styles = StyleSheet.create({
     width: responsiveWidth(175),
     height: responsiveWidth(237),
     borderRadius: 10,
+    marginRight: responsiveWidth(13),
   },
   images: {
     width: responsiveWidth(175),
