@@ -8,5 +8,5 @@ export const colors = {
   pembatas: '#F2F2F2',
   bisnis: '#B1B1B1',
   black: '#000000',
-  trans: '#34126C',
+  trans: 'rgba(52, 18, 108, 0.9)',
 };

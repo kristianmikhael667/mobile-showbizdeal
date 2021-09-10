@@ -1,9 +1,10 @@
 import React, {Component} from 'react';
 import {Text, StyleSheet, View, Image} from 'react-native';
+import {ScrollView} from 'react-native-gesture-handler';
 import {get} from 'react-native/Libraries/Utilities/PixelRatio';
 import {connect} from 'react-redux';
 import {getManajemenProfileId} from '../../actions/MarketPlace';
-import {Heads, LogoHeader} from '../../assets';
+import {ButtonLefts, Heads, LogoHeader, MenuAlamat} from '../../assets';
 import {StatusBars, Tombol} from '../../components';
 import {
   API_URL,
@@ -47,7 +48,11 @@ class MyDashboard extends Component {
             style={{position: 'absolute', marginTop: 6, marginLeft: 22}}
           />
           <View
-            style={{marginTop: 60, position: 'absolute', flexDirection: 'row'}}>
+            style={{
+              marginTop: 60,
+              position: 'absolute',
+              flexDirection: 'row',
+            }}>
             <View
               style={{
                 marginLeft: responsiveWidth(20),
@@ -109,15 +114,15 @@ class MyDashboard extends Component {
               <Text style={styles.viewmaps}>View On Map</Text>
             </View>
           </View>
-          <View style={styles.menus}>
-            <View style={styles.menu}>
-              <View style={{flexDirection: 'row'}}>
-                <MenuAlamat />
-                <Text style={styles.textmenu}>Alamat</Text>
-              </View>
-              <View>
-                <ButtonLefts />
-              </View>
+        </View>
+        <View style={styles.menus}>
+          <View style={styles.menu}>
+            <View style={{flexDirection: 'row'}}>
+              <MenuAlamat />
+              <Text style={styles.textmenu}>Alamat</Text>
+            </View>
+            <View>
+              <ButtonLefts />
             </View>
           </View>
         </View>
@@ -133,6 +138,10 @@ const mapStatetoProps = state => ({
 export default connect(mapStatetoProps, null)(MyDashboard);
 
 const styles = StyleSheet.create({
+  pages: {
+    flex: 1,
+  },
+
   dashboard: {
     fontFamily: fonts.primary.bold,
     fontSize: 22,
@@ -157,6 +166,12 @@ const styles = StyleSheet.create({
     top: 330,
     borderRadius: 10,
     alignSelf: 'center',
+  },
+  menus: {
+    backgroundColor: colors.white,
+    top: 685,
+    position: 'absolute',
+    width: responsiveWidth(374),
   },
   gambar: {
     width: responsiveWidth(112),

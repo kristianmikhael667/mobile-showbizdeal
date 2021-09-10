@@ -16,6 +16,7 @@ import {
   DetailPortopolio,
   IDCard,
   MyDashboard,
+  VirtualLive,
 } from '../pages';
 import {BottomNavigator} from '../components';
 
@@ -108,6 +109,11 @@ const Router = () => {
       <Stack.Screen
         name="MyDashboard"
         component={MyDashboard}
+        options={{headerShown: false}}
+      />
+      <Stack.Screen
+        name="VirtualLive"
+        component={VirtualLive}
         options={{headerShown: false}}
       />
     </Stack.Navigator>

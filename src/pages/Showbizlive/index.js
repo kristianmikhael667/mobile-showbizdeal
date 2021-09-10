@@ -7,6 +7,7 @@ import {
   TouchableOpacity,
   ActivityIndicator,
   ScrollView,
+  Alert,
 } from 'react-native';
 import {connect} from 'react-redux';
 import {getListShowLive} from '../../actions/Showbizlive';
@@ -41,6 +42,10 @@ class Showbizlive extends Component {
     this._unsubscribe();
   }
 
+  teskesabaran = () => {
+    Alert.alert('Blm Mulai Pak', 'Nanti kita mulai');
+  };
+
   getUserData = () => {
     getData('users').then(res => {
       const data = res;
@@ -62,6 +67,7 @@ class Showbizlive extends Component {
     // console.log(getlistShowLiveResult);
     return (
       <View style={styles.pages}>
+        <StatusBars />
         <ScrollView>
           <View style={styles.header}>
             <Image
@@ -112,17 +118,81 @@ class Showbizlive extends Component {
             {getlistShowLiveResult ? (
               getlistShowLiveResult.map(showlive => {
                 {
+                  var status_private = showlive.is_private
+                    ? 'private'
+                    : 'public';
                   if (showlive.is_live == true) {
                     if (showlive.is_private != true) {
-                      return <Text>Blm Live asu sabarrr</Text>;
+                      return (
+                        <TouchableOpacity
+                          onPress={() =>
+                            this.props.navigation.navigate('VirtualLive', {
+                              showlive,
+                              status_private,
+                            })
+                          }
+                          style={styles.bodysub}>
+                          <Image
+                            style={styles.images}
+                            source={{uri: API_URL + showlive.thumbnail_url}}
+                          />
+                          <View style={styles.iconmata}></View>
+                          <View
+                            style={{
+                              flexDirection: 'row',
+                              position: 'absolute',
+                              top: 7,
+                              left: 8,
+                            }}>
+                            <EyesIcon />
+                            <Text style={styles.views}>{showlive.views}</Text>
+                          </View>
+                          <View style={styles.see}></View>
+                          <View style={styles.foot}></View>
+                          <View style={{position: 'absolute', bottom: -5}}>
+                            <Text style={styles.content}>
+                              {showlive.content}
+                            </Text>
+                            <Text style={styles.title}>{showlive.title}</Text>
+                          </View>
+                        </TouchableOpacity>
+                      );
                     } else if (token != null) {
-                      <Text>msk</Text>;
+                      return (
+                        <TouchableOpacity style={styles.bodysub}>
+                          <Image
+                            style={styles.images}
+                            source={{uri: API_URL + showlive.thumbnail_url}}
+                          />
+                          <View style={styles.iconmata}></View>
+                          <View
+                            style={{
+                              flexDirection: 'row',
+                              position: 'absolute',
+                              top: 7,
+                              left: 8,
+                            }}>
+                            <EyesIcon />
+                            <Text style={styles.views}>{showlive.views}</Text>
+                          </View>
+                          <View style={styles.see}></View>
+                          <View style={styles.foot}></View>
+                          <View style={{position: 'absolute', bottom: -5}}>
+                            <Text style={styles.content}>
+                              {showlive.content}
+                            </Text>
+                            <Text style={styles.title}>{showlive.title}</Text>
+                          </View>
+                        </TouchableOpacity>
+                      );
                     } else {
                       this.props.navigation.replace('Login');
                     }
                   } else {
                     return (
-                      <TouchableOpacity style={styles.bodysub}>
+                      <TouchableOpacity
+                        onPress={() => this.teskesabaran()}
+                        style={styles.bodysub}>
                         <Image
                           style={styles.images}
                           source={{uri: API_URL + showlive.thumbnail_url}}

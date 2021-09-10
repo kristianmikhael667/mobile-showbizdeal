@@ -12,6 +12,7 @@ import RegisterSuccess from './Register/RegisterSuccess';
 import DetailPortopolio from './DetailPortopolio';
 import IDCard from './IDCard';
 import MyDashboard from './MyDashboard';
+import VirtualLive from './VirtualLive';
 export {
   Splash,
   Info,
@@ -27,4 +28,5 @@ export {
   DetailPortopolio,
   IDCard,
   MyDashboard,
+  VirtualLive,
 };
