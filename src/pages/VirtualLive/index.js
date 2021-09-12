@@ -1,10 +1,21 @@
 import React, {Component} from 'react';
-import {Image, StyleSheet, View, Text} from 'react-native';
+import {Image, StyleSheet, View, Text, TouchableOpacity} from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
 import {RFValue} from 'react-native-responsive-fontsize';
 import {connect} from 'react-redux';
 import {getLeaderBoard} from '../../actions/Showbizlive';
-import {JuaraDua, JuaraSatu, JuaraTiga} from '../../assets';
+import {
+  Close,
+  EyesIcon,
+  IconWidthScreen,
+  JuaraDua,
+  JuaraSatu,
+  JuaraTiga,
+  LogoHeader,
+  NamaLive,
+  Showbizlive,
+  ViewLive,
+} from '../../assets';
 import {
   colors,
   fonts,
@@ -36,19 +47,51 @@ class VirtualLive extends Component {
 
   render() {
     const {showlive} = this.state;
+
     const {getshowLeaderBoardResult} = this.props;
     return (
       <LinearGradient
-        colors={[colors.primary1, colors.primary2]}
+        colors={[colors.primaryLive, colors.primaryLive2]}
         style={styles.container}>
+        <Image style={styles.logohead} source={LogoHeader} />
+
+        <View style={{position: 'absolute'}}>
+          <View style={styles.viewlive}>
+            <ViewLive />
+          </View>
+          <View style={styles.namalive}>
+            <NamaLive />
+            <Text numberOfLines={1} style={styles.judullive}>
+              {showlive.title}
+            </Text>
+          </View>
+          <View
+            style={{position: 'absolute', top: responsiveHeight(95), left: 19}}>
+            <EyesIcon />
+            <Text style={styles.viewer}>{showlive.views}</Text>
+          </View>
+        </View>
+
+        <View
+          style={{
+            position: 'absolute',
+            flexDirection: 'row',
+            right: 20,
+            top: 26,
+          }}>
+          <TouchableOpacity style={{marginRight: responsiveWidth(22)}}>
+            <Showbizlive />
+          </TouchableOpacity>
+          <TouchableOpacity style={{marginRight: responsiveWidth(13)}}>
+            <IconWidthScreen />
+          </TouchableOpacity>
+          <TouchableOpacity>
+            <Close />
+          </TouchableOpacity>
+        </View>
+
         <View style={styles.juara}>
           <Image style={styles.juaraimg} source={JuaraSatu} />
-
-          <Image style={styles.juaraimg} source={JuaraDua} />
-
-          <Image style={styles.juaraimg} source={JuaraTiga} />
-        </View>
-        <View style={styles.juaras}>
           {getshowLeaderBoardResult
             ? getshowLeaderBoardResult.slice(0, 1).map(leaderboard => {
                 return (
@@ -58,6 +101,7 @@ class VirtualLive extends Component {
                 );
               })
             : []}
+          <Image style={styles.juaraimg} source={JuaraDua} />
           {getshowLeaderBoardResult
             ? getshowLeaderBoardResult.slice(1, 2).map(leaderboard => {
                 return (
@@ -67,6 +111,7 @@ class VirtualLive extends Component {
                 );
               })
             : []}
+          <Image style={styles.juaraimg} source={JuaraTiga} />
           {getshowLeaderBoardResult
             ? getshowLeaderBoardResult.slice(2, 3).map(leaderboard => {
                 return (
@@ -95,46 +140,75 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
   },
+  logohead: {
+    marginTop: 18,
+    width: 238,
+    height: 238,
+    marginLeft: -34,
+  },
+  viewer: {
+    color: colors.white,
+    fontSize: 13,
+    fontWeight: 'bold',
+    marginLeft: responsiveWidth(25),
+    top: responsiveHeight(-17),
+  },
   juara: {
     flexDirection: 'row',
-    // marginHorizontal: responsiveWidth(18),
-    marginTop: 104,
-    position: 'absolute',
+    marginTop: 125,
     marginRight: 3,
     alignSelf: 'center',
-  },
-  juaras: {
-    flexDirection: 'row',
-    marginTop: 104,
     position: 'absolute',
-    justifyContent: 'space-between',
+  },
+  viewlive: {
+    position: 'absolute',
+    top: 60,
+  },
+  namalive: {
+    top: 26,
+    position: 'absolute',
+    flex: 1,
+  },
+  judullive: {
+    fontSize: RFValue(18),
+    fontFamily: fonts.primary.bold,
+    color: colors.white,
+    position: 'absolute',
+    flex: 1,
+    top: 8,
+    marginHorizontal: 19,
   },
   juaraimg: {
     width: responsiveWidth(120),
     height: responsiveHeight(40),
   },
   namajuara: {
-    fontSize: RFValue(12, heightMobileUi),
+    fontSize: RFValue(13, heightMobileUi),
     fontFamily: fonts.primary.bold,
     color: colors.white,
     textAlign: 'center',
     marginTop: 12,
-    marginLeft: 65,
+    position: 'absolute',
+    marginLeft: responsiveWidth(50),
   },
   namajuara2: {
     fontSize: RFValue(12, heightMobileUi),
     fontFamily: fonts.primary.bold,
-    color: colors.white,
+    color: colors.juara2,
     textAlign: 'center',
-    marginTop: 12,
-    marginLeft: 62,
+    marginTop: 14,
+    textAlign: 'center',
+
+    marginLeft: responsiveWidth(150),
+    position: 'absolute',
   },
   namajuara3: {
     fontSize: RFValue(12, heightMobileUi),
     fontFamily: fonts.primary.bold,
     color: colors.white,
-    // textAlign: 'center',
+    position: 'absolute',
+
     marginTop: 12,
-    marginLeft: 45,
+    marginLeft: responsiveWidth(280),
   },
 });

@@ -58,6 +58,13 @@ import ButtonBack from './buttonback.svg';
 
 import Lefts from './lefts.svg';
 
+import NamaLive from './namalive.svg';
+
+import ViewLive from './viewlive.svg';
+
+import IconWidthScreen from './iconwidthscreen.svg';
+
+import Close from './close.svg';
 export {
   EyesIcon,
   Logo,
@@ -106,4 +113,8 @@ export {
   Lefts,
   IconFiltersa,
   MenuIconTalent,
+  NamaLive,
+  ViewLive,
+  IconWidthScreen,
+  Close,
 };
