@@ -24,7 +24,7 @@ import {
   MenuTransaksi,
   MenuUbahProfile,
 } from '../../assets';
-import {Tombol} from '../../components';
+import {StatusBars, Tombol} from '../../components';
 import {
   colors,
   fonts,
@@ -79,6 +79,7 @@ export default class Profile extends Component {
     const {profiles, role} = this.state;
     return (
       <View style={styles.pages}>
+        <StatusBars />
         <ScrollView>
           <View style={styles.heads}>
             <Image

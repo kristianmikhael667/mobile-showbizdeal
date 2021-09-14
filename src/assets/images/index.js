@@ -20,6 +20,13 @@ import JuaraSatu from './lead1.png';
 import JuaraDua from './lead2.png';
 import JuaraTiga from './lead3.png';
 
+// Bussiness Sosmed
+import ImgWebsite from './website.png';
+import ImgInstagram from './instagram.png';
+import ImgFacebook from './facebook.png';
+import ImgWhatsapp from './whatsapp.png';
+import ImgYoutube from './youtube.png';
+
 export {
   OnBoardingImg1,
   OnBoardingImg2,
@@ -36,4 +43,9 @@ export {
   JuaraSatu,
   JuaraDua,
   JuaraTiga,
+  ImgFacebook,
+  ImgInstagram,
+  ImgWebsite,
+  ImgWhatsapp,
+  ImgYoutube,
 };

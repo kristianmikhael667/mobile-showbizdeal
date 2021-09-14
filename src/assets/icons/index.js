@@ -64,6 +64,13 @@ import ViewLive from './viewlive.svg';
 
 import IconWidthScreen from './iconwidthscreen.svg';
 
+// Menu Dashboard
+import MyTalent from './mytalent.svg';
+import MyEvent from './myevent.svg';
+import MyOrder from './myorder.svg';
+import MyPortopolio from './myportopolio.svg';
+import MyProduct from './myproduct.svg';
+
 import Close from './close.svg';
 export {
   EyesIcon,
@@ -117,4 +124,9 @@ export {
   ViewLive,
   IconWidthScreen,
   Close,
+  MyEvent,
+  MyOrder,
+  MyPortopolio,
+  MyProduct,
+  MyTalent,
 };
