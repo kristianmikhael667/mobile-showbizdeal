@@ -1,5 +1,13 @@
 import React, {Component} from 'react';
-import {Text, Image, StyleSheet, View, TouchableOpacity} from 'react-native';
+import {
+  Text,
+  Image,
+  StyleSheet,
+  View,
+  TouchableOpacity,
+  RefreshControl,
+  ScrollView,
+} from 'react-native';
 import {RFValue} from 'react-native-responsive-fontsize';
 import {connect} from 'react-redux';
 import {getMyTalent} from '../../actions/MyTalentAction';
@@ -20,8 +28,16 @@ class MyTalent extends Component {
 
     this.state = {
       getidmanajemen: this.props.route.params.getidmanajemen,
+      refreshing: false,
     };
   }
+
+  _onRefresh = () => {
+    this.setState({refreshing: true});
+    const {getidmanajemen} = this.state;
+    this.props.dispatch(getMyTalent(getidmanajemen));
+    this.setState({refreshing: false});
+  };
 
   componentDidMount() {
     const {getidmanajemen} = this.state;
@@ -35,38 +51,46 @@ class MyTalent extends Component {
     return (
       <View style={styles.pages}>
         <StatusBars />
-        <View style={styles.headers}>
-          <TouchableOpacity
-            onPress={() => this.props.navigation.goBack()}
-            style={styles.buttonback}>
-            <ButtonBack />
-          </TouchableOpacity>
-          <View style={styles.title}>
-            <Text style={styles.titletext}>My Talent</Text>
+        <ScrollView
+          refreshControl={
+            <RefreshControl
+              refreshing={this.state.refreshing}
+              onRefresh={this._onRefresh}
+            />
+          }>
+          <View style={styles.headers}>
+            <TouchableOpacity
+              onPress={() => this.props.navigation.goBack()}
+              style={styles.buttonback}>
+              <ButtonBack />
+            </TouchableOpacity>
+            <View style={styles.title}>
+              <Text style={styles.titletext}>My Talent</Text>
+            </View>
           </View>
-        </View>
-        <Jarak height={6} />
-        <View style={styles.body}>
-          <View style={styles.subbody}>
-            {getMyTalentResult
-              ? getMyTalentResult.map(talent => {
-                  return (
-                    <View style={styles.card}>
-                      <Image
-                        style={styles.images}
-                        source={{uri: API_URL + talent.img}}
-                      />
-                      <Text style={styles.names}>{talent.name}</Text>
-                      <Text style={styles.citys}>{talent.city}</Text>
-                      <TouchableOpacity style={styles.tombol}>
-                        <Text style={styles.updates}>Update</Text>
-                      </TouchableOpacity>
-                    </View>
-                  );
-                })
-              : []}
+          <Jarak height={6} />
+          <View style={styles.body}>
+            <View style={styles.subbody}>
+              {getMyTalentResult
+                ? getMyTalentResult.map(talent => {
+                    return (
+                      <View style={styles.card}>
+                        <Image
+                          style={styles.images}
+                          source={{uri: API_URL + talent.img}}
+                        />
+                        <Text style={styles.names}>{talent.name}</Text>
+                        <Text style={styles.citys}>{talent.city}</Text>
+                        <TouchableOpacity style={styles.tombol}>
+                          <Text style={styles.updates}>Update</Text>
+                        </TouchableOpacity>
+                      </View>
+                    );
+                  })
+                : []}
+            </View>
           </View>
-        </View>
+        </ScrollView>
       </View>
     );
   }

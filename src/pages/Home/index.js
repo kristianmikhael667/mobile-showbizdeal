@@ -8,6 +8,7 @@ import {
   ScrollView,
   ActivityIndicator,
   TouchableOpacity,
+  RefreshControl,
 } from 'react-native';
 import {connect} from 'react-redux';
 import {
@@ -36,8 +37,23 @@ class Home extends Component {
       lokasi: 'Jabodetabek',
       kategori: 'Semua',
       subkategori: 'Semua',
+      refreshing: false,
     };
   }
+
+  _onRefresh = () => {
+    this.setState({refreshing: true});
+    this.setState(
+      {
+        layanan: value,
+      },
+      () => {
+        const {layanan} = this.state;
+        this.props.dispatch(getMarketInfluencer(layanan));
+      },
+    );
+    this.setState({refreshing: false});
+  };
 
   clickLayanan(value) {
     this.setState(
@@ -75,6 +91,14 @@ class Home extends Component {
     this.props.dispatch(getMarketInfluencer(layanan));
   }
 
+  _onRefresh = () => {
+    this.setState({refreshing: true});
+    this.props.dispatch(getCategory());
+    const {layanan} = this.state;
+    this.props.dispatch(getMarketInfluencer(layanan));
+    this.setState({refreshing: false});
+  };
+
   OnOpen = () => {
     // const {modalizeReff} = this.state;
     this.modalizeReff.current?.open();
@@ -92,7 +116,13 @@ class Home extends Component {
     return (
       <View style={styles.pages}>
         <StatusBars />
-        <ScrollView>
+        <ScrollView
+          refreshControl={
+            <RefreshControl
+              refreshing={this.state.refreshing}
+              onRefresh={this._onRefresh}
+            />
+          }>
           <View style={styles.header}>
             <Image
               style={{resizeMode: 'stretch', width: '100%'}}
