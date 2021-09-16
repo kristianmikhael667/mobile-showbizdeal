@@ -13,6 +13,7 @@ import DetailPortopolio from './DetailPortopolio';
 import IDCard from './IDCard';
 import MyDashboard from './MyDashboard';
 import VirtualLive from './VirtualLive';
+import MyTalent from './MyTalent/MyTalent';
 export {
   Splash,
   Info,
@@ -29,4 +30,5 @@ export {
   IDCard,
   MyDashboard,
   VirtualLive,
+  MyTalent,
 };

@@ -45,8 +45,8 @@ class MyDashboard extends Component {
 
   render() {
     const {getManajementResult} = this.props;
-    console.log(getManajementResult);
-
+    const getidmanajemen = getManajementResult.id;
+    const {profiles} = this.state;
     return (
       <View style={styles.pages}>
         <ScrollView
@@ -210,7 +210,13 @@ class MyDashboard extends Component {
             </View>
           </View>
           <View style={styles.menus}>
-            <TouchableOpacity style={styles.menu}>
+            <TouchableOpacity
+              onPress={() =>
+                this.props.navigation.navigate('MyTalent', {
+                  getidmanajemen,
+                })
+              }
+              style={styles.menu}>
               <View style={{flexDirection: 'row'}}>
                 <MyTalent />
                 <Text style={styles.textmenu}>My Talent</Text>

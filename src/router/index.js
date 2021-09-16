@@ -17,6 +17,7 @@ import {
   IDCard,
   MyDashboard,
   VirtualLive,
+  MyTalent,
 } from '../pages';
 import {BottomNavigator} from '../components';
 
@@ -109,6 +110,11 @@ const Router = () => {
       <Stack.Screen
         name="MyDashboard"
         component={MyDashboard}
+        options={{headerShown: false}}
+      />
+      <Stack.Screen
+        name="MyTalent"
+        component={MyTalent}
         options={{headerShown: false}}
       />
       <Stack.Screen
