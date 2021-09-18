@@ -15,6 +15,7 @@ import MyDashboard from './MyDashboard';
 import VirtualLive from './VirtualLive';
 import MyTalent from './MyTalent/MyTalent';
 import PageSearch from './PageSearch/PageSearch';
+import ResultSearch from './ResultSearch';
 export {
   Splash,
   Info,
@@ -33,4 +34,5 @@ export {
   VirtualLive,
   MyTalent,
   PageSearch,
+  ResultSearch,
 };

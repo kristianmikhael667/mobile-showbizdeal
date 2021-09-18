@@ -104,7 +104,7 @@ class Login extends Component {
               borderColor={colors.white}
               borderWidth={1}
               paddingVertical={8}
-              paddingHorizontal={28}
+              textAlign="center"
               color={colors.white}
               width={199}
               height={36}

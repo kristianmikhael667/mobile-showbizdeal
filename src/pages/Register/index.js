@@ -166,7 +166,8 @@ class Register extends Component {
               borderColor={colors.white}
               borderWidth={1}
               paddingVertical={8}
-              paddingHorizontal={28}
+              textAlign="center"
+              // paddingHorizontal={28}
               color={colors.white}
               width={199}
               height={36}

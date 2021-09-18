@@ -71,11 +71,11 @@ class IDCard extends Component {
             borderColor={colors.white}
             borderWidth={1}
             paddingVertical={8}
-            paddingHorizontal={28}
             color={colors.white}
             width={responsiveWidth(358)}
             height={responsiveHeight(47)}
             borderRadius={5}
+            textAlign="center"
             //   onPress={() => this.props.navigation.replace('Register')}
             backgroundColor={colors.primary2}
           />

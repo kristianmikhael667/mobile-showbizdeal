@@ -52,7 +52,8 @@ export default class Info extends Component {
                   title="Daftar Sekarang"
                   fontSize={18}
                   paddingVertical={10}
-                  paddingHorizontal={60}
+                  // paddingHorizontal={60}
+                  textAlign="center"
                   color={colors.white}
                   width={259}
                   height={48}
@@ -68,9 +69,10 @@ export default class Info extends Component {
                   borderWidth={1}
                   fontSize={14}
                   paddingVertical={12}
-                  paddingHorizontal={38}
+                  // paddingHorizontal={38}
                   color={colors.primary2}
                   width={259}
+                  textAlign="center"
                   height={48}
                   onPress={() => this.props.navigation.replace('MainApp')}
                   borderColor={colors.primary2}

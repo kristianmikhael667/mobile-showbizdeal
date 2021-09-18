@@ -5,6 +5,7 @@ import Kategory from './Kategory';
 import FilterProduk from './FiltersProduk';
 import RefreshData from './RefreshData';
 import Loading from './Loading';
+import HeaderSearch from './HeaderSearch';
 export {
   StatusBars,
   BottomNavigator,
@@ -13,4 +14,5 @@ export {
   FilterProduk,
   RefreshData,
   Loading,
+  HeaderSearch,
 };
