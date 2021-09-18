@@ -22,6 +22,8 @@ const Inputan = ({
   textAlignVertical,
   marginRight,
   marginLeft,
+  marginBottom,
+  marginTop,
 }) => {
   return (
     <View style={styles.container}>
@@ -39,6 +41,8 @@ const Inputan = ({
           backgroundColor,
           marginRight,
           marginLeft,
+          marginBottom,
+          marginTop,
         )}
         ref={ref}
         value={value}
@@ -76,10 +80,14 @@ const styles = StyleSheet.create({
     backgroundColor,
     marginRight,
     marginLeft,
+    marginBottom,
+    marginTop,
   ) => ({
     fontSize: fontSize ? fontSize : 18,
     marginRight: marginRight,
     marginLeft: marginLeft,
+    marginBottom: marginBottom,
+    marginTop: marginTop,
     fontFamily: 'Arial',
     width: width,
     height: height,

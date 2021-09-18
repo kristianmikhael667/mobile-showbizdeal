@@ -16,15 +16,25 @@ import {
   getMarketInfluencer,
   getMarketPlace,
 } from '../../actions/MarketPlace';
-import {Heads, IconFiltersa, LogoHeader, Love, Start} from '../../assets';
+import {
+  Banner1,
+  Heads,
+  IconFiltersa,
+  LogoHeader,
+  Love,
+  Searching,
+  Start,
+} from '../../assets';
 import {API_URL, heightMobileUi} from '../../utils/constant';
 import {responsiveWidth, responsiveHeight, colors, fonts} from '../../utils';
 import {RFValue} from 'react-native-responsive-fontsize';
+
 import {
   BannerSlider,
   FilterProduk,
   Inputan,
   Kategory,
+  Loading,
   StatusBars,
   Tombol,
 } from '../../components';
@@ -109,7 +119,6 @@ class Home extends Component {
       getInfluencerResult,
       getInfluencerLoading,
       getInfluencerError,
-
       getCategoryResult,
     } = this.props;
     const {modalizeReff} = this.state;
@@ -142,20 +151,34 @@ class Home extends Component {
                 flexDirection: 'row',
                 alignItems: 'center',
               }}>
-              <Inputan
+              <Tombol
                 fontSize={14}
-                placeholder="DJ Soda"
+                onPress={() => this.props.navigation.navigate('PageSearch')}
+                title="DJ Soda"
                 width={responsiveWidth(240)}
                 height={34}
-                color={colors.white}
+                type="text"
+                borderRadius={5}
+                color={colors.grey}
+                textAlign="left"
+                paddingLeft={responsiveWidth(18)}
+                paddingVertical={responsiveHeight(10)}
                 backgroundColor={colors.white}
-                fontSizes={14 * 1.1}
-                textAlignVertical="top"
+                fontSizes={12}
+                marginTop={30}
                 marginLeft={responsiveWidth(7)}
-                marginRight={responsiveWidth(16)}
               />
+              <View
+                style={{
+                  position: 'absolute',
+                  right: responsiveWidth(128),
+                  top: responsiveHeight(53),
+                }}>
+                <Searching />
+              </View>
               <Tombol
                 marginTop={30}
+                marginLeft={16}
                 marginRight={16}
                 icon="notifikasi"
                 padding={10}
@@ -170,7 +193,6 @@ class Home extends Component {
           </View>
           <BannerSlider />
           <Text style={styles.categorys}>Kategory</Text>
-
           <View style={styles.layanan}>
             <Kategory
               title="Performer"
@@ -264,12 +286,7 @@ class Home extends Component {
                 );
               })
             ) : getInfluencerLoading ? (
-              <View
-                style={{
-                  flex: 1,
-                }}>
-                <ActivityIndicator size="large" color={colors.primary2} />
-              </View>
+              <Loading />
             ) : getInfluencerError ? (
               <Text>Error</Text>
             ) : (
@@ -486,7 +503,6 @@ const mapStatetoProps = state => ({
   getInfluencerLoading: state.MarketPlaceReducer.getInfluencerLoading,
   getInfluencerResult: state.MarketPlaceReducer.getInfluencerResult,
   getInfluencerError: state.MarketPlaceReducer.getInfluencerError,
-
   // Category
   getCategoryLoading: state.MarketPlaceReducer.getCategoryLoading,
   getCategoryResult: state.MarketPlaceReducer.getCategoryResult,

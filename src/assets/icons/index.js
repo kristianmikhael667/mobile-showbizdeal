@@ -72,6 +72,9 @@ import MyPortopolio from './myportopolio.svg';
 import MyProduct from './myproduct.svg';
 
 import Close from './close.svg';
+
+import Searching from './searching.svg';
+
 export {
   EyesIcon,
   Logo,
@@ -129,4 +132,5 @@ export {
   MyPortopolio,
   MyProduct,
   MyTalent,
+  Searching,
 };

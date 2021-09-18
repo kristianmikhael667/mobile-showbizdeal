@@ -7,6 +7,7 @@ const TextOnly = ({
   title,
   onPress,
   fontSize,
+  paddingLeft,
   paddingHorizontal,
   paddingVertical,
   backgroundColor,
@@ -17,6 +18,8 @@ const TextOnly = ({
   borderColor,
   justifyContent,
   borderRadius,
+  marginTop,
+  textAlign,
 }) => {
   return (
     <TouchableOpacity
@@ -24,6 +27,7 @@ const TextOnly = ({
       style={styles.container(
         backgroundColor,
         padding,
+        paddingLeft,
         paddingHorizontal,
         paddingVertical,
         width,
@@ -32,8 +36,11 @@ const TextOnly = ({
         borderColor,
         justifyContent,
         borderRadius,
+        marginTop,
       )}>
-      <Text style={styles.text(fontSize, fontFamily, color)}>{title}</Text>
+      <Text style={styles.text(fontSize, fontFamily, color, textAlign)}>
+        {title}
+      </Text>
     </TouchableOpacity>
   );
 };
@@ -44,6 +51,7 @@ const styles = StyleSheet.create({
   container: (
     backgroundColor,
     padding,
+    paddingLeft,
     paddingHorizontal,
     paddingVertical,
     width,
@@ -52,9 +60,11 @@ const styles = StyleSheet.create({
     borderColor,
     justifyContent,
     borderRadius,
+    marginTop,
   ) => ({
     backgroundColor: backgroundColor,
     padding: padding,
+    paddingLeft: paddingLeft,
     paddingHorizontal: paddingHorizontal,
     paddingVertical: paddingVertical,
     borderRadius: 8,
@@ -64,11 +74,13 @@ const styles = StyleSheet.create({
     borderWidth: borderWidth,
     borderColor: borderColor,
     justifyContent: justifyContent,
+    marginTop: marginTop,
   }),
-  text: (fontSize, fontFamily, color) => ({
+  text: (fontSize, fontFamily, color, textAlign) => ({
     color: color,
     textAlign: 'center',
     fontSize: fontSize ? fontSize : 13,
     fontFamily: fontFamily,
+    textAlign: textAlign,
   }),
 });

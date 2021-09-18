@@ -64,7 +64,6 @@ class Showbizlive extends Component {
       getlistShowLiveError,
     } = this.props;
     const {token} = this.state;
-    // console.log(getlistShowLiveResult);
     return (
       <View style={styles.pages}>
         <StatusBars />
@@ -211,7 +210,9 @@ class Showbizlive extends Component {
                         <View style={styles.see}></View>
                         <View style={styles.foot}></View>
                         <View style={{position: 'absolute', bottom: -5}}>
-                          <Text style={styles.content}>{showlive.content}</Text>
+                          <Text numberOfLines={1} style={styles.content}>
+                            {showlive.content}
+                          </Text>
                           <Text style={styles.title}>{showlive.title}</Text>
                         </View>
                       </TouchableOpacity>
@@ -301,7 +302,7 @@ const styles = StyleSheet.create({
     width: responsiveWidth(175),
     height: responsiveHeight(50),
     backgroundColor: colors.trans,
-    opacity: 0.5,
+    opacity: 2,
     position: 'absolute',
     bottom: 0,
     borderBottomLeftRadius: 10,
@@ -314,6 +315,7 @@ const styles = StyleSheet.create({
     marginLeft: 7,
     marginBottom: 5,
     color: colors.white,
+    flex: 1,
   },
   title: {
     fontSize: 11,

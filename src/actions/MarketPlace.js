@@ -92,6 +92,14 @@ export const getMarketInfluencer = data => {
           });
         } else {
           //BERHASIL
+          // dispatch({
+          //   type: GET_MARKET_INFLUENCER,
+          //   payload: {
+          //     loading: true,
+          //     data: response.data ? response.data.data : [],
+          //     errorMessage: false,
+          //   },
+          // });
           dispatch({
             type: GET_MARKET_INFLUENCER,
             payload: {

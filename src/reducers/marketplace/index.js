@@ -17,7 +17,7 @@ const initialState = {
   getInfluencerLoading: false,
   getInfluencerResult: false,
   getInfluencerError: false,
-
+  getInfluencerLoadingData: false,
   // Category
   getCategoryLoading: false,
   getCategoryResult: false,
@@ -53,6 +53,7 @@ export default function (state = initialState, action) {
       return {
         ...state,
         getInfluencerLoading: action.payload.loading,
+        getInfluencerLoadingData: action.payload.data,
         getInfluencerResult: action.payload.data,
         getInfluencerError: action.payload.errorMessage,
       };
