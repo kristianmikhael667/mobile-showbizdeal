@@ -35,7 +35,7 @@ export const saveKeywordName = search => {
             type: SEARCH_NAME,
             payload: {
               loading: false,
-              data: response.data ? response.data : [],
+              data: response.data.data ? response.data.data : [],
               errorMessage: false,
             },
           });

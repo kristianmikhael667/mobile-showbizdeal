@@ -75,6 +75,12 @@ import Close from './close.svg';
 
 import Searching from './searching.svg';
 
+// Button Pencarian
+import PerformerButton from './performerbutton.svg';
+import InfluencerButton from './influencerbutton.svg';
+import SupportButton from './supportbutton.svg';
+import ShowLiveButton from './showlivebutton.svg';
+
 export {
   EyesIcon,
   Logo,
@@ -133,4 +139,8 @@ export {
   MyProduct,
   MyTalent,
   Searching,
+  ShowLiveButton,
+  SupportButton,
+  PerformerButton,
+  InfluencerButton,
 };

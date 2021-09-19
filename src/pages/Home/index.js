@@ -153,7 +153,7 @@ class Home extends Component {
               }}>
               <Tombol
                 fontSize={14}
-                onPress={() => this.props.navigation.navigate('PageSearch')}
+                onPress={() => this.props.navigation.navigate('ResultSearch')}
                 title="DJ Soda"
                 width={responsiveWidth(240)}
                 height={34}

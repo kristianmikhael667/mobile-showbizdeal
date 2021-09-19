@@ -4,6 +4,10 @@ import {colors, responsiveHeight, responsiveWidth} from '../../../utils';
 import TabItem from '../TabItem';
 
 const BottomNavigator = ({state, descriptors, navigation}) => {
+  const focusedOptions = descriptors[state.routes[state.index].key].options;
+  if (focusedOptions.tabBarVisible === false) {
+    return null;
+  }
   return (
     <View style={styles.container}>
       {state.routes.map((route, index) => {

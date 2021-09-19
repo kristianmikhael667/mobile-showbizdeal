@@ -14,7 +14,6 @@ import IDCard from './IDCard';
 import MyDashboard from './MyDashboard';
 import VirtualLive from './VirtualLive';
 import MyTalent from './MyTalent/MyTalent';
-import PageSearch from './PageSearch/PageSearch';
 import ResultSearch from './ResultSearch';
 export {
   Splash,
@@ -33,6 +32,5 @@ export {
   MyDashboard,
   VirtualLive,
   MyTalent,
-  PageSearch,
   ResultSearch,
 };

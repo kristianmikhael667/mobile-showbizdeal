@@ -18,7 +18,6 @@ import {
   MyDashboard,
   VirtualLive,
   MyTalent,
-  PageSearch,
   ResultSearch,
 } from '../pages';
 import {BottomNavigator} from '../components';
@@ -124,11 +123,7 @@ const Router = () => {
         component={VirtualLive}
         options={{headerShown: false}}
       />
-      <Stack.Screen
-        name="PageSearch"
-        component={PageSearch}
-        options={{headerShown: false}}
-      />
+
       <Stack.Screen
         name="ResultSearch"
         component={ResultSearch}

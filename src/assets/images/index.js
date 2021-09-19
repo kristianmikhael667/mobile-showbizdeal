@@ -27,6 +27,12 @@ import ImgFacebook from './facebook.png';
 import ImgWhatsapp from './whatsapp.png';
 import ImgYoutube from './youtube.png';
 
+// Pencarian banyak dummy
+import Djclasix from './adm1.png';
+import Adam from './adm2.png';
+import Mayang from './adm3.png';
+import Djvan from './adm4.png';
+
 export {
   OnBoardingImg1,
   OnBoardingImg2,
@@ -48,4 +54,8 @@ export {
   ImgWebsite,
   ImgWhatsapp,
   ImgYoutube,
+  Djclasix,
+  Djvan,
+  Adam,
+  Mayang,
 };

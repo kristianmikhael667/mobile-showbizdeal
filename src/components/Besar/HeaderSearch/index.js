@@ -47,7 +47,6 @@ class HeaderSearch extends Component {
     const {search} = this.state;
 
     dispatch(saveKeywordName(search));
-
     if (page !== 'ResultSearch') {
       navigation.navigate('ResultSearch');
     }
