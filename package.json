@@ -29,6 +29,7 @@
     "react-native-responsive-fontsize": "^0.5.1",
     "react-native-safe-area-context": "^3.3.2",
     "react-native-screens": "^3.6.0",
+    "react-native-search-header": "^0.3.5",
     "react-native-skeleton-placeholder": "^5.0.0",
     "react-native-svg": "^12.1.1",
     "react-native-svg-transformer": "^0.14.3",

@@ -10,6 +10,8 @@ import {
   responsiveHeight,
   responsiveWidth,
 } from '../../../utils';
+import SearchHeader from 'react-native-search-header';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 class HeaderSearch extends Component {
   constructor(props) {
@@ -33,7 +35,6 @@ class HeaderSearch extends Component {
   getUserData = () => {
     getData('historysearch').then(res => {
       const data = res;
-      console.log('nah : ', data);
       if (data) {
         this.setState({
           results: data,
@@ -42,8 +43,7 @@ class HeaderSearch extends Component {
     });
   };
   selesaiCari = () => {
-    const {page, navigation, dispatch} = this.props;
-
+    const {page, navigation, dispatch, datas} = this.props;
     const {search} = this.state;
 
     dispatch(saveKeywordName(search));
@@ -55,19 +55,28 @@ class HeaderSearch extends Component {
       search: '',
     });
   };
+
+  clears = () => {
+    AsyncStorage.removeItem('historysearch');
+    AsyncStorage.removeItem('historydata');
+
+    this.props.navigation.goBack();
+  };
+
   render() {
-    const {search} = this.state;
+    const {search, results} = this.state;
+
     return (
       <View style={styles.header}>
         <TouchableOpacity
-          onPress={() => this.props.navigation.goBack()}
+          onPress={() => this.clears()}
           style={styles.buttonback}>
           <ButtonBack />
         </TouchableOpacity>
         <View style={styles.title}>
           <TextInput
             ref={ref => (this.textInputRef = ref)}
-            placeholder="Dj Soda"
+            placeholder={results ? results : 'Dj Kuda'}
             value={search}
             onChangeText={search => this.setState({search})}
             onSubmitEditing={() => this.selesaiCari()}
@@ -87,7 +96,7 @@ export default connect()(HeaderSearch);
 
 const styles = StyleSheet.create({
   header: {
-    height: responsiveHeight(104),
+    height: responsiveHeight(120),
     flexDirection: 'row',
     paddingHorizontal: 18,
     paddingTop: 44,

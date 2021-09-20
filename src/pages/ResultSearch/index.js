@@ -23,6 +23,7 @@ import {
   API_URL,
   colors,
   fonts,
+  getData,
   heightMobileUi,
   responsiveHeight,
   responsiveWidth,
@@ -34,8 +35,30 @@ class ResultSearch extends Component {
 
     this.state = {
       popular: dummyPopular,
+      datas: false,
+      isLoading: false,
     };
   }
+
+  componentDidMount() {
+    this._unsubscribe = this.props.navigation.addListener('focus', () => {
+      this.getUserData();
+    });
+  }
+  componentWillUnmount() {
+    this._unsubscribe();
+  }
+
+  getUserData = () => {
+    getData('historydata').then(res => {
+      const data = res;
+      if (data) {
+        this.setState({
+          datas: data,
+        });
+      }
+    });
+  };
 
   render() {
     const {
@@ -45,8 +68,8 @@ class ResultSearch extends Component {
       getCategoryResult,
       navigation,
     } = this.props;
-    const {popular} = this.state;
-    console.log(popular);
+    const {popular, datas} = this.state;
+    console.log(datas);
     return (
       <View style={styles.pages}>
         <StatusBars />
@@ -54,7 +77,7 @@ class ResultSearch extends Component {
           <HeaderSearch navigation={navigation} page="ResultSearch" />
           <Jarak height={7} />
           <View style={styles.body}>
-            {getSearchByNameResult === false ? (
+            {datas === false ? (
               <View>
                 <Text style={styles.pencarian}>Pencarian Popular</Text>
                 <View style={{marginTop: 20}}>
@@ -93,13 +116,16 @@ class ResultSearch extends Component {
                   </TouchableOpacity>
                 </View>
               </View>
-            ) : getSearchByNameResult ? (
-              getSearchByNameResult.map(search => {
+            ) : (
+              []
+            )}
+            {datas ? (
+              datas.map(market => {
                 return (
                   <TouchableOpacity
                     onPress={() =>
                       this.props.navigation.navigate('DetailMarket', {
-                        search,
+                        market,
                         getCategoryResult,
                       })
                     }
@@ -107,7 +133,7 @@ class ResultSearch extends Component {
                     <Image
                       style={styles.images}
                       source={{
-                        uri: API_URL + search.img + '&w=500&h=500&fit=crop',
+                        uri: API_URL + market.img + '&w=500&h=500&fit=crop',
                       }}
                     />
                     <View style={styles.love}>
@@ -117,13 +143,13 @@ class ResultSearch extends Component {
                         </>
                       </View>
                     </View>
-                    <Text style={styles.nama}>{search.name}</Text>
+                    <Text style={styles.nama}>{market.name}</Text>
                     {getCategoryResult ? (
                       getCategoryResult.map(category => {
                         {
                           if (
                             category.id ===
-                            search.vendor_category[0].sub_category_id
+                            market.vendor_category[0].sub_category_id
                           ) {
                             return (
                               <Text style={styles.category}>
@@ -150,7 +176,7 @@ class ResultSearch extends Component {
                 );
               })
             ) : (
-              []
+              <Text>No Available Data</Text>
             )}
           </View>
         </ScrollView>

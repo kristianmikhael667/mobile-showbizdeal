@@ -39,7 +39,8 @@ export const saveKeywordName = search => {
               errorMessage: false,
             },
           });
-          storeData('historysearch', response.data);
+          storeData('historysearch', search);
+          storeData('historydata', response.data.data);
         }
       })
       .catch(error => {
