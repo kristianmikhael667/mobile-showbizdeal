@@ -19,6 +19,7 @@ import {
   VirtualLive,
   MyTalent,
   ResultSearch,
+  Showbizcare,
 } from '../pages';
 import {BottomNavigator} from '../components';
 
@@ -127,6 +128,12 @@ const Router = () => {
       <Stack.Screen
         name="ResultSearch"
         component={ResultSearch}
+        options={{headerShown: false}}
+      />
+
+      <Stack.Screen
+        name="Showbizcare"
+        component={Showbizcare}
         options={{headerShown: false}}
       />
     </Stack.Navigator>

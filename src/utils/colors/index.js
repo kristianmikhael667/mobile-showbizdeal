@@ -13,4 +13,5 @@ export const colors = {
   black: '#000000',
   trans: 'rgba(52, 18, 108, 0.9)',
   line: '#DADADA',
+  pages: '#E5E5E5',
 };

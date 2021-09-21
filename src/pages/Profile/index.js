@@ -174,7 +174,9 @@ export default class Profile extends Component {
                     <ButtonLefts />
                   </View>
                 </View>
-                <View style={styles.menus}>
+                <TouchableOpacity
+                  onPress={() => this.props.navigation.navigate('Showbizcare')}
+                  style={styles.menus}>
                   <View style={{flexDirection: 'row'}}>
                     <MenuShowbizcare />
                     <Text style={styles.textmenu}>ShowbizCare</Text>
@@ -182,7 +184,7 @@ export default class Profile extends Component {
                   <View>
                     <ButtonLefts />
                   </View>
-                </View>
+                </TouchableOpacity>
                 <TouchableOpacity
                   onPress={() => this.login()}
                   style={styles.menus}>
@@ -281,7 +283,9 @@ export default class Profile extends Component {
                     <ButtonLefts />
                   </View>
                 </View>
-                <View style={styles.menus}>
+                <TouchableOpacity
+                  onPress={() => this.props.navigation.navigate('Showbizcare')}
+                  style={styles.menus}>
                   <View style={{flexDirection: 'row'}}>
                     <MenuShowbizcare />
                     <Text style={styles.textmenu}>ShowbizCare</Text>
@@ -289,7 +293,7 @@ export default class Profile extends Component {
                   <View>
                     <ButtonLefts />
                   </View>
-                </View>
+                </TouchableOpacity>
                 <TouchableOpacity
                   onPress={() => this.login()}
                   style={styles.menus}>

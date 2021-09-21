@@ -18,6 +18,7 @@ import {
 } from '../../actions/MarketPlace';
 import {
   Banner1,
+  Disconnect,
   Heads,
   IconFiltersa,
   LogoHeader,
@@ -121,6 +122,7 @@ class Home extends Component {
       getInfluencerError,
       getCategoryResult,
     } = this.props;
+    // console.log(getInfluencerResult);
     const {modalizeReff} = this.state;
     return (
       <View style={styles.pages}>
@@ -288,7 +290,37 @@ class Home extends Component {
             ) : getInfluencerLoading ? (
               <Loading />
             ) : getInfluencerError ? (
-              <Text>Error</Text>
+              <View
+                style={{alignItems: 'center', marginHorizontal: 18, flex: 1}}>
+                <Text
+                  style={{
+                    fontSize: 30,
+                    fontFamily: fonts.primary.bold,
+                    marginBottom: 6,
+                    color: colors.primary2,
+                  }}>
+                  500
+                </Text>
+                <Text
+                  style={{
+                    fontSize: 25,
+                    fontFamily: fonts.primary.normal,
+                    marginBottom: 6,
+                  }}>
+                  Something is wrong
+                </Text>
+                <Text style={{textAlign: 'center', marginBottom: 10}}>
+                  We're having an issue, please try one of these option to get
+                  you back on track
+                </Text>
+                <Image
+                  style={{
+                    width: responsiveWidth(150),
+                    height: responsiveHeight(165),
+                  }}
+                  source={Disconnect}
+                />
+              </View>
             ) : (
               <Text>Gak ada</Text>
             )}

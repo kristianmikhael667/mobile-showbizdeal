@@ -33,6 +33,8 @@ import Adam from './adm2.png';
 import Mayang from './adm3.png';
 import Djvan from './adm4.png';
 
+import Disconnect from './disconnect.png';
+
 export {
   OnBoardingImg1,
   OnBoardingImg2,
@@ -58,4 +60,5 @@ export {
   Djvan,
   Adam,
   Mayang,
+  Disconnect,
 };
