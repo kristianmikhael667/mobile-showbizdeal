@@ -9,12 +9,21 @@ import {
   Linking,
 } from 'react-native';
 import {RFValue} from 'react-native-responsive-fontsize';
+import {get} from 'react-native/Libraries/Utilities/PixelRatio';
 import {connect} from 'react-redux';
 import {
   getManajemenProfileById,
   getPortofolio,
+  getRating,
 } from '../../actions/MarketPlace';
-import {Facebook, FillStart, Instagram, TimeBomb, Youtube} from '../../assets';
+import {
+  Facebook,
+  FillStart,
+  Instagram,
+  Start,
+  TimeBomb,
+  Youtube,
+} from '../../assets';
 import {Jarak, StatusBars, Tombol} from '../../components';
 import {
   API_URL,
@@ -39,6 +48,7 @@ class DetailMarket extends Component {
     const {market} = this.state;
     this.props.dispatch(getManajemenProfileById(market.business_id));
     this.props.dispatch(getPortofolio(market.id));
+    this.props.dispatch(getRating(market.id));
   }
 
   render() {
@@ -47,7 +57,8 @@ class DetailMarket extends Component {
     const fb = market.facebook;
     const ig_link = ig.length > 25 ? ig.substring(26, ig.length - 1) : ig;
     const fb_link = fb.substring(25, fb.length - 1);
-    const {getManajementProfileResult, getPortofolioResult} = this.props;
+    const {getManajementProfileResult, getPortofolioResult, getRatingResult} =
+      this.props;
     return (
       <View style={styles.page}>
         <StatusBars />
@@ -119,7 +130,18 @@ class DetailMarket extends Component {
                   </Text>
                   <View style={{marginTop: 4, flexDirection: 'row'}}>
                     <FillStart />
-                    <Text style={styles.rating}>4.9 Rata-rata Ulasan</Text>
+                    {getRatingResult ? (
+                      getRatingResult.map(rate => {
+                        return (
+                          <Text style={styles.rating}>
+                            {rate.rating === '' ? 0 : rate.rating} Rata-rata
+                            Ulasan
+                          </Text>
+                        );
+                      })
+                    ) : (
+                      <Text style={styles.rating}>0 Rata-rata Ulasan</Text>
+                    )}
                   </View>
                   <View style={{marginTop: 4, flexDirection: 'row'}}>
                     <TimeBomb />
@@ -149,49 +171,132 @@ class DetailMarket extends Component {
           </View>
           <Jarak height={10} />
           <View style={styles.cardportofolio}>
-            <View style={styles.board}>
-              <Text style={styles.portofoliotitle}>Portofolio</Text>
-              <Text style={styles.seeall}>Lihat Semua</Text>
-            </View>
-            <View style={styles.portopolio}>
-              <ScrollView horizontal showsHorizontalScrollIndicator={false}>
-                {getPortofolioResult ? (
-                  getPortofolioResult.map(porto => {
-                    return (
-                      <>
-                        {porto.images.map(mbar => {
-                          return (
-                            <>
-                              <TouchableOpacity
-                                onPress={() =>
-                                  this.props.navigation.navigate(
-                                    'DetailPortopolio',
-                                    {
-                                      mbar,
-                                      porto,
-                                      market,
-                                      getManajementProfileResult,
-                                    },
-                                  )
-                                }>
-                                <Image
-                                  style={styles.imageporto}
-                                  source={{uri: API_URL + mbar.images}}
-                                />
-                              </TouchableOpacity>
-                            </>
-                          );
-                        })}
-                      </>
-                    );
-                  })
-                ) : (
-                  <Text>Tidak Ada Portofolio</Text>
-                )}
-              </ScrollView>
-            </View>
+            {getPortofolioResult == false ? (
+              []
+            ) : (
+              <>
+                <View style={styles.board}>
+                  <Text style={styles.portofoliotitle}>Portofolio</Text>
+                  <Text style={styles.seeall}>Lihat Semua</Text>
+                </View>
+                <View style={styles.portopolio}>
+                  <ScrollView horizontal showsHorizontalScrollIndicator={false}>
+                    {getPortofolioResult ? (
+                      getPortofolioResult.map(porto => {
+                        return (
+                          <>
+                            {porto.images.map(mbar => {
+                              return (
+                                <>
+                                  <TouchableOpacity
+                                    onPress={() =>
+                                      this.props.navigation.navigate(
+                                        'DetailPortopolio',
+                                        {
+                                          mbar,
+                                          porto,
+                                          market,
+                                          getManajementProfileResult,
+                                        },
+                                      )
+                                    }>
+                                    <Image
+                                      style={styles.imageporto}
+                                      source={{uri: API_URL + mbar.images}}
+                                    />
+                                  </TouchableOpacity>
+                                </>
+                              );
+                            })}
+                          </>
+                        );
+                      })
+                    ) : (
+                      <Text>Tidak Ada Portofolio</Text>
+                    )}
+                  </ScrollView>
+                </View>
+              </>
+            )}
           </View>
-          <Jarak height={10} />
+          <Jarak height={7} />
+          <View style={styles.cardportofolio}>
+            {getRatingResult == false ? (
+              []
+            ) : (
+              <>
+                <View style={styles.board}>
+                  <Text style={styles.portofoliotitle}>Ulasan</Text>
+                  <Text style={styles.seeall}>Lihat Semua</Text>
+                </View>
+                <View style={styles.ratings}>
+                  {getRatingResult ? (
+                    getRatingResult.map(ratings => {
+                      return (
+                        <>
+                          <View style={{flexDirection: 'row', width: '100%'}}>
+                            <View>
+                              <FillStart />
+                            </View>
+                            <View>
+                              <Text style={styles.textratings}>
+                                {ratings.rating} Rata-rata ulasan
+                              </Text>
+                            </View>
+                          </View>
+                          <View style={{flexDirection: 'row', marginTop: 14}}>
+                            <Image
+                              style={{
+                                width: responsiveWidth(142),
+                                height: responsiveHeight(142),
+                              }}
+                              source={{
+                                uri: 'https://pbs.twimg.com/profile_images/1415573131251486725/Or3H-UjP_400x400.jpg',
+                              }}
+                            />
+                            <View>
+                              <View style={{flexDirection: 'row'}}>
+                                <View style={{marginRight: 3}}>
+                                  <FillStart />
+                                </View>
+                                <View style={{marginRight: 3}}>
+                                  <FillStart />
+                                </View>
+                                <View style={{marginRight: 3}}>
+                                  <FillStart />
+                                </View>
+                                <View style={{marginRight: 3}}>
+                                  <FillStart />
+                                </View>
+                                <View style={{marginRight: 3}}>
+                                  <FillStart />
+                                </View>
+                              </View>
+                              <View style={{marginVertical: 10}}>
+                                <Text style={{fontSize: 10}}>
+                                  oleh{' '}
+                                  <Text
+                                    style={{fontWeight: 'bold', fontSize: 10}}>
+                                    {ratings.user_name}
+                                  </Text>
+                                </Text>
+                              </View>
+
+                              <Text style={{fontSize: 10}}>
+                                {ratings.review}
+                              </Text>
+                            </View>
+                          </View>
+                        </>
+                      );
+                    })
+                  ) : (
+                    <Text>Tidak Ada Ratings</Text>
+                  )}
+                </View>
+              </>
+            )}
+          </View>
         </ScrollView>
       </View>
     );
@@ -200,11 +305,14 @@ class DetailMarket extends Component {
 
 const mapStatetoProps = state => ({
   // Get Manajement
-
   getManajementProfileResult:
     state.MarketPlaceReducer.getManajementProfileResult,
-
   getPortofolioResult: state.MarketPlaceReducer.getPortofolioResult,
+
+  // Get Rating
+  getRatingLoading: state.MarketPlaceReducer.getRatingLoading,
+  getRatingResult: state.MarketPlaceReducer.getRatingResult,
+  getRatingError: state.MarketPlaceReducer.getRatingError,
 });
 export default connect(mapStatetoProps, null)(DetailMarket);
 
@@ -304,5 +412,15 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     marginTop: 11,
     marginLeft: 18,
+  },
+
+  ratings: {
+    marginTop: 11,
+    marginLeft: 18,
+  },
+  textratings: {
+    fontSize: RFValue(13, heightMobileUi),
+    justifyContent: 'center',
+    marginLeft: 3,
   },
 });

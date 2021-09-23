@@ -181,61 +181,60 @@ export const getCategory = () => {
   };
 };
 
-// export const getRating = () => {
-//   return dispatch => {
-//     //   Loading
-//     dispatch({
-//       type: GET_CATEGORY,
-//       payload: {
-//         loading: true,
-//         data: false,
-//         errorMessage: false,
-//       },
-//     });
+export const getRating = id => {
+  console.log(id);
+  return dispatch => {
+    //   Loading
+    dispatch({
+      type: GET_RATING,
+      payload: {
+        loading: true,
+        data: false,
+        errorMessage: false,
+      },
+    });
 
-//     //Get Category
-//     axios({
-//       method: 'get',
-//       url:
-//         API_URL +
-//         '/business-service/v1/multicategory?parentId=138bb094-8aa2-4900-95c5-c0cd0b4fa3da',
-//     })
-//       .then(responses => {
-//         if (responses.status !== 200) {
-//           //ERROR
-//           dispatch({
-//             type: GET_CATEGORY,
-//             payload: {
-//               loading: false,
-//               data: false,
-//               errorMessage: responses,
-//             },
-//           });
-//         } else {
-//           //BERHASIL
-//           dispatch({
-//             type: GET_CATEGORY,
-//             payload: {
-//               loading: false,
-//               data: responses.data ? responses.data.data : [],
-//               errorMessage: false,
-//             },
-//           });
-//         }
-//       })
-//       .catch(error => {
-//         dispatch({
-//           type: GET_CATEGORY,
-//           payload: {
-//             loading: false,
-//             data: false,
-//             errorMessage: true,
-//           },
-//         });
-//         alert('Your Connection is Invalids');
-//       });
-//   };
-// };
+    //Get Rating
+    axios({
+      method: 'get',
+      url: API_URL + '/product-service/rating/business/' + id,
+    })
+      .then(responses => {
+        if (responses.data.message === 'success get data') {
+          //BERHASIL
+          dispatch({
+            type: GET_RATING,
+            payload: {
+              loading: false,
+              data: responses.data.results ? responses.data.results : [],
+              errorMessage: false,
+            },
+          });
+        } else {
+          //ERROR
+          dispatch({
+            type: GET_RATING,
+            payload: {
+              loading: false,
+              data: false,
+              errorMessage: responses,
+            },
+          });
+        }
+      })
+      .catch(error => {
+        dispatch({
+          type: GET_RATING,
+          payload: {
+            loading: false,
+            data: false,
+            errorMessage: true,
+          },
+        });
+        alert('Your Connection is Invalids');
+      });
+  };
+};
 
 export const getManajemenProfileById = id => {
   return dispatch => {

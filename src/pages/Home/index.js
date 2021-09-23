@@ -39,6 +39,7 @@ import {
   StatusBars,
   Tombol,
 } from '../../components';
+import axios from 'axios';
 class Home extends Component {
   constructor(props) {
     super(props);
@@ -122,7 +123,6 @@ class Home extends Component {
       getInfluencerError,
       getCategoryResult,
     } = this.props;
-    // console.log(getInfluencerResult);
     const {modalizeReff} = this.state;
     return (
       <View style={styles.pages}>
@@ -232,9 +232,10 @@ class Home extends Component {
           </View>
           <View style={styles.body}>
             {getInfluencerResult ? (
-              getInfluencerResult.map(market => {
+              getInfluencerResult.map((market, index) => {
                 return (
                   <TouchableOpacity
+                    key={index}
                     onPress={() =>
                       this.props.navigation.navigate('DetailMarket', {
                         market,
@@ -277,6 +278,8 @@ class Home extends Component {
                       <Text>kosong</Text>
                     )}
                     <View style={styles.start}>
+                      {/* {this.props.dispatch(getRating([market.id]))} */}
+
                       <Start />
                       <Start />
                       <Start />

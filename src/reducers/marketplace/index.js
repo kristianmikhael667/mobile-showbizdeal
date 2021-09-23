@@ -5,6 +5,7 @@ import {
   GET_MANAGEMENT_PROFILE,
   GET_PORTOPOLIO,
   GET_MANAGEMENT,
+  GET_RATING,
 } from '../../actions/MarketPlace';
 
 const initialState = {
@@ -37,6 +38,11 @@ const initialState = {
   getManajementLoading: false,
   getManajementResult: false,
   getManajementError: false,
+
+  // RATING
+  getRatingLoading: false,
+  getRatingResult: false,
+  getRatingError: false,
 };
 
 export default function (state = initialState, action) {
@@ -84,6 +90,13 @@ export default function (state = initialState, action) {
         getManajementLoading: action.payload.loading,
         getManajementResult: action.payload.data,
         getManajementError: action.payload.errorMessage,
+      };
+    case GET_RATING:
+      return {
+        ...state,
+        getRatingLoading: action.payload.loading,
+        getRatingResult: action.payload.data,
+        getRatingError: action.payload.errorMessage,
       };
     default:
       return state;
