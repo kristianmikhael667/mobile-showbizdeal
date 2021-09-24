@@ -33,6 +33,12 @@ import Adam from './adm2.png';
 import Mayang from './adm3.png';
 import Djvan from './adm4.png';
 
+// Button Search Speed
+import PerformerButtons from './buttonPerformer.png';
+import InfluencerButtons from './buttonInfluencer.png';
+import SupportButtons from './buttonSupport.png';
+import ShowLiveButtons from './buttonShowLive.png';
+
 import Disconnect from './disconnect.png';
 
 export {
@@ -61,4 +67,8 @@ export {
   Adam,
   Mayang,
   Disconnect,
+  PerformerButtons,
+  InfluencerButtons,
+  ShowLiveButtons,
+  SupportButtons,
 };

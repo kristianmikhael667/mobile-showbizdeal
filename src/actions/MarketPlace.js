@@ -8,6 +8,8 @@ export const GET_MANAGEMENT_PROFILE = 'GET_MANAGEMENT_PROFILE';
 export const GET_PORTOPOLIO = 'GET_PORTOPOLIO';
 export const GET_MANAGEMENT = 'GET_MANAGEMENT';
 export const GET_RATING = 'GET_RATING';
+export const GET_RATINGS = 'GET_RATINGS';
+
 // Performer
 export const getMarketPlace = () => {
   return dispatch => {
@@ -182,7 +184,7 @@ export const getCategory = () => {
 };
 
 export const getRating = id => {
-  console.log(id);
+  // console.log(id);
   return dispatch => {
     //   Loading
     dispatch({
@@ -235,6 +237,67 @@ export const getRating = id => {
       });
   };
 };
+
+// export const getRatings = id => {
+//   return dispatch => {
+//     //   Loading
+//     dispatch({
+//       type: GET_RATINGS,
+//       payload: {
+//         loading: true,
+//         data: false,
+//         errorMessage: false,
+//       },
+//     });
+//     const formData = new URLSearchParams();
+//     formData.append('id', id);
+//     const request = {
+//       formData: formData,
+//     };
+//     console.log(request);
+//     //Get Ratings
+//     axios({
+//       method: 'get',
+//       url: API_URL + '/product-service/rating-avg/business/' + request,
+//     })
+//       .then(responses => {
+//         if (responses.data.message === 'success get data') {
+//           //BERHASIL
+//           dispatch({
+//             type: GET_RATINGS,
+//             payload: {
+//               loading: false,
+//               data: responses.data.results.avg
+//                 ? responses.data.results.avg
+//                 : [],
+//               errorMessage: false,
+//             },
+//           });
+//         } else {
+//           //ERROR
+//           dispatch({
+//             type: GET_RATINGS,
+//             payload: {
+//               loading: false,
+//               data: false,
+//               errorMessage: responses,
+//             },
+//           });
+//         }
+//       })
+//       .catch(error => {
+//         dispatch({
+//           type: GET_RATINGS,
+//           payload: {
+//             loading: false,
+//             data: false,
+//             errorMessage: true,
+//           },
+//         });
+//         alert('Your Connection is Invalids');
+//       });
+//   };
+// };
 
 export const getManajemenProfileById = id => {
   return dispatch => {

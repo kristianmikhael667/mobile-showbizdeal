@@ -1,3 +1,4 @@
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import React from 'react';
 import {
   Dimensions,
@@ -15,6 +16,7 @@ import {connect} from 'react-redux';
 import {saveKeywordName} from '../../../actions/ResultSearch';
 import {ButtonBack, Notifikasi, Searching} from '../../../assets';
 import {
+  clearStorage,
   colors,
   heightMobileUi,
   responsiveHeight,
@@ -23,8 +25,13 @@ import {
 
 const DEVICE_WIDTH = Dimensions.get(`window`).width;
 
-const HeaderSearch = () => {
+const HeaderSearch = ({navigation}) => {
+  // const {navigation} = this.props;
   const searchHeaderRef = React.useRef(null);
+  // clearstore = () => {
+  //   AsyncStorage.removeItem('historysearch');
+  //   AsyncStorage.removeItem('historydata');
+  // };
 
   return (
     <View style={styles.container}>
@@ -32,7 +39,11 @@ const HeaderSearch = () => {
       <View style={styles.status} />
       <View style={styles.header}>
         <TouchableOpacity
-          onPress={() => this.props.navigation.goBack()}
+          onPress={() => {
+            AsyncStorage.removeItem('historysearch');
+            AsyncStorage.removeItem('historydata');
+            navigation.goBack();
+          }}
           style={{
             marginLeft: responsiveWidth(19),
             marginRight: responsiveWidth(36),
@@ -63,7 +74,7 @@ const HeaderSearch = () => {
         onShow={async text => {
           if (text) {
             dispatch(saveKeywordName(text));
-            this.props.navigation.navigate('ResultSearch');
+            this.props.navigation.push('ResultSearch');
           } else {
             return [];
           }

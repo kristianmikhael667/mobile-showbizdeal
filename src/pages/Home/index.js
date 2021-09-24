@@ -15,6 +15,7 @@ import {
   getCategory,
   getMarketInfluencer,
   getMarketPlace,
+  getRatings,
 } from '../../actions/MarketPlace';
 import {
   Banner1,
@@ -39,7 +40,6 @@ import {
   StatusBars,
   Tombol,
 } from '../../components';
-import axios from 'axios';
 class Home extends Component {
   constructor(props) {
     super(props);
@@ -122,8 +122,10 @@ class Home extends Component {
       getInfluencerLoading,
       getInfluencerError,
       getCategoryResult,
+      // getRatingsResult,
     } = this.props;
     const {modalizeReff} = this.state;
+    // console.log('datas  : ', getRatingsResult);
     return (
       <View style={styles.pages}>
         <StatusBars />
@@ -278,7 +280,7 @@ class Home extends Component {
                       <Text>kosong</Text>
                     )}
                     <View style={styles.start}>
-                      {/* {this.props.dispatch(getRating([market.id]))} */}
+                      {/* {this.props.dispatch(getRatings([market.id]))} */}
 
                       <Start />
                       <Start />
@@ -542,6 +544,11 @@ const mapStatetoProps = state => ({
   getCategoryLoading: state.MarketPlaceReducer.getCategoryLoading,
   getCategoryResult: state.MarketPlaceReducer.getCategoryResult,
   getCategoryError: state.MarketPlaceReducer.getCategoryError,
+
+  // Get Rating
+  getRatingsLoading: state.MarketPlaceReducer.getRatingsLoading,
+  getRatingsResult: state.MarketPlaceReducer.getRatingsResult,
+  getRatingsError: state.MarketPlaceReducer.getRatingsError,
 });
 
 export default connect(mapStatetoProps, null)(Home);

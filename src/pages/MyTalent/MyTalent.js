@@ -129,8 +129,10 @@ const styles = StyleSheet.create({
   },
   subbody: {
     flexDirection: 'row',
-    marginHorizontal: 20,
+    justifyContent: 'space-between',
+    marginHorizontal: 12,
     marginTop: 21,
+    flexWrap: 'wrap',
   },
   images: {
     width: responsiveWidth(181),
@@ -139,7 +141,8 @@ const styles = StyleSheet.create({
     borderTopRightRadius: 10,
   },
   card: {
-    marginRight: responsiveWidth(12),
+    marginBottom: 10,
+    // marginRight: responsiveWidth(12),
     width: responsiveWidth(181),
     height: responsiveHeight(270),
     borderTopLeftRadius: 10,

@@ -1,130 +1,199 @@
-import React, {Component} from 'react';
+import React, {useState, useEffect} from 'react';
 import {
+  Dimensions,
+  AppRegistry,
   StyleSheet,
   View,
-  ScrollView,
-  TouchableOpacity,
   Text,
+  Button,
+  StatusBar,
+  TouchableOpacity,
   Image,
+  ScrollView,
 } from 'react-native';
 import {RFValue} from 'react-native-responsive-fontsize';
+import SearchHeader from 'react-native-search-header';
 import {connect} from 'react-redux';
 import {
-  InfluencerButton,
+  InfluencerButtons,
   Love,
-  PerformerButton,
-  ShowLiveButton,
+  PerformerButtons,
+  ShowLiveButtons,
   Start,
-  SupportButton,
+  SupportButtons,
 } from '../../assets';
-import {HeaderSearch, Jarak, Loading, StatusBars} from '../../components';
+import {StatusBars} from '../../components';
 import {dummyPopular} from '../../Data/dummyPopular';
+
 import {
   API_URL,
   colors,
   fonts,
-  getData,
   heightMobileUi,
   responsiveHeight,
   responsiveWidth,
 } from '../../utils';
 
-class ResultSearch extends Component {
-  constructor(props) {
-    super(props);
+const DEVICE_WIDTH = Dimensions.get(`window`).width;
 
-    this.state = {
-      popular: dummyPopular,
-      datas: false,
-      isLoading: false,
-    };
-  }
-
-  componentDidMount() {
-    this._unsubscribe = this.props.navigation.addListener('focus', () => {
-      this.getUserData();
-    });
-  }
-  componentWillUnmount() {
-    this._unsubscribe();
-  }
-
-  getUserData = () => {
-    getData('historydata').then(res => {
-      const data = res;
-      if (data) {
-        this.setState({
-          datas: data,
-        });
-      }
-    });
+const ResultSearch = ({getCategoryResult, navigation, getDataPer}) => {
+  const searchHeaderRef = React.useRef(null);
+  const [datas, setPostArray] = useState(false);
+  const MyGetter = () => {
+    // console.log('kntl');
+    searchHeaderRef.current.show();
   };
+  useEffect(() => {
+    setTimeout(() => {
+      searchHeaderRef.current.show();
+    }, 0); //miliseconds
+  }, []);
+  return (
+    <View style={styles.container}>
+      <StatusBars />
+      <View style={styles.status} />
+      <View style={styles.header}>
+        <TouchableOpacity
+          color="#f5fcff"
+          style={{
+            width: responsiveWidth(275),
+            height: responsiveHeight(34),
+            backgroundColor: colors.pembatas,
+            justifyContent: 'center',
+          }}
+          onPress={MyGetter}>
+          <Text>Search</Text>
+        </TouchableOpacity>
+      </View>
+      <SearchHeader
+        ref={searchHeaderRef}
+        placeholder="Search..."
+        placeholderColor="gray"
+        style={{
+          container: {
+            marginTop: responsiveHeight(30),
+          },
+        }}
+        // pinnedSuggestions={[
+        //   `react-native-search-header`,
+        //   `react-native`,
+        //   `javascript`,
+        // ]}
 
-  render() {
-    const {
-      getSearchByNameResult,
-      getSearchByNameLoading,
-      getSearchByNameError,
-      getCategoryResult,
-      navigation,
-    } = this.props;
-    const {popular, datas} = this.state;
-    console.log(datas);
-    return (
-      <View style={styles.pages}>
-        <StatusBars />
-        <ScrollView>
-          <HeaderSearch navigation={navigation} page="ResultSearch" />
-          <Jarak height={7} />
-          <View style={styles.body}>
-            {datas === false ? (
-              <View>
-                <Text style={styles.pencarian}>Pencarian Popular</Text>
-                <View style={{marginTop: 20}}>
-                  {popular.map(pop => {
-                    return (
-                      <View style={{flexDirection: 'row', marginBottom: 20}}>
-                        <Image
-                          style={{
-                            width: 46,
-                            height: 46,
-                            marginRight: 18,
-                          }}
-                          source={pop.image}
-                        />
-                        <View style={{alignSelf: 'center'}}>
-                          <Text style={{fontSize: 12}}>{pop.nama}</Text>
-                          <Text style={{fontSize: 10}}>{pop.genre}</Text>
-                        </View>
+        onClear={() => {
+          console.log(`Clearing input!`);
+          navigation.push('ResultSearch');
+        }}
+        onGetAutocompletions={async text => {
+          if (text) {
+            const response = await fetch(
+              `http://longmsg.id:2001/business-service/v1/v2/vendor?&q=${text}`,
+              {
+                method: `get`,
+              },
+            );
+            const data = await response.json();
+
+            console.log(data.data);
+            // return data;
+            setPostArray(data.data);
+          } else {
+            return [];
+          }
+        }}
+      />
+
+      {/* <View style={styles.button}>
+        <Button
+          title="Open Search"
+          color="#f5fcff"
+          onPress={() => searchHeaderRef.current.show()}
+        />
+      </View>
+      <View style={styles.button}>
+        <Button
+          title="Clear"
+          color="#f5fcff"
+          onPress={() => {
+            searchHeaderRef.current.clear();
+          }}
+        />
+      </View> */}
+      <ScrollView>
+        <View style={styles.body}>
+          {datas === false ? (
+            <View>
+              <Text style={styles.pencarian}>Pencarian Popular</Text>
+              <View style={{marginTop: 20}}>
+                {getDataPer.map(pop => {
+                  return (
+                    <View style={{flexDirection: 'row', marginBottom: 20}}>
+                      <Image
+                        style={{
+                          width: 46,
+                          height: 46,
+                          marginRight: 18,
+                        }}
+                        source={pop.image}
+                      />
+                      <View style={{alignSelf: 'center'}}>
+                        <Text style={{fontSize: 12}}>{pop.nama}</Text>
+                        <Text style={{fontSize: 10}}>{pop.genre}</Text>
                       </View>
-                    );
-                  })}
-                </View>
-                <Text style={styles.pencarian}>Kategori Pilihan</Text>
-                <View style={{marginHorizontal: 18}}>
-                  <TouchableOpacity style={{width: 30}}>
-                    <PerformerButton />
-                  </TouchableOpacity>
-                  <TouchableOpacity>
-                    <InfluencerButton />
-                  </TouchableOpacity>
-                  <TouchableOpacity>
-                    <SupportButton />
-                  </TouchableOpacity>
-                  <TouchableOpacity>
-                    <ShowLiveButton />
-                  </TouchableOpacity>
-                </View>
+                    </View>
+                  );
+                })}
               </View>
-            ) : (
-              []
-            )}
-            {datas ? (
-              datas.map(market => {
+              <Text style={styles.pencarian}>Kategori Pilihan</Text>
+              <View style={{marginTop: 16}}>
+                <TouchableOpacity style={{marginBottom: 6}}>
+                  <Image
+                    style={{
+                      width: responsiveWidth(376),
+                      height: 55,
+                    }}
+                    source={PerformerButtons}
+                  />
+                </TouchableOpacity>
+                <TouchableOpacity style={{marginBottom: 6}}>
+                  <Image
+                    style={{
+                      width: responsiveWidth(376),
+                      height: 55,
+                    }}
+                    source={InfluencerButtons}
+                  />
+                </TouchableOpacity>
+                <TouchableOpacity style={{marginBottom: 6}}>
+                  <Image
+                    style={{
+                      width: responsiveWidth(376),
+                      height: 55,
+                    }}
+                    source={SupportButtons}
+                  />
+                </TouchableOpacity>
+                <TouchableOpacity>
+                  <Image
+                    style={{
+                      width: responsiveWidth(376),
+                      height: 55,
+                    }}
+                    source={ShowLiveButtons}
+                  />
+                </TouchableOpacity>
+              </View>
+            </View>
+          ) : (
+            []
+          )}
+
+          {datas
+            ? datas.map(market => {
                 return (
                   <TouchableOpacity
                     onPress={() =>
-                      this.props.navigation.navigate('DetailMarket', {
+                      navigation.navigate('DetailMarket', {
                         market,
                         getCategoryResult,
                       })
@@ -175,15 +244,12 @@ class ResultSearch extends Component {
                   </TouchableOpacity>
                 );
               })
-            ) : (
-              <Text>No Available Data</Text>
-            )}
-          </View>
-        </ScrollView>
-      </View>
-    );
-  }
-}
+            : []}
+        </View>
+      </ScrollView>
+    </View>
+  );
+};
 
 const mapStatetoProps = state => ({
   // name
@@ -195,11 +261,54 @@ const mapStatetoProps = state => ({
   getCategoryLoading: state.MarketPlaceReducer.getCategoryLoading,
   getCategoryResult: state.MarketPlaceReducer.getCategoryResult,
   getCategoryError: state.MarketPlaceReducer.getCategoryError,
+
+  getDataPer: dummyPopular,
 });
 
 export default connect(mapStatetoProps, null)(ResultSearch);
 
 const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    justifyContent: 'flex-start',
+    alignItems: 'center',
+    backgroundColor: colors.white,
+  },
+  status: {
+    zIndex: 10,
+    elevation: 2,
+    width: DEVICE_WIDTH,
+    height: responsiveHeight(1),
+    backgroundColor: '#0097a7',
+  },
+  header: {
+    zIndex: 100,
+    justifyContent: 'center',
+    alignItems: 'center',
+    width: DEVICE_WIDTH,
+    height: 56,
+    marginBottom: 6,
+    // backgroundColor: '#00bcd4',
+  },
+  label: {
+    flexGrow: 1,
+    fontSize: 20,
+    fontWeight: `600`,
+    textAlign: `left`,
+    marginVertical: 8,
+    paddingVertical: 3,
+    color: `#f5fcff`,
+    backgroundColor: `transparent`,
+  },
+  button: {
+    justifyContent: 'center',
+    alignItems: 'center',
+    width: 130,
+    height: 40,
+    marginTop: 40,
+    borderRadius: 2,
+    backgroundColor: `#ff5722`,
+  },
   pages: {
     flex: 1,
   },
