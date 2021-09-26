@@ -20,6 +20,7 @@ const TextOnly = ({
   borderRadius,
   marginTop,
   textAlign,
+  alignSelf,
 }) => {
   return (
     <TouchableOpacity
@@ -37,6 +38,7 @@ const TextOnly = ({
         justifyContent,
         borderRadius,
         marginTop,
+        alignSelf,
       )}>
       <Text style={styles.text(fontSize, fontFamily, color, textAlign)}>
         {title}
@@ -61,6 +63,7 @@ const styles = StyleSheet.create({
     justifyContent,
     borderRadius,
     marginTop,
+    alignSelf,
   ) => ({
     backgroundColor: backgroundColor,
     padding: padding,
@@ -75,6 +78,7 @@ const styles = StyleSheet.create({
     borderColor: borderColor,
     justifyContent: justifyContent,
     marginTop: marginTop,
+    alignSelf: alignSelf,
   }),
   text: (fontSize, fontFamily, color, textAlign) => ({
     color: color,

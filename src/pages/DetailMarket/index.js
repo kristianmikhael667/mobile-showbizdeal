@@ -20,11 +20,12 @@ import {
   Facebook,
   FillStart,
   Instagram,
+  Love,
   Start,
   TimeBomb,
   Youtube,
 } from '../../assets';
-import {Jarak, StatusBars, Tombol} from '../../components';
+import {Jarak, Loading, StatusBars, Tombol} from '../../components';
 import {
   API_URL,
   colors,
@@ -39,26 +40,32 @@ class DetailMarket extends Component {
     super(props);
 
     this.state = {
-      market: this.props.route.params.market,
+      markets: this.props.route.params.market,
       getCategoryResult: this.props.route.params.getCategoryResult,
     };
   }
 
   componentDidMount() {
-    const {market} = this.state;
-    this.props.dispatch(getManajemenProfileById(market.business_id));
-    this.props.dispatch(getPortofolio(market.id));
-    this.props.dispatch(getRating(market.id));
+    const {markets} = this.state;
+    this.props.dispatch(getManajemenProfileById(markets.business_id));
+    this.props.dispatch(getPortofolio(markets.id));
+    this.props.dispatch(getRating(markets.id));
   }
 
   render() {
-    const {market, getCategoryResult} = this.state;
-    const ig = market.instagram;
-    const fb = market.facebook;
+    const {markets, getCategoryResult} = this.state;
+    const ig = markets.instagram;
+    const fb = markets.facebook;
     const ig_link = ig.length > 25 ? ig.substring(26, ig.length - 1) : ig;
     const fb_link = fb.substring(25, fb.length - 1);
-    const {getManajementProfileResult, getPortofolioResult, getRatingResult} =
-      this.props;
+    const {
+      getManajementProfileResult,
+      getPortofolioResult,
+      getRatingResult,
+      getInfluencerResult,
+      getInfluencerLoading,
+      getInfluencerError,
+    } = this.props;
     return (
       <View style={styles.page}>
         <StatusBars />
@@ -66,16 +73,16 @@ class DetailMarket extends Component {
           <Image
             style={styles.images}
             source={{
-              uri: API_URL + market.img + '&w=500&h=500&fit=crop',
+              uri: API_URL + markets.img + '&w=500&h=500&fit=crop',
             }}
           />
           <View style={{backgroundColor: colors.white}}>
-            <Text style={styles.name}>{market.name}</Text>
+            <Text style={styles.name}>{markets.name}</Text>
             {getCategoryResult ? (
               getCategoryResult.map(category => {
                 {
                   if (
-                    category.id === market.vendor_category[0].sub_category_id
+                    category.id === markets.vendor_category[0].sub_category_id
                   ) {
                     return <Text style={styles.category}>{category.name}</Text>;
                   } else {
@@ -195,7 +202,7 @@ class DetailMarket extends Component {
                                         {
                                           mbar,
                                           porto,
-                                          market,
+                                          markets,
                                           getManajementProfileResult,
                                         },
                                       )
@@ -297,6 +304,129 @@ class DetailMarket extends Component {
               </>
             )}
           </View>
+          <View style={styles.cardportofolio}>
+            <View style={styles.board}>
+              <Text style={styles.portofoliotitle}>Produk Lainnya</Text>
+              <Text style={styles.seeall}>Lihat Semua</Text>
+            </View>
+            <View style={styles.portopolio}>
+              <ScrollView horizontal showsHorizontalScrollIndicator={false}>
+                {getInfluencerResult ? (
+                  getInfluencerResult.slice(0, 4).map((market, index) => {
+                    {
+                      if (markets.business_id !== market.business_id) {
+                        return (
+                          <TouchableOpacity
+                            key={index}
+                            onPress={() =>
+                              this.props.navigation.replace('DetailMarket', {
+                                market,
+                                getCategoryResult,
+                              })
+                            }
+                            style={styles.bodysub}>
+                            <Image
+                              style={styles.imagess}
+                              source={{
+                                uri:
+                                  API_URL +
+                                  market.img +
+                                  '&w=500&h=500&fit=crop',
+                              }}
+                            />
+                            <View style={styles.love}>
+                              <View
+                                style={{
+                                  alignItems: 'center',
+                                  marginVertical: 6,
+                                }}>
+                                <>
+                                  <Love />
+                                </>
+                              </View>
+                            </View>
+                            <Text style={styles.nama}>{market.name}</Text>
+                            {getCategoryResult ? (
+                              getCategoryResult.map(category => {
+                                {
+                                  if (
+                                    category.id ===
+                                    market.vendor_category[0].sub_category_id
+                                  ) {
+                                    return (
+                                      <Text style={styles.category}>
+                                        {category.name}
+                                      </Text>
+                                    );
+                                  } else {
+                                    <Text>No</Text>;
+                                  }
+                                }
+                              })
+                            ) : (
+                              <Text>kosong</Text>
+                            )}
+                            <View style={styles.start}>
+                              {/* {this.props.dispatch(getRatings([market.id]))} */}
+
+                              <Start />
+                              <Start />
+                              <Start />
+                              <Start />
+                              <Start />
+                            </View>
+                            <Text style={styles.review}>(0 Reviews)</Text>
+                          </TouchableOpacity>
+                        );
+                      } else {
+                        [];
+                      }
+                    }
+                  })
+                ) : getInfluencerLoading ? (
+                  <Loading />
+                ) : getInfluencerError ? (
+                  <View
+                    style={{
+                      alignItems: 'center',
+                      marginHorizontal: 18,
+                      flex: 1,
+                    }}>
+                    <Text
+                      style={{
+                        fontSize: 30,
+                        fontFamily: fonts.primary.bold,
+                        marginBottom: 6,
+                        color: colors.primary2,
+                      }}>
+                      500
+                    </Text>
+                    <Text
+                      style={{
+                        fontSize: 25,
+                        fontFamily: fonts.primary.normal,
+                        marginBottom: 6,
+                      }}>
+                      Something is wrong
+                    </Text>
+                    <Text style={{textAlign: 'center', marginBottom: 10}}>
+                      We're having an issue, please try one of these option to
+                      get you back on track
+                    </Text>
+                    <Image
+                      style={{
+                        width: responsiveWidth(150),
+                        height: responsiveHeight(165),
+                      }}
+                      source={Disconnect}
+                    />
+                  </View>
+                ) : (
+                  <Text>Gak ada</Text>
+                )}
+              </ScrollView>
+            </View>
+          </View>
         </ScrollView>
       </View>
     );
@@ -304,6 +434,16 @@ class DetailMarket extends Component {
 }
 
 const mapStatetoProps = state => ({
+  // Marketplace
+  getInfluencerLoading: state.MarketPlaceReducer.getInfluencerLoading,
+  getInfluencerResult: state.MarketPlaceReducer.getInfluencerResult,
+  getInfluencerError: state.MarketPlaceReducer.getInfluencerError,
+
+  // Category
+  getCategoryLoading: state.MarketPlaceReducer.getCategoryLoading,
+  getCategoryResult: state.MarketPlaceReducer.getCategoryResult,
+  getCategoryError: state.MarketPlaceReducer.getCategoryError,
+
   // Get Manajement
   getManajementProfileResult:
     state.MarketPlaceReducer.getManajementProfileResult,
@@ -422,5 +562,65 @@ const styles = StyleSheet.create({
     fontSize: RFValue(13, heightMobileUi),
     justifyContent: 'center',
     marginLeft: 3,
+  },
+
+  bodysub: {
+    width: responsiveWidth(168),
+    height: responsiveHeight(290),
+    borderTopLeftRadius: 10,
+    borderTopRightRadius: 10,
+    borderBottomLeftRadius: 10,
+    borderBottomRightRadius: 10,
+    shadowColor: '#000',
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.25,
+    shadowRadius: 3.84,
+
+    elevation: 5,
+    backgroundColor: colors.white,
+    marginBottom: 16,
+    marginHorizontal: responsiveWidth(6),
+  },
+  imagess: {
+    width: '100%',
+    height: responsiveHeight(182),
+    marginRight: responsiveWidth(4),
+    borderTopLeftRadius: 10,
+    borderTopRightRadius: 10,
+    resizeMode: 'contain',
+  },
+  love: {
+    width: 24,
+    height: 24,
+    backgroundColor: colors.white,
+    position: 'absolute',
+    borderRadius: 24,
+    top: 7,
+    right: 7,
+  },
+  nama: {
+    textAlign: 'center',
+    marginTop: 9,
+    fontFamily: fonts.primary.bold,
+    fontSize: RFValue(16, heightMobileUi),
+  },
+  category: {
+    fontSize: 10,
+    textAlign: 'center',
+    fontFamily: fonts.primary.normal,
+    marginBottom: 9,
+  },
+  start: {
+    flexDirection: 'row',
+    justifyContent: 'center',
+  },
+  review: {
+    fontSize: 7,
+    marginTop: 7,
+    textAlign: 'center',
+    marginBottom: 8,
   },
 });

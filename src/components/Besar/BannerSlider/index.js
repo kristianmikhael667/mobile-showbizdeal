@@ -32,7 +32,7 @@ export default class BannerSlider extends Component {
 
 const styles = StyleSheet.create({
   container: {
-    marginTop: -100,
+    marginTop: responsiveHeight(-90),
     marginBottom: 12,
     flex: 1,
   },

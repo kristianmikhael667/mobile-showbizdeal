@@ -40,6 +40,7 @@ import {
   StatusBars,
   Tombol,
 } from '../../components';
+import LinearGradient from 'react-native-linear-gradient';
 class Home extends Component {
   constructor(props) {
     super(props);
@@ -129,6 +130,57 @@ class Home extends Component {
     return (
       <View style={styles.pages}>
         <StatusBars />
+        <LinearGradient
+          colors={[colors.primary1, colors.primary2]}
+          style={{
+            // marginHorizontal: 20,
+            // left: 18,
+            // top: 35,
+            width: '100%',
+            marginTop: 0,
+            flexDirection: 'row',
+            paddingHorizontal: responsiveWidth(26),
+            paddingBottom: 5,
+          }}>
+          <Tombol
+            fontSize={14}
+            onPress={() => this.props.navigation.navigate('ResultSearch')}
+            title="DJ Soda"
+            width={responsiveWidth(240)}
+            // height={34}
+            type="text"
+            borderRadius={5}
+            color={colors.grey}
+            textAlign="left"
+            paddingLeft={responsiveWidth(18)}
+            paddingVertical={responsiveHeight(10)}
+            backgroundColor={colors.white}
+            fontSizes={12}
+            marginTop={30}
+            marginLeft={responsiveWidth(7)}
+          />
+          <View
+            style={{
+              position: 'absolute',
+              right: responsiveWidth(160),
+              top: responsiveHeight(50),
+            }}>
+            <Searching />
+          </View>
+          <Tombol
+            marginTop={30}
+            marginLeft={16}
+            marginRight={16}
+            icon="notifikasi"
+            padding={10}
+          />
+          <Tombol
+            onPress={() => this.OnOpen()}
+            marginTop={30}
+            icon="filter"
+            padding={10}
+          />
+        </LinearGradient>
         <ScrollView
           refreshControl={
             <RefreshControl
@@ -138,62 +190,17 @@ class Home extends Component {
           }>
           <View style={styles.header}>
             <Image
-              style={{resizeMode: 'stretch', width: '100%'}}
+              style={{resizeMode: 'stretch', width: '100%', height: 110}}
               source={Heads}
             />
             <Image
               source={LogoHeader}
-              style={{position: 'absolute', marginTop: 52, marginLeft: 32}}
-            />
-            <View
               style={{
                 position: 'absolute',
-                marginHorizontal: 20,
-                // left: 18,
-                // top: 35,
-                marginTop: 30,
-                flexDirection: 'row',
-                alignItems: 'center',
-              }}>
-              <Tombol
-                fontSize={14}
-                onPress={() => this.props.navigation.navigate('ResultSearch')}
-                title="DJ Soda"
-                width={responsiveWidth(240)}
-                height={34}
-                type="text"
-                borderRadius={5}
-                color={colors.grey}
-                textAlign="left"
-                paddingLeft={responsiveWidth(18)}
-                paddingVertical={responsiveHeight(10)}
-                backgroundColor={colors.white}
-                fontSizes={12}
-                marginTop={30}
-                marginLeft={responsiveWidth(7)}
-              />
-              <View
-                style={{
-                  position: 'absolute',
-                  right: responsiveWidth(128),
-                  top: responsiveHeight(53),
-                }}>
-                <Searching />
-              </View>
-              <Tombol
-                marginTop={30}
-                marginLeft={16}
-                marginRight={16}
-                icon="notifikasi"
-                padding={10}
-              />
-              <Tombol
-                onPress={() => this.OnOpen()}
-                marginTop={30}
-                icon="filter"
-                padding={10}
-              />
-            </View>
+                marginTop: responsiveHeight(-55),
+                marginLeft: 32,
+              }}
+            />
           </View>
           <BannerSlider />
           <Text style={styles.categorys}>Kategory</Text>

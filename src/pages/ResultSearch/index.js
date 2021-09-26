@@ -15,9 +15,12 @@ import {RFValue} from 'react-native-responsive-fontsize';
 import SearchHeader from 'react-native-search-header';
 import {connect} from 'react-redux';
 import {
+  ButtonBack,
   InfluencerButtons,
   Love,
+  Notifikasi,
   PerformerButtons,
+  Searching,
   ShowLiveButtons,
   Start,
   SupportButtons,
@@ -40,7 +43,6 @@ const ResultSearch = ({getCategoryResult, navigation, getDataPer}) => {
   const searchHeaderRef = React.useRef(null);
   const [datas, setPostArray] = useState(false);
   const MyGetter = () => {
-    // console.log('kntl');
     searchHeaderRef.current.show();
   };
   useEffect(() => {
@@ -51,8 +53,20 @@ const ResultSearch = ({getCategoryResult, navigation, getDataPer}) => {
   return (
     <View style={styles.container}>
       <StatusBars />
-      <View style={styles.status} />
+      {/* <View style={styles.status} /> */}
       <View style={styles.header}>
+        <TouchableOpacity
+          onPress={() => {
+            // AsyncStorage.removeItem('historysearch');
+            // AsyncStorage.removeItem('historydata');
+            navigation.goBack();
+          }}
+          style={{
+            marginLeft: responsiveWidth(19),
+            marginRight: responsiveWidth(36),
+          }}>
+          <ButtonBack />
+        </TouchableOpacity>
         <TouchableOpacity
           color="#f5fcff"
           style={{
@@ -60,10 +74,18 @@ const ResultSearch = ({getCategoryResult, navigation, getDataPer}) => {
             height: responsiveHeight(34),
             backgroundColor: colors.pembatas,
             justifyContent: 'center',
+            paddingLeft: 18,
+            paddingVertical: 7,
           }}
           onPress={MyGetter}>
-          <Text>Search</Text>
+          <Text style={{fontSize: 12, fontWeight: '600'}}>Search</Text>
         </TouchableOpacity>
+        <View style={{position: 'absolute', right: 78, top: 21}}>
+          <Searching />
+        </View>
+        <View style={{position: 'absolute', right: 19, top: 21}}>
+          <Notifikasi />
+        </View>
       </View>
       <SearchHeader
         ref={searchHeaderRef}
@@ -72,6 +94,9 @@ const ResultSearch = ({getCategoryResult, navigation, getDataPer}) => {
         style={{
           container: {
             marginTop: responsiveHeight(30),
+          },
+          header: {
+            marginHorizontal: responsiveWidth(18),
           },
         }}
         // pinnedSuggestions={[
@@ -94,7 +119,7 @@ const ResultSearch = ({getCategoryResult, navigation, getDataPer}) => {
             );
             const data = await response.json();
 
-            console.log(data.data);
+            // console.log(data.data);
             // return data;
             setPostArray(data.data);
           } else {
@@ -279,15 +304,17 @@ const styles = StyleSheet.create({
     elevation: 2,
     width: DEVICE_WIDTH,
     height: responsiveHeight(1),
-    backgroundColor: '#0097a7',
+    // backgroundColor: '#0097a7',
   },
   header: {
     zIndex: 100,
-    justifyContent: 'center',
+    // justifyContent: 'center',
     alignItems: 'center',
+    flexDirection: 'row',
     width: DEVICE_WIDTH,
     height: 56,
     marginBottom: 6,
+    marginTop: 15,
     // backgroundColor: '#00bcd4',
   },
   label: {
@@ -344,6 +371,7 @@ const styles = StyleSheet.create({
 
     elevation: 5,
     backgroundColor: colors.white,
+    marginTop: 23,
     marginBottom: 16,
     marginHorizontal: responsiveWidth(7),
   },

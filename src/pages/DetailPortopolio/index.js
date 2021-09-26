@@ -22,7 +22,7 @@ class DetailPortopolio extends Component {
     super(props);
 
     this.state = {
-      market: this.props.route.params.market,
+      market: this.props.route.params.markets,
       mbar: this.props.route.params.mbar,
       porto: this.props.route.params.porto.video,
       getManajementProfileResult:
