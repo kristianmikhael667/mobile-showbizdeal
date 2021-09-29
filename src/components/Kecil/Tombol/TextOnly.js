@@ -10,6 +10,7 @@ const TextOnly = ({
   paddingLeft,
   paddingHorizontal,
   paddingVertical,
+  paddingTop,
   backgroundColor,
   width,
   height,
@@ -39,6 +40,7 @@ const TextOnly = ({
         borderRadius,
         marginTop,
         alignSelf,
+        paddingTop,
       )}>
       <Text style={styles.text(fontSize, fontFamily, color, textAlign)}>
         {title}
@@ -64,6 +66,7 @@ const styles = StyleSheet.create({
     borderRadius,
     marginTop,
     alignSelf,
+    paddingTop,
   ) => ({
     backgroundColor: backgroundColor,
     padding: padding,
@@ -79,6 +82,7 @@ const styles = StyleSheet.create({
     justifyContent: justifyContent,
     marginTop: marginTop,
     alignSelf: alignSelf,
+    paddingTop: paddingTop,
   }),
   text: (fontSize, fontFamily, color, textAlign) => ({
     color: color,

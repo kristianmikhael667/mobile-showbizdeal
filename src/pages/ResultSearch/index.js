@@ -1,3 +1,4 @@
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import React, {useState, useEffect} from 'react';
 import {
   Dimensions,
@@ -59,7 +60,7 @@ const ResultSearch = ({getCategoryResult, navigation, getDataPer}) => {
           onPress={() => {
             // AsyncStorage.removeItem('historysearch');
             // AsyncStorage.removeItem('historydata');
-            navigation.goBack();
+            navigation.navigate('Home');
           }}
           style={{
             marginLeft: responsiveWidth(19),
@@ -307,7 +308,7 @@ const styles = StyleSheet.create({
     // backgroundColor: '#0097a7',
   },
   header: {
-    zIndex: 100,
+    zIndex: 1,
     // justifyContent: 'center',
     alignItems: 'center',
     flexDirection: 'row',

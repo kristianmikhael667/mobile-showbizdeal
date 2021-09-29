@@ -9,6 +9,7 @@ import {
   ActivityIndicator,
   TouchableOpacity,
   RefreshControl,
+  Platform,
 } from 'react-native';
 import {connect} from 'react-redux';
 import {
@@ -137,7 +138,7 @@ class Home extends Component {
             // left: 18,
             // top: 35,
             width: '100%',
-            marginTop: 0,
+            paddingTop: Platform.OS === 'ios' ? 5 : 0,
             flexDirection: 'row',
             paddingHorizontal: responsiveWidth(26),
             paddingBottom: 5,
@@ -307,7 +308,10 @@ class Home extends Component {
                 <Text
                   style={{
                     fontSize: 30,
-                    fontFamily: fonts.primary.bold,
+                    fontFamily:
+                      Platform.OS === 'ios'
+                        ? 'Montserrat-Bold'
+                        : fonts.primary.bold,
                     marginBottom: 6,
                     color: colors.primary2,
                   }}>
@@ -316,7 +320,10 @@ class Home extends Component {
                 <Text
                   style={{
                     fontSize: 25,
-                    fontFamily: fonts.primary.normal,
+                    fontFamily:
+                      Platform.OS === 'ios'
+                        ? 'Montserrat-Medium'
+                        : fonts.primary.normal,
                     marginBottom: 6,
                   }}>
                   Something is wrong
@@ -579,10 +586,11 @@ const styles = StyleSheet.create({
   },
   images: {
     width: '100%',
-    height: responsiveHeight(182),
+    height: responsiveHeight(187),
     marginRight: responsiveWidth(4),
-    borderTopLeftRadius: 10,
-    borderTopRightRadius: 10,
+    borderTopLeftRadius: responsiveWidth(10),
+    // top: Platform.OS === 'ios' ? -10 : 0,
+    borderTopRightRadius: responsiveWidth(10),
     resizeMode: 'contain',
   },
   love: {
@@ -617,13 +625,14 @@ const styles = StyleSheet.create({
   nama: {
     textAlign: 'center',
     marginTop: 9,
-    fontFamily: fonts.primary.bold,
+    fontFamily: Platform.OS === 'ios' ? 'Montserrat-Bold' : fonts.primary.bold,
     fontSize: RFValue(16, heightMobileUi),
   },
   category: {
     fontSize: 10,
     textAlign: 'center',
-    fontFamily: fonts.primary.normal,
+    fontFamily:
+      Platform.OS === 'ios' ? 'Montserrat-Medium' : fonts.primary.normal,
     marginBottom: 9,
   },
   start: {
@@ -639,7 +648,7 @@ const styles = StyleSheet.create({
   },
   categorys: {
     color: colors.primary2,
-    fontFamily: fonts.primary.bold,
+    fontFamily: Platform.OS === 'ios' ? 'Montserrat-Bold' : fonts.primary.bold,
     fontSize: 18,
     marginLeft: responsiveWidth(26),
     marginBottom: 9,
@@ -660,7 +669,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   filterproduk: {
-    fontFamily: fonts.primary.bold,
+    fontFamily: Platform.OS === 'ios' ? 'Montserrat-Bold' : fonts.primary.bold,
     fontSize: 18,
   },
   reset: {
@@ -668,7 +677,7 @@ const styles = StyleSheet.create({
     fontStyle: 'italic',
   },
   juduls: {
-    fontFamily: fonts.primary.bold,
+    fontFamily: Platform.OS === 'ios' ? 'Montserrat-Bold' : fonts.primary.bold,
     fontSize: 14,
   },
   lihatall: {

@@ -91,13 +91,13 @@ export default class Info extends Component {
           backgroundColor: colors.active,
           width: 24,
           height: 10,
-          marginBottom: 61,
+          marginBottom: responsiveHeight(66),
         }}
         dotStyle={{
           backgroundColor: colors.nonactive,
           width: 10,
           height: 10,
-          marginBottom: 61,
+          marginBottom: responsiveHeight(66),
         }}
         renderItem={this._renderItem}
         data={boarding}

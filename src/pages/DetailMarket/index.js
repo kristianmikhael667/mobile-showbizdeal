@@ -17,6 +17,7 @@ import {
   getRating,
 } from '../../actions/MarketPlace';
 import {
+  Backst,
   Facebook,
   FillStart,
   Instagram,
@@ -76,6 +77,15 @@ class DetailMarket extends Component {
               uri: API_URL + markets.img + '&w=500&h=500&fit=crop',
             }}
           />
+          <TouchableOpacity
+            onPress={() => this.props.navigation.goBack()}
+            style={{
+              position: 'absolute',
+              top: responsiveHeight(44),
+              left: responsiveWidth(19),
+            }}>
+            <Backst />
+          </TouchableOpacity>
           <View style={{backgroundColor: colors.white}}>
             <Text style={styles.name}>{markets.name}</Text>
             {getCategoryResult ? (

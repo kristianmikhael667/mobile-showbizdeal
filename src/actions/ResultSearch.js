@@ -1,5 +1,5 @@
 import axios from 'axios';
-import {API_URL2, clearStorage, storeData} from '../utils';
+import {API_URL, API_URL2, clearStorage, storeData} from '../utils';
 
 export const SEARCH_NAME = 'SEARCH_NAME';
 
@@ -16,7 +16,7 @@ export const saveKeywordName = search => {
 
     axios({
       method: 'get',
-      url: API_URL2 + ':2001/business-service/v1/v2/vendor?&q=' + search,
+      url: API_URL + ':2001/business-service/v1/v2/vendor?&q=' + search,
     })
       .then(response => {
         if (response.status !== 200) {

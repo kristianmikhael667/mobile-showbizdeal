@@ -81,6 +81,8 @@ import InfluencerButton from './influencerbutton.svg';
 import SupportButton from './supportbutton.svg';
 import ShowLiveButton from './showlivebutton.svg';
 
+import Backst from './backs.svg';
+
 import ButtonRight from './rightbutton.svg';
 export {
   EyesIcon,
@@ -145,4 +147,5 @@ export {
   PerformerButton,
   InfluencerButton,
   ButtonRight,
+  Backst,
 };

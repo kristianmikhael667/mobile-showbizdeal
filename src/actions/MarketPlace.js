@@ -80,7 +80,7 @@ export const getMarketInfluencer = data => {
     // Get Market
     axios({
       method: 'get',
-      url: API_URL2 + ':2001/business-service/v1/v2/vendor?category_id=' + data,
+      url: API_URL + '/business-service/v1/v2/vendor?category_id=' + data,
     })
       .then(response => {
         if (response.status !== 200) {

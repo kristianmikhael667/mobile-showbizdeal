@@ -6,6 +6,7 @@ import {
   Text,
   TouchableOpacity,
   ScrollView,
+  Platform,
 } from 'react-native';
 import {RFValue} from 'react-native-responsive-fontsize';
 import {
@@ -94,7 +95,7 @@ export default class Profile extends Component {
               style={{
                 position: 'absolute',
                 marginHorizontal: 20,
-                marginTop: 30,
+                marginTop: responsiveHeight(30),
                 alignSelf: 'flex-end',
                 flexDirection: 'row',
                 alignItems: 'center',
@@ -342,7 +343,7 @@ const styles = StyleSheet.create({
   biok: {
     backgroundColor: colors.white,
     height: responsiveHeight(130),
-    marginTop: 11,
+    marginTop: responsiveHeight(13),
   },
   bios: {
     backgroundColor: colors.white,
@@ -367,7 +368,8 @@ const styles = StyleSheet.create({
   nama: {
     fontFamily: fonts.primary.bold,
     fontSize: RFValue(25, heightMobileUi),
-    marginTop: 30,
+    marginTop:
+      Platform.OS === 'ios' ? responsiveHeight(45) : responsiveHeight(30),
     color: colors.primary2,
     textAlign: 'center',
     marginBottom: 2,
@@ -375,7 +377,7 @@ const styles = StyleSheet.create({
   images: {
     width: responsiveWidth(143),
     height: responsiveHeight(143),
-    borderRadius: 143,
+    borderRadius: responsiveWidth(143),
   },
   email: {
     fontSize: RFValue(18, heightMobileUi),
