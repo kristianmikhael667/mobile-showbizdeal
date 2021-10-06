@@ -437,7 +437,43 @@ class DetailMarket extends Component {
               </ScrollView>
             </View>
           </View>
+          <Jarak height={responsiveHeight(91)} />
         </ScrollView>
+
+        <View style={styles.footer}>
+          <Tombol
+            marginLeft={18}
+            marginRight={16}
+            icon="message"
+            paddingHorizontal={16}
+            paddingVertical={10}
+            width={responsiveWidth(67)}
+            borderWidth={1}
+            alignSelf="center"
+            height={responsiveHeight(47)}
+            borderColor={colors.primaryLive2}
+          />
+          <Tombol
+            type="text"
+            title="Booking"
+            fontSize={RFValue(20, heightMobileUi)}
+            borderColor={colors.white}
+            borderWidth={1}
+            paddingVertical={8}
+            color={colors.white}
+            width={responsiveWidth(295)}
+            height={responsiveHeight(47)}
+            borderRadius={5}
+            textAlign="center"
+            fontWeight="bold"
+            onPress={() =>
+              this.props.navigation.navigate('ProdukAll', {
+                markets,
+              })
+            }
+            backgroundColor={colors.primary2}
+          />
+        </View>
       </View>
     );
   }
@@ -632,5 +668,27 @@ const styles = StyleSheet.create({
     marginTop: 7,
     textAlign: 'center',
     marginBottom: 8,
+  },
+  footer: {
+    // borderTopRightRadius: 10,
+    flexDirection: 'row',
+    position: 'absolute',
+    bottom: 0,
+    height: responsiveHeight(80),
+    width: '100%',
+    backgroundColor: colors.white,
+    borderTopLeftRadius: 20,
+    borderTopRightRadius: 20,
+    shadowColor: '#000',
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.25,
+    shadowRadius: 3.84,
+
+    elevation: 5,
+    paddingVertical: 15,
+    alignItems: 'center',
   },
 });

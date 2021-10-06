@@ -15,6 +15,7 @@ target 'Showbizdeal' do
 
 
 
+
   pod 'RNVectorIcons', :path => '../node_modules/react-native-vector-icons'
 
   target 'ShowbizdealTests' do

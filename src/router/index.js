@@ -20,6 +20,7 @@ import {
   MyTalent,
   ResultSearch,
   Showbizcare,
+  ProdukAll,
 } from '../pages';
 import {BottomNavigator} from '../components';
 
@@ -134,6 +135,11 @@ const Router = () => {
       <Stack.Screen
         name="Showbizcare"
         component={Showbizcare}
+        options={{headerShown: false}}
+      />
+      <Stack.Screen
+        name="ProdukAll"
+        component={ProdukAll}
         options={{headerShown: false}}
       />
     </Stack.Navigator>

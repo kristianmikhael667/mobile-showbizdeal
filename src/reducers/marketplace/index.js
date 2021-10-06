@@ -6,6 +6,7 @@ import {
   GET_PORTOPOLIO,
   GET_MANAGEMENT,
   GET_RATING,
+  GET_PRODUCT,
   // GET_RATINGS,
 } from '../../actions/MarketPlace';
 
@@ -34,6 +35,11 @@ const initialState = {
   getPortofolioLoading: false,
   getPortofolioResult: false,
   getPortofolioError: false,
+
+  // PRODUCT
+  getProductLoading: false,
+  getProductResult: false,
+  getProductError: false,
 
   // MANAJEMENTPROFILE
   getManajementLoading: false,
@@ -90,6 +96,14 @@ export default function (state = initialState, action) {
         getPortofolioResult: action.payload.data,
         getPortofolioError: action.payload.errorMessage,
       };
+    case GET_PRODUCT:
+      return {
+        ...state,
+        getProductLoading: action.payload.loading,
+        getProductResult: action.payload.data,
+        getProductError: action.payload.errorMessage,
+      };
+
     case GET_MANAGEMENT:
       return {
         ...state,

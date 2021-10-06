@@ -42,6 +42,7 @@ import {
   Tombol,
 } from '../../components';
 import LinearGradient from 'react-native-linear-gradient';
+import axios from 'axios';
 class Home extends Component {
   constructor(props) {
     super(props);
@@ -52,8 +53,13 @@ class Home extends Component {
       kategori: 'Semua',
       subkategori: 'Semua',
       refreshing: false,
+      // getRatingss: false,
     };
   }
+
+  state = {
+    getRatings: [],
+  };
 
   _onRefresh = () => {
     this.setState({refreshing: true});
@@ -105,6 +111,28 @@ class Home extends Component {
     this.props.dispatch(getMarketInfluencer(layanan));
   }
 
+  getRatingsBussines = id => {
+    const request = {
+      params: {
+        foo: [id],
+      },
+    };
+    axios({
+      method: 'GET',
+      url:
+        API_URL +
+        '/product-service/rating-avg/business/' +
+        request.params.foo[0],
+    }).then(responses => {
+      if (responses.data.message === 'success get data') {
+        // console.log(responses.data.results.avg);
+        // this.setState({
+        //   getRatings: responses.data.results.avg,
+        // });
+      }
+    });
+  };
+
   _onRefresh = () => {
     this.setState({refreshing: true});
     this.props.dispatch(getCategory());
@@ -124,8 +152,9 @@ class Home extends Component {
       getInfluencerLoading,
       getInfluencerError,
       getCategoryResult,
-      // getRatingsResult,
     } = this.props;
+    const {getRatings} = this.state;
+    console.log(getRatings);
     const {modalizeReff} = this.state;
     // console.log('datas  : ', getRatingsResult);
     return (
@@ -288,7 +317,7 @@ class Home extends Component {
                       <Text>kosong</Text>
                     )}
                     <View style={styles.start}>
-                      {/* {this.props.dispatch(getRatings([market.id]))} */}
+                      {this.getRatingsBussines(market.id)}
 
                       <Start />
                       <Start />
@@ -560,6 +589,11 @@ const mapStatetoProps = state => ({
   getCategoryError: state.MarketPlaceReducer.getCategoryError,
 
   // Get Rating
+  getRatingsLoading: state.MarketPlaceReducer.getRatingsLoading,
+  getRatingsResult: state.MarketPlaceReducer.getRatingsResult,
+  getRatingsError: state.MarketPlaceReducer.getRatingsError,
+
+  // Get Ratings
   getRatingsLoading: state.MarketPlaceReducer.getRatingsLoading,
   getRatingsResult: state.MarketPlaceReducer.getRatingsResult,
   getRatingsError: state.MarketPlaceReducer.getRatingsError,

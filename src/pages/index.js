@@ -16,6 +16,7 @@ import VirtualLive from './VirtualLive';
 import MyTalent from './MyTalent/MyTalent';
 import ResultSearch from './ResultSearch';
 import Showbizcare from './Showbizcare';
+import ProdukAll from './ProdukAll';
 export {
   Splash,
   Info,
@@ -35,4 +36,5 @@ export {
   MyTalent,
   ResultSearch,
   Showbizcare,
+  ProdukAll,
 };

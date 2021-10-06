@@ -113,7 +113,7 @@ const ResultSearch = ({getCategoryResult, navigation, getDataPer}) => {
         onGetAutocompletions={async text => {
           if (text) {
             const response = await fetch(
-              `http://longmsg.id:2001/business-service/v1/v2/vendor?&q=${text}`,
+              `https://api.showbizdeal.com/business-service/v1/v2/vendor?&q=${text}`,
               {
                 method: `get`,
               },

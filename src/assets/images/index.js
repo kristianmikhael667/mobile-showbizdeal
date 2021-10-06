@@ -41,6 +41,8 @@ import ShowLiveButtons from './buttonShowLive.png';
 
 import Disconnect from './disconnect.png';
 
+import HeaderMessage from './headermess.png';
+
 export {
   OnBoardingImg1,
   OnBoardingImg2,
@@ -71,4 +73,5 @@ export {
   InfluencerButtons,
   ShowLiveButtons,
   SupportButtons,
+  HeaderMessage,
 };

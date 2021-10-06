@@ -31,7 +31,7 @@ export const saveKeywordName = search => {
           });
         } else {
           //BERHASIL
-          console.log(response.data.data);
+          // console.log(response.data.data);
           dispatch({
             type: SEARCH_NAME,
             payload: {

@@ -1,6 +1,6 @@
 import React from 'react';
 import {StyleSheet, Text, TouchableOpacity, View} from 'react-native';
-import {Filter, Lefts, Notifikasi} from '../../../assets';
+import {Filter, Lefts, MessageAktif, Notifikasi} from '../../../assets';
 import {colors} from '../../../utils';
 import TextOnly from './TextOnly';
 import TombolLoading from './TombolLoading';
@@ -15,6 +15,9 @@ const Tombol = props => {
     }
     if (icon === 'left') {
       return <Lefts />;
+    }
+    if (icon === 'message') {
+      return <MessageAktif />;
     }
     return <Notifikasi />;
   };
@@ -33,6 +36,11 @@ const Tombol = props => {
     paddingVertical,
     onPress,
     marginLeft,
+    borderWidth,
+    borderColor,
+    justifyContent,
+    alignItems,
+    alignSelf,
   } = props;
   if (loading) {
     return <TombolLoading {...props} />;
@@ -51,6 +59,12 @@ const Tombol = props => {
         paddingTop,
         paddingHorizontal,
         paddingVertical,
+        borderWidth,
+        borderColor,
+        height,
+        justifyContent,
+        alignItems,
+        alignSelf,
       )}
       onPress={onPress}>
       <Icon />
@@ -69,6 +83,12 @@ const styles = StyleSheet.create({
     paddingTop,
     paddingHorizontal,
     paddingVertical,
+    borderWidth,
+    borderColor,
+    height,
+    justifyContent,
+    alignItems,
+    alignSelf,
   ) => ({
     backgroundColor: colors.white,
     padding: padding,
@@ -79,5 +99,11 @@ const styles = StyleSheet.create({
     paddingTop: paddingTop,
     paddingHorizontal: paddingHorizontal,
     paddingVertical: paddingVertical,
+    borderWidth: borderWidth,
+    borderColor: borderColor,
+    height: height,
+    justifyContent: justifyContent,
+    alignItems: alignItems,
+    alignSelf: alignSelf,
   }),
 });

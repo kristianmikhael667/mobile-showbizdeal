@@ -9,6 +9,7 @@ export const GET_PORTOPOLIO = 'GET_PORTOPOLIO';
 export const GET_MANAGEMENT = 'GET_MANAGEMENT';
 export const GET_RATING = 'GET_RATING';
 export const GET_RATINGS = 'GET_RATINGS';
+export const GET_PRODUCT = 'GET_PRODUCT';
 
 // Performer
 export const getMarketPlace = () => {
@@ -238,66 +239,74 @@ export const getRating = id => {
   };
 };
 
-// export const getRatings = id => {
-//   return dispatch => {
-//     //   Loading
-//     dispatch({
-//       type: GET_RATINGS,
-//       payload: {
-//         loading: true,
-//         data: false,
-//         errorMessage: false,
-//       },
-//     });
-//     const formData = new URLSearchParams();
-//     formData.append('id', id);
-//     const request = {
-//       formData: formData,
-//     };
-//     console.log(request);
-//     //Get Ratings
-//     axios({
-//       method: 'get',
-//       url: API_URL + '/product-service/rating-avg/business/' + request,
-//     })
-//       .then(responses => {
-//         if (responses.data.message === 'success get data') {
-//           //BERHASIL
-//           dispatch({
-//             type: GET_RATINGS,
-//             payload: {
-//               loading: false,
-//               data: responses.data.results.avg
-//                 ? responses.data.results.avg
-//                 : [],
-//               errorMessage: false,
-//             },
-//           });
-//         } else {
-//           //ERROR
-//           dispatch({
-//             type: GET_RATINGS,
-//             payload: {
-//               loading: false,
-//               data: false,
-//               errorMessage: responses,
-//             },
-//           });
-//         }
-//       })
-//       .catch(error => {
-//         dispatch({
-//           type: GET_RATINGS,
-//           payload: {
-//             loading: false,
-//             data: false,
-//             errorMessage: true,
-//           },
-//         });
-//         alert('Your Connection is Invalids');
-//       });
-//   };
-// };
+export const getRatings = id => {
+  return dispatch => {
+    //   Loading
+    dispatch({
+      type: GET_RATINGS,
+      payload: {
+        loading: true,
+        data: false,
+        errorMessage: false,
+      },
+    });
+    // const formData = new URLSearchParams();
+    // formData.append('id', id);
+    // const request = {
+    //   formData: formData,
+    // };
+
+    const request = {
+      params: {
+        foo: [id],
+      },
+    };
+    // console.log(request.params.foo[0]);
+    //Get Ratings
+    axios({
+      method: 'get',
+      url:
+        API_URL +
+        '/product-service/rating-avg/business/' +
+        request.params.foo[0],
+    })
+      .then(responses => {
+        console.log(responses.data);
+        if (responses.data.message === 'success get data') {
+          //BERHASIL
+          dispatch({
+            type: GET_RATINGS,
+            payload: {
+              loading: false,
+              data: responses.data ? responses.data : [],
+              errorMessage: false,
+            },
+          });
+        } else {
+          //ERROR
+          dispatch({
+            type: GET_RATINGS,
+            payload: {
+              loading: false,
+              data: false,
+              errorMessage: responses,
+            },
+          });
+        }
+      })
+      .catch(error => {
+        dispatch({
+          type: GET_RATINGS,
+          payload: {
+            loading: false,
+            data: false,
+            errorMessage: true,
+          },
+        });
+        alert('Your Connection is Invalids');
+      });
+  };
+};
 
 export const getManajemenProfileById = id => {
   return dispatch => {
@@ -450,6 +459,60 @@ export const getPortofolio = id => {
       .catch(error => {
         dispatch({
           type: GET_PORTOPOLIO,
+          payload: {
+            loading: false,
+            data: false,
+            errorMessage: true,
+          },
+        });
+        alert('Your Connection is Invalid');
+      });
+  };
+};
+
+export const getProductAll = id => {
+  return dispatch => {
+    //   Loading
+    dispatch({
+      type: GET_PRODUCT,
+      payload: {
+        loading: true,
+        data: false,
+        errorMessage: false,
+      },
+    });
+
+    // Get Manajemen
+    axios({
+      method: 'get',
+      url: API_URL + '/product-service/product/business/' + id,
+    })
+      .then(response => {
+        if (response.status !== 200) {
+          //ERROR
+          dispatch({
+            type: GET_PRODUCT,
+            payload: {
+              loading: false,
+              data: false,
+              errorMessage: response,
+            },
+          });
+        } else {
+          //BERHASIL
+          dispatch({
+            type: GET_PRODUCT,
+            payload: {
+              loading: false,
+              data: response.data.results ? response.data.results : [],
+              errorMessage: false,
+            },
+          });
+        }
+      })
+      .catch(error => {
+        dispatch({
+          type: GET_PRODUCT,
           payload: {
             loading: false,
             data: false,
