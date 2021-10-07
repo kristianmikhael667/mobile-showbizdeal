@@ -5,6 +5,7 @@ import LoginPersonalReducer from './login';
 import ShowbizliveReducer from './showbizlive';
 import MyTalentReducer from './mytalent';
 import SearchNameReducer from './searching';
+import ChatslistReducer from './chats';
 
 const rootReducer = combineReducers({
   MarketPlaceReducer,
@@ -13,6 +14,7 @@ const rootReducer = combineReducers({
   ShowbizliveReducer,
   MyTalentReducer,
   SearchNameReducer,
+  ChatslistReducer,
 });
 
 export default rootReducer;

@@ -78,6 +78,7 @@ export default class Profile extends Component {
 
   render() {
     const {profiles, role} = this.state;
+    console.log(profiles);
     return (
       <View style={styles.pages}>
         <StatusBars />

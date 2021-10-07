@@ -35,6 +35,7 @@ export const loginUser = (username, password) => {
             },
           });
           storeData('users', res);
+          // storeData('sessiontoken', res.data.token);
         } else {
           //BERHASIL
           dispatch({
