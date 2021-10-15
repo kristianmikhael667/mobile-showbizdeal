@@ -24,6 +24,7 @@ const Inputan = ({
   marginLeft,
   marginBottom,
   marginTop,
+  autoCapitalize,
 }) => {
   return (
     <View style={styles.container}>
@@ -44,6 +45,7 @@ const Inputan = ({
           marginBottom,
           marginTop,
         )}
+        autoCapitalize={autoCapitalize}
         ref={ref}
         value={value}
         onFocus={onFocus}

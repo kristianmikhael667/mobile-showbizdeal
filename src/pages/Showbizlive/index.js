@@ -270,6 +270,7 @@ const styles = StyleSheet.create({
     height: responsiveWidth(237),
     borderRadius: 10,
     marginRight: responsiveWidth(13),
+    marginBottom: 10,
   },
   images: {
     width: responsiveWidth(175),

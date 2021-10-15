@@ -6,6 +6,7 @@ import FilterProduk from './FiltersProduk';
 import RefreshData from './RefreshData';
 import Loading from './Loading';
 import HeaderSearch from './HeaderSearch';
+import TabTransactionOrder from './TabTransactionOrder';
 export {
   StatusBars,
   BottomNavigator,
@@ -15,4 +16,5 @@ export {
   RefreshData,
   Loading,
   HeaderSearch,
+  TabTransactionOrder,
 };

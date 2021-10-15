@@ -3,7 +3,13 @@ import {Text, StyleSheet, View, Image} from 'react-native';
 import {connect} from 'react-redux';
 import {getTransactions} from '../../actions/TransactionAction';
 import {HeaderMessage} from '../../assets';
-import {Inputan, StatusBars, Tombol} from '../../components';
+import {
+  Inputan,
+  Jarak,
+  StatusBars,
+  TabTransactionOrder,
+  Tombol,
+} from '../../components';
 import {colors, getData, responsiveHeight, responsiveWidth} from '../../utils';
 
 class Transaksi extends Component {
@@ -12,6 +18,8 @@ class Transaksi extends Component {
 
     this.state = {
       token: false,
+      transaksiku: 'sayang ku neta',
+      orderku: 'open bo netta',
     };
   }
 
@@ -45,6 +53,7 @@ class Transaksi extends Component {
   };
 
   render() {
+    const {transaksiku, orderku} = this.state;
     return (
       <View style={styles.container}>
         <StatusBars />
@@ -53,7 +62,7 @@ class Transaksi extends Component {
           <View style={styles.backgroundheader}>
             <Inputan
               fontSize={14}
-              placeholder="Cari Pesan"
+              placeholder="Cari Transaksi"
               width={responsiveWidth(325)}
               height={34}
               color={colors.white}
@@ -71,6 +80,8 @@ class Transaksi extends Component {
             />
           </View>
         </View>
+        <Jarak height={responsiveHeight(23)} />
+        <TabTransactionOrder transaksiku={transaksiku} orderku={orderku} />
       </View>
     );
   }

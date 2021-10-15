@@ -1,18 +1,21 @@
 import React from 'react';
-import {StyleSheet, Text, TouchableOpacity} from 'react-native';
+import {
+  ActivityIndicator,
+  StyleSheet,
+  View,
+  TouchableOpacity,
+} from 'react-native';
+import {colors} from '../../../utils';
 
 const TombolLoading = ({
   padding,
-  color,
-  title,
+
   onPress,
-  fontSize,
   paddingHorizontal,
   paddingVertical,
   backgroundColor,
   width,
   height,
-  fontFamily,
   borderWidth,
   borderColor,
   justifyContent,
@@ -21,6 +24,7 @@ const TombolLoading = ({
   return (
     <TouchableOpacity
       onPress={onPress}
+      disabled={true}
       style={styles.container(
         backgroundColor,
         padding,
@@ -33,9 +37,9 @@ const TombolLoading = ({
         justifyContent,
         borderRadius,
       )}>
-      <Text style={styles.text(fontSize, fontFamily, color)}>
-        Loading . . .
-      </Text>
+      <View style={styles.indikator}>
+        <ActivityIndicator size="large" color={colors.active} />
+      </View>
     </TouchableOpacity>
   );
 };
@@ -67,10 +71,8 @@ const styles = StyleSheet.create({
     borderColor: borderColor,
     justifyContent: justifyContent,
   }),
-  text: (fontSize, fontFamily, color) => ({
-    color: color,
-    textAlign: 'center',
-    fontSize: fontSize ? fontSize : 13,
-    fontFamily: fontFamily,
-  }),
+  indikator: {
+    flex: 1,
+    justifyContent: 'center',
+  },
 });

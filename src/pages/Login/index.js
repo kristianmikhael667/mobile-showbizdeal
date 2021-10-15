@@ -59,6 +59,7 @@ class Login extends Component {
               color={colors.white}
               backgroundColor={colors.white}
               fontSizes={14 * 1.1}
+              autoCapitalize="none"
               suptext="*"
               textAlignVertical="top"
               value={username}
@@ -77,6 +78,7 @@ class Login extends Component {
               suptext="*"
               textAlignVertical="top"
               value={password}
+              secureTextEntry
               onChangeText={password => this.setState({password})}
             />
             <Jarak height={52} />

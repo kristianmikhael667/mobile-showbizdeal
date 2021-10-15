@@ -11,6 +11,7 @@ import {
   TouchableOpacity,
   Image,
   ScrollView,
+  Platform,
 } from 'react-native';
 import {RFValue} from 'react-native-responsive-fontsize';
 import SearchHeader from 'react-native-search-header';
@@ -93,8 +94,12 @@ const ResultSearch = ({getCategoryResult, navigation, getDataPer}) => {
         placeholder="Search..."
         placeholderColor="gray"
         style={{
+          textTransform: 'lowercase',
           container: {
-            marginTop: responsiveHeight(30),
+            marginTop:
+              Platform.OS === 'ios'
+                ? responsiveHeight(0)
+                : responsiveHeight(30),
           },
           header: {
             marginHorizontal: responsiveWidth(18),
@@ -111,9 +116,10 @@ const ResultSearch = ({getCategoryResult, navigation, getDataPer}) => {
           navigation.push('ResultSearch');
         }}
         onGetAutocompletions={async text => {
-          if (text) {
+          const texts = text.toLowerCase();
+          if (texts) {
             const response = await fetch(
-              `https://api.showbizdeal.com/business-service/v1/v2/vendor?&q=${text}`,
+              `https://api.showbizdeal.com/business-service/v1/v2/vendor?&q=${texts}`,
               {
                 method: `get`,
               },
@@ -315,7 +321,7 @@ const styles = StyleSheet.create({
     width: DEVICE_WIDTH,
     height: 56,
     marginBottom: 6,
-    marginTop: 15,
+    marginTop: 20,
     // backgroundColor: '#00bcd4',
   },
   label: {
@@ -344,9 +350,9 @@ const styles = StyleSheet.create({
     flex: 1,
     flexDirection: 'row',
     flexWrap: 'wrap',
-    width: '100%',
+    // width: '100%',
 
-    paddingHorizontal: 18,
+    paddingHorizontal: responsiveWidth(20),
     paddingTop: 18,
     backgroundColor: colors.white,
   },
